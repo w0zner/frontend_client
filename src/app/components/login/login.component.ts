@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 import { NotificacionService } from 'src/app/services/notificacion.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   registroForm: FormGroup
 
-  constructor(private fb: FormBuilder, private notificacionService: NotificacionService){
+  constructor(private fb: FormBuilder, private notificacionService: NotificacionService, private authService: AuthService){
     this.loginForm= this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]]
@@ -34,7 +35,17 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid) {
       console.log('Datos enviados: ')
       console.log(this.loginForm.value)
-      this.notificacionService.notificarExito("Bienvenido")
+
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (response:any)=> {
+          this.notificacionService.notificarExito("Bienvenido")
+        },
+        error: (err)=> {
+          this.notificacionService.notificarError(err)
+        }
+      })
+
+      
 
     } else {
       console.error('Faltan campos por completar')
