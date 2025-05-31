@@ -16,7 +16,7 @@ export class AuthService {
 
   login(data: any){
     console.log(data)
-    let headers= new HttpHeaders().set('Content-Type', 'application-json')
+    let headers= new HttpHeaders().set('Content-Type', 'application/json')
     return this.http.post(this.url + 'login', data, {headers: headers}).pipe(
       tap((response: any)=> {
         localStorage.setItem('token', response.token)
