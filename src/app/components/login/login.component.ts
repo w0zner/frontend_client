@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificacionService } from 'src/app/services/notificacion.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   registroForm: FormGroup
 
-  constructor(private fb: FormBuilder, private router: Router, private notificacionService: NotificacionService, private authService: AuthService){
+  constructor(private fb: FormBuilder, private router: Router, private notificacionService: NotificacionService, private authService: AuthService, private usuarioService: UsuarioService){
     this.loginForm= this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]]
@@ -46,9 +47,6 @@ export class LoginComponent implements OnInit {
           this.notificacionService.notificarError(err)
         }
       })
-
-      
-
     } else {
       console.error('Faltan campos por completar')
       this.notificacionService.notificarError(null, "Faltan campos por completar")

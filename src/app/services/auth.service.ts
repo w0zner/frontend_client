@@ -14,6 +14,19 @@ export class AuthService {
     this.url= GLOBAL.url;
   }
 
+  getToken():any {
+    return localStorage.getItem('token')
+  }
+
+  getEmailLogged():any {
+    return localStorage.getItem('usuario')
+  }
+
+  getHeaders() {
+    let headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.getToken()})
+    return headers;
+  }
+
   login(data: any){
     console.log(data)
     let headers= new HttpHeaders().set('Content-Type', 'application/json')
