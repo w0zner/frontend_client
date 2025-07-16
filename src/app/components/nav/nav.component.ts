@@ -9,19 +9,28 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class NavComponent {
 
   id: any
-  userLogged: any= undefined
+  userData: any= undefined
+  userLogged: any= {}
 
   constructor(private usuarioService: UsuarioService){
     this.id = localStorage.getItem('_id')
   }
 
   ngOnInit(): void {
+    if(localStorage.getItem('userData')){
+      this.userLogged = JSON.parse(localStorage.getItem('userData') || '{}')
+    } else {
+      this.userLogged = undefined
+    }
+
     this.usuarioService.getById(this.id).subscribe({
       next: (response:any)=> {
-        this.userLogged = response.data
+        this.userData = response.data
+        console.log(this.userData)
+        localStorage.setItem('userData', JSON.stringify(this.userData))
       },
       error: (err) => {
-        this.userLogged = null
+        this.userData = null
       }
     })
   }
