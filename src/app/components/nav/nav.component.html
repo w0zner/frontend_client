@@ -18,14 +18,14 @@
       <div class="d-flex align-items-center order-lg-3">
         <ul class="nav nav-tools flex-nowrap">
           <li class="nav-item d-lg-block d-none mb-0">
-            <ng-container *ngIf="!userLogged">
+            <ng-container *ngIf="!userLogged.nombres">
               <a [routerLink]="['/login']" class="nav-tool">
                 <i class="cxi-profile nav-tool-icon"></i>
                 <span class="nav-tool-label">Iniciar Sesión</span>
               </a>
             </ng-container>
-            <ng-container *ngIf="userLogged">
-              <a [routerLink]="['/login']" class="nav-tool">
+            <ng-container *ngIf="userLogged.nombres">
+              <a  class="nav-tool">
                 <i class="cxi-profile nav-tool-icon"></i>
                 <span class="nav-tool-label">{{userLogged.nombres}} {{userLogged.apellidos}}</span>
               </a>

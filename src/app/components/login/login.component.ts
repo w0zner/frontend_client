@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(this.loginForm.value).subscribe({
         next: (response:any)=> {
+          console.log(response)
           this.notificacionService.notificarExito("Bienvenido")
           this.router.navigate(['/'])
         },

@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GLOBAL } from './GLOBAL';
-import { tap } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
+import { UsuarioService } from './usuario.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,13 @@ import { tap } from 'rxjs';
 export class AuthService {
 
   private url: string
+  private usuarioSubject = new BehaviorSubject<string | null>(null);
+  usuario$ = this.usuarioSubject.asObservable();
 
   constructor(private http: HttpClient) {
     this.url= GLOBAL.url;
+    const usuario = JSON.parse(localStorage.getItem('userData') || '{}')
+    if (usuario) this.usuarioSubject.next(usuario);
   }
 
   getToken():any {
@@ -27,6 +32,11 @@ export class AuthService {
     return headers;
   }
 
+  setUsuario(usuario: string) {
+    localStorage.setItem('userData', JSON.stringify(usuario));
+    this.usuarioSubject.next(usuario);
+  }
+
   login(data: any){
     console.log(data)
     let headers= new HttpHeaders().set('Content-Type', 'application/json')
@@ -35,7 +45,9 @@ export class AuthService {
         localStorage.setItem('token', response.token)
         localStorage.setItem('refreshToken', response.refreshToken)
         localStorage.setItem('_id', response.data._id)
-        localStorage.setItem('usuario', response.data.email)
+        localStorage.setItem('email', response.data.email)
+        //localStorage.setItem('userData', response.data)
+        this.setUsuario(response.data)
       })
     )
   }

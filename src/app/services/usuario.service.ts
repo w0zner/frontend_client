@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GLOBAL } from './GLOBAL';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -24,9 +24,14 @@ export class UsuarioService {
     return this.http.post(this.url, data, {headers: this.headers})
   }
 
-  getById(id: any) {
-    return this.http.get(this.url + "/cliente/" + id, {headers: this.headers})
-  }
+  // getById(id: any) {
+  //   return this.http.get(this.url + "/cliente/" + id, {headers: this.headers}).pipe(
+  //     tap((response:any) => {
+  //       localStorage.setItem('userData', JSON.stringify(response.data))
+  //       if (response.data) this.usuarioSubject.next(response.data);
+  //     })
+  //   )
+  // }
 
   update(id: string, data:any) {
     return this.http.put(this.url + "/" + id, data,{headers: this.headers})
