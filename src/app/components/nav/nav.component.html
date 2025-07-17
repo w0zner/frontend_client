@@ -25,10 +25,31 @@
               </a>
             </ng-container>
             <ng-container *ngIf="userLogged.nombres">
-              <a  class="nav-tool">
+              <!-- <a  class="nav-tool">
                 <i class="cxi-profile nav-tool-icon"></i>
                 <span class="nav-tool-label">{{userLogged.nombres}} {{userLogged.apellidos}}</span>
-              </a>
+              </a> -->
+              <div class="dropdown nav-tool">
+                <a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                  <i class="cxi-profile nav-tool-icon"></i>
+                <span class="nav-tool-label">{{userLogged.nombres}} {{userLogged.apellidos}}</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a class="dropdown-item" href="#">
+                    <i class="cxi-home me-2"></i>
+                    <span style="margin-left: 5px;  font-size: 15px;">Perfil</span>
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="cxi-external-link me-2"></i>
+                    <span style="margin-left: 5px;  font-size: 15px;">Preferencias</span>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">
+                    <i class="cxi-logout me-2"></i>
+                    <span style="margin-left: 5px;  font-size: 15px;">Salir</span>
+                  </a>
+                </div>
+              </div>
             </ng-container>
           </li>
           <li class="divider-vertical mb-0 d-lg-block d-none"></li>
