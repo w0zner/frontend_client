@@ -6,10 +6,7 @@
         <div class="container">
           <ol class="breadcrumb breadcrumb-alt mb-0">
             <li class="breadcrumb-item">
-              <a href="index.html"><i class="cxi-home"></i></a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href="#">Cuenta</a>
+              <a [routerLink]="['/']"><i class="cxi-home"></i></a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Mi Perfil</li>
           </ol>
@@ -34,27 +31,27 @@
                 Eliminar cuenta
               </a>
             </div>
-            <form>
+            <form [formGroup]="usuarioForm" (submit)="actualizar()">
               <div class="row pb-3">
                 <div class="col-sm-6 form-group">
                   <label for="ac-address">Documento de identidad</label>
-                  <input type="text" id="ac-address" class="form-control form-control-lg" value="4786912">
+                  <input type="text" id="ac-address" class="form-control form-control-lg" formControlName="cedula" value="4786912">
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-email">Correo Electronico</label>
-                  <input type="email" id="ac-email" class="form-control form-control-lg" value="ann.black@example.com">
+                  <input type="email" id="ac-email" class="form-control form-control-lg" value="ann.black@example.com" formControlName="email">
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-fn">Nombre</label>
-                  <input type="text" id="ac-fn" class="form-control form-control-lg" value="Annette">
+                  <input type="text" id="ac-fn" class="form-control form-control-lg" value="Annette" formControlName="nombres">
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-ln">Apellido</label>
-                  <input type="text" id="ac-ln" class="form-control form-control-lg" value="Black">
+                  <input type="text" id="ac-ln" class="form-control form-control-lg" value="Black" formControlName="apellidos">
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-country">Pais</label>
-                  <select id="ac-country" class="custom-select custom-select-lg">
+                  <select id="ac-country" class="custom-select custom-select-lg" formControlName="pais">
                     <option value="" disabled>Choose country</option>
                     <option value="argentina">Australia</option>
                     <option value="brazil">Brazil</option>
@@ -67,15 +64,19 @@
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-phone">Telefono</label>
-                  <input type="text" id="ac-phone" class="form-control form-control-lg" value="(629) 555-0129">
+                  <input type="text" id="ac-phone" class="form-control form-control-lg" value="(629) 555-0129" formControlName="telefono">
                 </div>
                 <div class="col-sm-6 form-group">
-                  <label for="ac-address">Genero</label>
-                  <input type="text" id="ac-address" class="form-control form-control-lg" value="2464 Royal Ln. Mesa, New Jersey">
+                  <label for="validationCustom01" class="form-label">Genero</label>
+                        <select class="form-control custom-select rounded-0" formControlName="genero" id="">
+                          <option value="" selected disabled>Seleccionar</option>
+                          <option value="Masculino">Masculino</option>
+                          <option value="Femenino">Femenino</option>
+                        </select>
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-zip">Fecha de Nacimiento</label>
-                  <input type="text" id="ac-zip" class="form-control form-control-lg" value="45463">
+                  <input type="text" id="ac-zip" class="form-control form-control-lg" value="45463" formControlName="fecha_nacimiento">
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-password">Contraseña</label>

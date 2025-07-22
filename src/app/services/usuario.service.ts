@@ -9,10 +9,12 @@ import { AuthService } from './auth.service';
 export class UsuarioService {
 
   private url: string;
+  private urlUsuarioCliente: string;
   private headers: any
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.url = GLOBAL.url + 'usuarios'
+    this.urlUsuarioCliente = GLOBAL.url + 'usuarios/cliente'
     this.headers = this.authService.getHeaders()
   }
 
@@ -39,5 +41,9 @@ export class UsuarioService {
 
   delete(id:any) {
     return this.http.delete(this.url + "/" + id, {headers: this.headers})
+  }
+
+  updateUsuarioCliente(id: string, data:any) {
+    return this.http.put(this.urlUsuarioCliente + "/" + id, data,{headers: this.headers})
   }
 }
