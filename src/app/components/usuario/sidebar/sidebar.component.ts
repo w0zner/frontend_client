@@ -1,18 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css']
 })
-export class NavComponent {
+export class SidebarComponent implements OnInit {
 
   userLogged: any= null
 
   constructor(private authService: AuthService){
-
   }
 
   ngOnInit(): void {
@@ -20,4 +18,5 @@ export class NavComponent {
       this.userLogged = usuario;
     });
   }
+
 }
