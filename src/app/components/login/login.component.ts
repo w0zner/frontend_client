@@ -12,8 +12,11 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup
-  registroForm: FormGroup
+  loginForm: FormGroup;
+  registroForm: FormGroup;
+  showPassword= false;
+  public showRegistro= false;
+  loading=false;
 
   constructor(private fb: FormBuilder, private router: Router, private notificacionService: NotificacionService, private authService: AuthService, private usuarioService: UsuarioService){
     this.loginForm= this.fb.group({
@@ -22,6 +25,7 @@ export class LoginComponent implements OnInit {
     })
 
     this.registroForm= this.fb.group({
+      cedula: ['', [Validators.required]],
       nombres: ['', [Validators.required]],
       apellidos: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
@@ -35,11 +39,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+
   loguearse(){
     if(this.loginForm.valid) {
-      console.log('Datos enviados: ')
-      console.log(this.loginForm.value)
-
       this.authService.login(this.loginForm.value).subscribe({
         next: (response:any)=> {
           console.log(response)
@@ -51,7 +56,32 @@ export class LoginComponent implements OnInit {
         }
       })
     } else {
-      console.error('Faltan campos por completar')
+      //console.error('Faltan campos por completar')
+      this.notificacionService.notificarError(null, "Faltan campos por completar")
+    }
+  }
+
+  registrarse(){
+    if(this.registroForm.valid) {
+      this.loading=true
+      console.log('Datos enviados: ')
+      console.log(this.loginForm.value)
+
+      this.usuarioService.registro(this.registroForm.value).subscribe({
+        next: (response:any)=> {
+          this.loading=false
+          console.log(response)
+          this.notificacionService.notificarExito(response.message)
+          this.showRegistro=!this.showRegistro
+          this.router.navigate(['/login'])
+        },
+        error: (err)=> {
+          this.loading=false
+          this.notificacionService.notificarError(err)
+        }
+      })
+    } else {
+      //console.error('Faltan campos por completar')
       this.notificacionService.notificarError(null, "Faltan campos por completar")
     }
   }

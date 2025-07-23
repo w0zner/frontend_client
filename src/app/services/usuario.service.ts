@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { GLOBAL } from './GLOBAL';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,11 @@ export class UsuarioService {
 
   updateUsuarioCliente(id: string, data:any) {
     return this.http.put(this.urlUsuarioCliente + "/" + id, data,{headers: this.headers})
+  }
+
+  registro(data: any){
+    console.log(data)
+    let headers= new HttpHeaders().set('Content-Type', 'application/json')
+    return this.http.post(this.url + "/" + 'registro', data, {headers: headers})
   }
 }
