@@ -26,6 +26,14 @@ export class UsuarioService {
     return this.http.post(this.url, data, {headers: this.headers})
   }
 
+  update(id: string, data:any) {
+    return this.http.put(this.url + "/" + id, data,{headers: this.headers})
+  }
+
+  delete(id:any) {
+    return this.http.delete(this.url + "/" + id, {headers: this.headers})
+  }
+
   // getById(id: any) {
   //   return this.http.get(this.url + "/cliente/" + id, {headers: this.headers}).pipe(
   //     tap((response:any) => {
@@ -34,14 +42,6 @@ export class UsuarioService {
   //     })
   //   )
   // }
-
-  update(id: string, data:any) {
-    return this.http.put(this.url + "/" + id, data,{headers: this.headers})
-  }
-
-  delete(id:any) {
-    return this.http.delete(this.url + "/" + id, {headers: this.headers})
-  }
 
   updateUsuarioCliente(id: string, data:any) {
     return this.http.put(this.urlUsuarioCliente + "/" + id, data,{headers: this.headers})

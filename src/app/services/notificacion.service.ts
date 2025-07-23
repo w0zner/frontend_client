@@ -13,7 +13,7 @@ export class NotificacionService {
       title: 'Exito',
       message: mensaje,
       //color: 'green',
-      position: position || 'topRight'
+      position: position || 'bottomRight'
     })
   }
 

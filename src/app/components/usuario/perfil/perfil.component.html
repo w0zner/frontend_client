@@ -35,40 +35,42 @@
               <div class="row pb-3">
                 <div class="col-sm-6 form-group">
                   <label for="ac-address">Documento de identidad</label>
-                  <input type="text" id="ac-address" class="form-control form-control-lg" formControlName="cedula" value="4786912">
+                  <input type="text" id="ac-address" class="form-control" formControlName="cedula" value="4786912">
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-email">Correo Electronico</label>
-                  <input type="email" id="ac-email" class="form-control form-control-lg" value="ann.black@example.com" formControlName="email">
+                  <input type="email" id="ac-email" class="form-control" value="ann.black@example.com" formControlName="email">
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-fn">Nombre</label>
-                  <input type="text" id="ac-fn" class="form-control form-control-lg" value="Annette" formControlName="nombres">
+                  <input type="text" id="ac-fn" class="form-control" value="Annette" formControlName="nombres">
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-ln">Apellido</label>
-                  <input type="text" id="ac-ln" class="form-control form-control-lg" value="Black" formControlName="apellidos">
+                  <input type="text" id="ac-ln" class="form-control" value="Black" formControlName="apellidos">
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-country">Pais</label>
-                  <select id="ac-country" class="custom-select custom-select-lg" formControlName="pais">
-                    <option value="" disabled>Choose country</option>
-                    <option value="argentina">Australia</option>
-                    <option value="brazil">Brazil</option>
-                    <option value="belgium">Belgium</option>
-                    <option value="france">France</option>
-                    <option value="germany">Germany</option>
-                    <option value="uk">United Kingdom</option>
-                    <option value="usa" selected>USA</option>
+                  <select id="ac-country" class="custom-select rounded-0" formControlName="pais">
+                    <option value="" disabled>Seleccionar</option>
+                    <option value="argentina">Argentina</option>
+                    <option value="colombia">Colombia</option>
+                    <option value="chile">Chile</option>
+                    <option value="uruguay">Uruguay</option>
+                    <option value="paraguay">Paraguay</option>
+                    <option value="peru">Peru</option>
+                    <option value="bolivia">Bolivia</option>
+                    <option value="mexico">Mexico</option>
+                    <option value="estados unidos">Estados Unidos</option>
                   </select>
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-phone">Telefono</label>
-                  <input type="text" id="ac-phone" class="form-control form-control-lg" value="(629) 555-0129" formControlName="telefono">
+                  <input type="text" id="ac-phone" class="form-control" value="(629) 555-0129" formControlName="telefono">
                 </div>
                 <div class="col-sm-6 form-group">
-                  <label for="validationCustom01" class="form-label">Genero</label>
-                        <select class="form-control custom-select rounded-0" formControlName="genero" id="">
+                  <label for="genero" class="form-label">Genero</label>
+                        <select class="form-control custom-select rounded-0" formControlName="genero" id="genero">
                           <option value="" selected disabled>Seleccionar</option>
                           <option value="Masculino">Masculino</option>
                           <option value="Femenino">Femenino</option>
@@ -76,12 +78,12 @@
                 </div>
                 <div class="col-sm-6 form-group">
                   <label for="ac-zip">Fecha de Nacimiento</label>
-                  <input type="text" id="ac-zip" class="form-control form-control-lg" value="45463" formControlName="fecha_nacimiento">
+                  <input class="form-control" type="date" formControlName="fecha_nacimiento">
                 </div>
-                <div class="col-sm-6 form-group">
+                <!-- <div class="col-sm-6 form-group">
                   <label for="ac-password">Contraseña</label>
                   <div class="cs-password-toggle input-group-overlay">
-                    <input type="password" id="ac-password" class="form-control form-control-lg">
+                    <input type="password" id="ac-password" class="form-control">
                     <div class="input-group-append-overlay">
                       <label class="btn cs-password-toggle-btn input-group-text">
                         <input type="checkbox" class="custom-control-input">
@@ -94,7 +96,7 @@
                 <div class="col-sm-6 form-group">
                   <label for="ac-password-confirm">Confirmar Contraseña</label>
                   <div class="cs-password-toggle input-group-overlay">
-                    <input type="password" id="ac-password-confirm" class="form-control form-control-lg">
+                    <input type="password" id="ac-password-confirm" class="form-control">
                     <div class="input-group-append-overlay">
                       <label class="btn cs-password-toggle-btn input-group-text">
                         <input type="checkbox" class="custom-control-input">
@@ -103,9 +105,9 @@
                       </label>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
-              <button type="submit" class="btn btn-primary btn-lg">&nbsp;Guardar cambios&nbsp;</button>
+              <button type="submit" class="btn btn-primary btn-sm btn-hover-shadow">&nbsp;Guardar cambios&nbsp;</button>
             </form>
           </div>
         </div>

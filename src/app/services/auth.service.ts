@@ -51,4 +51,14 @@ export class AuthService {
       })
     )
   }
+
+  logout(){
+    localStorage.removeItem('_id')
+    localStorage.removeItem('token')
+    localStorage.removeItem('refreshToken')
+    localStorage.removeItem('email')
+    localStorage.removeItem('userData')
+    localStorage.clear()
+    this.usuarioSubject.next('');
+  }
 }

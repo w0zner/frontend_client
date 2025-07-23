@@ -25,29 +25,42 @@ export class PerfilComponent implements OnInit {
       fecha_nacimiento: [''],
       pais: [''],
       cedula: ['', [Validators.required]],
-      genero: ['seleccionar']
+      genero: ['']
     })
   }
 
   ngOnInit(): void {
     this.authService.usuario$.subscribe((usuario) => {
       this.userLogged = usuario;
+
+      this.usuarioForm.patchValue({
+        nombres: this.userLogged.nombres,
+        apellidos: this.userLogged.apellidos,
+        email: this.userLogged.email,
+        telefono: this.userLogged?.telefono,
+        fecha_nacimiento: this.userLogged?.fecha_nacimiento,
+        cedula: this.userLogged.cedula,
+        genero: this.userLogged?.genero ?? '',
+        pais: this.userLogged?.pais ?? ''
+      })
     });
   }
 
   actualizar() {
       if(this.usuarioForm.valid) {
-        this.usuarioService.updateUsuarioCliente(this.userLogged._id, this.usuarioForm.value).subscribe({
-          next: (response)=>{
-            this.notificacionService.notificarExito('Datos guardados exitosamente!')
-            //this.router.navigateByUrl('/panel/clientes')
+
+        this.notificacionService.alertConfirmation(
+          () => {
+            this.usuarioService.updateUsuarioCliente(this.userLogged._id, this.usuarioForm.value).subscribe({
+              next: (response)=>{}
+            })
           },
-          error: (err)=> {
-            this.notificacionService.notificarError(err)
-          }
-        })
+          'Confirma que desea actualizar los datos de su perfil?',
+          'Datos guardados exitosamente!',
+          'Error al guardar los datos'
+        );
       } else {
-        console.log("ajd")
+        this.notificacionService.notificarError('Por favor, complete todos los campos requeridos.')
       }
   }
 

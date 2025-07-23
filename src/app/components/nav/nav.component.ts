@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -11,7 +12,7 @@ export class NavComponent {
 
   userLogged: any= null
 
-  constructor(private authService: AuthService){
+  constructor(private authService: AuthService, private router: Router){
 
   }
 
@@ -20,4 +21,10 @@ export class NavComponent {
       this.userLogged = usuario;
     });
   }
+
+  logout(){
+    this.authService.logout()
+    this.router.navigateByUrl('/login')
+  }
+
 }
