@@ -20,6 +20,8 @@
     "@angular/router": "^16.2.0",
     "@auth0/angular-jwt": "^5.2.0",
     "frontend-client": "file:",
+    "ng2-nouislider": "^2.0.0",
+    "nouislider": "^15.8.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

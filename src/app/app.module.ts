@@ -12,6 +12,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { PerfilComponent } from './components/usuario/perfil/perfil.component';
 import { SidebarComponent } from './components/usuario/sidebar/sidebar.component';
+import { IndexProductosComponent } from './components/productos/index-productos/index-productos.component';
+import { NouisliderModule } from "ng2-nouislider";
 
 @NgModule({
   declarations: [
@@ -21,15 +23,17 @@ import { SidebarComponent } from './components/usuario/sidebar/sidebar.component
     FooterComponent,
     LoginComponent,
     PerfilComponent,
-    SidebarComponent
+    SidebarComponent,
+    IndexProductosComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    NouisliderModule
+],
   providers: [],
   bootstrap: [AppComponent]
 })
