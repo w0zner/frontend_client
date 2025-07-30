@@ -1,6 +1,6 @@
-@import "nouislider/dist/nouislider.css";
+//@import "nouislider/dist/nouislider.css";
 
-.input-container {
+/* .input-container {
   display: flex;
   gap: 10px;
   margin-top: 15px;
@@ -8,4 +8,52 @@
 
 input {
   width: 100px;
+} */
+
+:host ::ng-deep .noUi-target {
+  width: 100% !important;
+}
+
+:host ::ng-deep .noUi-handle {
+  border-radius: 50% !important;
+  background-color: #333 !important;
+  width: 16px !important;
+  height: 16px !important;
+  top: -6px !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+
+:host ::ng-deep .noUi-connect {
+  background: #007bff !important; /* Color de la barra activa */
+}
+
+:host ::ng-deep .noUi-base {
+  background: #ccc !important; /* Color de la barra inactiva */
+}
+
+:host ::ng-deep .noUi-target {
+  height: 4px !important;       /* Grosor de la barra */
+  border: none !important;
+  background: #e0e0e0 !important; /* Color base de la barra */
+  box-shadow: none !important;
+  margin-top: 15px;              /* Para alinear bien los handles */
+  border-radius: 2px;
+}
+
+:host ::ng-deep .noUi-connect {
+  background: #333 !important;   /* Color de la parte seleccionada */
+  height: 100% !important;
+  border-radius: 2px;
+}
+
+:host ::ng-deep .noUi-tooltip {
+  background-color: #333 !important;   /* Fondo gris oscuro */
+  color: #fff !important;              /* Texto blanco */
+  border: none !important;
+  font-size: 12px;
+  border-radius: 4px;
+  padding: 4px 6px;
+  box-shadow: none !important;
 }

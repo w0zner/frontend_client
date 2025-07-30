@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NouisliderComponent } from 'ng2-nouislider';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 @Component({
@@ -8,11 +9,23 @@ import { NouisliderComponent } from 'ng2-nouislider';
   styleUrls: ['./index-productos.component.scss']
 })
 export class IndexProductosComponent implements OnInit {
+
+  public config_global: any = {}
+
+  constructor(private usuarioService: UsuarioService) {
+    this.usuarioService.obtenerConfiguracionPublica().subscribe({
+      next: (response: any) => {
+        this.config_global = response.data;
+        console.log(this.config_global)
+      }
+    })
+  }
+
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
 
-  public someRange: number[] = [3, 7];
+  public someRange: number[] = [100, 700];
  
 
   changeSomeRange(index: number, value: number) {
@@ -20,9 +33,4 @@ export class IndexProductosComponent implements OnInit {
     newRange[index] = newRange[index] + value;
     this.someRange = newRange;
   }
-
-  onChange(value: any) {
-    console.log('Value changed to', value);
-  }
-
 }

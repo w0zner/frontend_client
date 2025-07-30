@@ -53,4 +53,8 @@ export class UsuarioService {
     let headers= new HttpHeaders().set('Content-Type', 'application/json')
     return this.http.post(this.url + "/" + 'registro', data, {headers: headers})
   }
+
+  obtenerConfiguracionPublica() {
+    return this.http.get(GLOBAL.url + 'config', {headers: new HttpHeaders({'Content-Type': 'application/json'})})
+  }
 }

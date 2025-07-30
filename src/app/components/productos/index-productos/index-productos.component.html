@@ -296,71 +296,38 @@
                             </div>
                             <div class="collapse show" id="price" aria-labelledby="price-panel">
                                 <div class="cs-widget pl-1 pr-3 pb-4 mt-n3">
-
-                                    <nouislider
-                                [connect]="true"
-                                [min]="0"
-                                [max]="10"
-                                [tooltips]="[true, true]"
-                                [step]="1"
-                                [animate]="true"
-                                [(ngModel)]="someRange"
-                                (ngModelChange)="onChange($event)"
-                                ></nouislider>
-
-                                <div>
-                                    <input [(ngModel)]="someRange[0]" (input)="onChange(someRange)"> -
-                                    <input [(ngModel)]="someRange[1]" (input)="onChange(someRange)">
-                                  </div>
-
+                                        <!-- (ngModelChange)="onChange($event)" -->
                                     <div class="cs-range-slider" data-start-min="250" data-start-max="680" data-min="0"
                                         data-max="1000" data-step="1">
-                                        <div class="cs-range-slider-ui"></div>
+                                        <nouislider
+                                        [connect]="true"
+                                        [min]="0"
+                                        [max]="1000"
+                                        [tooltips]="[true, true]"
+                                        [step]="1"
+                                        [(ngModel)]="someRange"
+                                        ></nouislider>
+
                                         <div class="d-flex align-items-center mt-3">
                                             <div class="w-50">
                                                 <div class="form-group position-relative mb-0">
-                                                    <input type="number"
+                                                    <input type="number" [(ngModel)]="someRange[0]" (input)="changeSomeRange(someRange[0], someRange[1])"
                                                         class="form-control form-control-sm cs-range-slider-value-min">
                                                 </div>
                                             </div>
                                             <div class="mx-1 px-2 font-size-xs">—</div>
                                             <div class="w-50">
                                                 <div class="form-group position-relative mb-0">
-                                                    <input type="number"
+                                                    <input type="number" [(ngModel)]="someRange[1]" (input)="changeSomeRange(someRange[0], someRange[1])"
                                                         class="form-control form-control-sm cs-range-slider-value-max">
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="cs-range-slider-ui"></div>
                                     </div>
                                 </div>
                             </div>
-
-
-
-                   <!--          <nouislider
-                            [connect]="true"
-                            [tooltips]="[true, true]"
-                            [range]="{ min: 0, max: 1000 }"
-                            (update)="onSliderUpdate($event)">
-                            </nouislider> -->
-                         <!--    <div>
-                                <label>Precio mínimo:</label>
-                                <input type="number" [(ngModel)]="min" [min]="rangeMin" [max]="max" (input)="validarRango()">
-                                <input type="range" [(ngModel)]="min" [min]="rangeMin" [max]="rangeMax" (input)="validarRango()">
-                              </div>
-                              
-                              <div>
-                                <label>Precio máximo:</label>
-                                <input type="number" [(ngModel)]="max" [min]="min" [max]="rangeMax" (input)="validarRango()">
-                                <input type="range" [(ngModel)]="max" [min]="rangeMin" [max]="rangeMax" (input)="validarRango()">
-                              </div> -->
-
-                              
-
-
                         </div>
-
-
                     </div>
                 </div>
             </div>
