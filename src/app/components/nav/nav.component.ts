@@ -11,15 +11,25 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class NavComponent {
 
   userLogged: any= null
-
-  constructor(private authService: AuthService, private router: Router){
-
+  config_global: any = {}
+  
+  constructor(private authService: AuthService, private router: Router, private usuarioService: UsuarioService){
+    this.obtenerConfiguracionPublica()
   }
 
   ngOnInit(): void {
     this.authService.usuario$.subscribe((usuario) => {
       this.userLogged = usuario;
     });
+  }
+
+  obtenerConfiguracionPublica() {
+    this.usuarioService.obtenerConfiguracionPublica().subscribe({
+      next: (response: any) => {
+        this.config_global = response.data;
+        console.log(this.config_global)
+      }
+    })
   }
 
   logout(){
