@@ -18,7 +18,7 @@ export class NavComponent {
   }
 
   ngOnInit(): void {
-    this.authService.usuario$.subscribe((usuario) => {
+    this.authService.usuario$.subscribe((usuario: any) => {
       this.userLogged = usuario;
     });
   }

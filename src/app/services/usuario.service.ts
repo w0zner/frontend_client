@@ -57,4 +57,9 @@ export class UsuarioService {
   obtenerConfiguracionPublica() {
     return this.http.get(GLOBAL.url + 'config', {headers: new HttpHeaders({'Content-Type': 'application/json'})})
   }
+
+  listarProductos(filtro: any) {
+    let headers= new HttpHeaders().set('Content-Type', 'application/json')
+    return this.http.get( GLOBAL.url + "productos/listar-productos/" + filtro, {headers: headers})
+  }
 }
