@@ -17,6 +17,7 @@ export class IndexProductosComponent implements OnInit {
   public url: any;
   nombre_categoria: string = '';
   filter_productos: string=""
+  loading: boolean = false;
 
   constructor(private usuarioService: UsuarioService) {
     this.url = GLOBAL.url + 'productos/obtenerPortada/'
@@ -37,10 +38,14 @@ export class IndexProductosComponent implements OnInit {
   }
 
   obtenerListadoProductos() {
+    this.loading = true;
     this.usuarioService.listarProductos(this.filter_productos).subscribe({
       next: (response: any) => {
         console.log(response)
         this.productos = response.data
+        setTimeout(() => {
+          this.loading = false;
+        }, 2000);
       }
     })
   }
