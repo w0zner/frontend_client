@@ -184,14 +184,14 @@
                             <div class="collapse show" id="price" aria-labelledby="price-panel">
                                 <div class="cs-widget pl-1 pr-3 pb-4 mt-1">
                                         <!-- (ngModelChange)="onChange($event)" -->
-                                    <div class="cs-range-slider" data-start-min="250" data-start-max="680" data-min="0"
-                                        data-max="1000" data-step="1">
+                                    <div class="cs-range-slider" data-start-min="0" data-start-max="12000000" data-min="0"
+                                        data-max="12000000" data-step="10">
                                         <nouislider
                                         [connect]="true"
                                         [min]="0"
-                                        [max]="1000"
+                                        [max]="12000000"
                                         [tooltips]="[true, true]"
-                                        [step]="1"
+                                        [step]="10"
                                         [(ngModel)]="someRange"
                                         ></nouislider>
 
@@ -208,6 +208,12 @@
                                                     <input type="number" [(ngModel)]="someRange[1]" (input)="changeSomeRange(someRange[0], someRange[1])"
                                                         class="form-control form-control-sm cs-range-slider-value-max">
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-12" style=" display: flex; gap: 0.5rem; white-space: nowrap;">
+                                                <button class="btn btn-primary btn-sm"  [ngClass]="{ 'btn-block': !mostrarLimpiar, 'btn-filtrando': mostrarLimpiar }"  (click)="filtrarPorPrecio()">Filtrar</button>
+                                                <button class="btn btn-secondary btn-sm" style="flex: 0.3" *ngIf="mostrarLimpiar" (click)="limpiarFiltroPrecio()">Limpiar</button>
                                             </div>
                                         </div>
                                         <div class="cs-range-slider-ui"></div>

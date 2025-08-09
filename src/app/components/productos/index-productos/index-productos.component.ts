@@ -13,11 +13,12 @@ export class IndexProductosComponent implements OnInit {
 
   public config_global: any = {}
   public productos: Array<any> = []
-  public someRange: number[] = [100, 700];
+  public someRange: number[] = [100000, 3000000];
   public url: any;
   nombre_categoria: string = '';
   filter_productos: string=""
   loading: boolean = false;
+  mostrarLimpiar = false;
 
   constructor(private usuarioService: UsuarioService) {
     this.url = GLOBAL.url + 'productos/obtenerPortada/'
@@ -45,7 +46,7 @@ export class IndexProductosComponent implements OnInit {
         this.productos = response.data
         setTimeout(() => {
           this.loading = false;
-        }, 2000);
+        }, 1000);
       }
     })
   }
@@ -65,5 +66,20 @@ export class IndexProductosComponent implements OnInit {
     } else {
       this.obtenerConfiguracionPublica();
     }
+  }
+
+  filtrarPorPrecio() {
+    if(this.someRange[0] && this.someRange[1]){
+      this.mostrarLimpiar=true
+      const min = this.someRange[0]  
+      const max = this.someRange[1]
+
+      this.productos = this.productos.filter(producto => producto.precio >= min && producto.precio <= max) 
+    }
+  }
+
+  limpiarFiltroPrecio() {
+    this.mostrarLimpiar=false
+    this.obtenerListadoProductos()
   }
 }
