@@ -20,6 +20,8 @@ export class IndexProductosComponent implements OnInit {
   filter_categorias: string = 'todos'
   loading: boolean = false;
   mostrarLimpiar = false;
+  page=1
+  pageSize=5
 
   constructor(private usuarioService: UsuarioService, private route: ActivatedRoute) {
     this.url = GLOBAL.url + 'productos/obtenerPortada/'
@@ -105,5 +107,10 @@ export class IndexProductosComponent implements OnInit {
         }
       })
     }
+  }
+
+  resetListadoProductos() {
+    this.filter_productos=''
+    this.obtenerListadoProductos();
   }
 }

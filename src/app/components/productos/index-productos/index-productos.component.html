@@ -247,54 +247,69 @@
                 </div>
 
                 <div *ngIf="!loading" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3" data-filters-columns>
+                    <ng-container *ngIf="productos.length == 0">
+                        <!-- shadow-sm -->
+                        <div class="col-12 col-md-8 mx-auto text-center p-5 bg-light rounded-4">
+                            <div class="mb-4">
+                                <i class="cxi-alert" style="color: gray; font-size: 3rem;"></i>
+                            </div>
 
-                    <!-- Item -->
-                    <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos">
-                        <div class="card card-product mx-auto">
-                            <div class="card-product-img">
-                                <a href="shop-single.html" class="card-img-top">
-                                    <img [src]="producto.portada ? url + producto.portada : 'assets/img/default-product.png'"
-                                        alt="Product image">
-                                </a>
-                                <div class="card-product-widgets-top">
-                                    <div class="star-rating ml-auto">
-                                        <i class="sr-star cxi-star-filled active"></i>
-                                        <i class="sr-star cxi-star-filled active"></i>
-                                        <i class="sr-star cxi-star-filled active"></i>
-                                        <i class="sr-star cxi-star-filled active"></i>
-                                        <i class="sr-star cxi-star-filled active"></i>
-                                    </div>
-                                </div>
-                                <div class="card-product-widgets-bottom">
-                                    <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left"
-                                        title="Add to wishlist"></a>
-                                </div>
-                            </div>
-                            <div class="card-body pb-2">
-                                <h3 class="card-product-title text-truncate mb-2">
-                                    <a href="shop-single.html" class="nav-link">{{producto.titulo}}</a>
-                                </h3>
-                                <div class="d-flex align-items-center">
-                                    <span class="h5 d-inline-block mb-0">Gs. {{producto.precio}}</span>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="d-flex align-items-center mb-2 pb-1">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <a href="">{{producto.categoria}}</a>
+                            <h4 class="h6 mb-2 text-uppercase text-muted">¡Ups! No encontramos nada</h4>
+                            <h3 class="fw-bold text-dark mb-4">Lo que buscas no está disponible</h3>
+
+                            <button class="btn btn-gradient btn-hover-shadow px-4 py-2 fw-semibold" (click)="resetListadoProductos()">
+                                Ver todos los productos &nbsp;
+                                <i class="cxi-cart"></i>
+                            </button>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="productos.length >= 1">
+                        <!-- Item -->
+                        <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos | slice: (page-1)*pageSize : (page-1)*pageSize+pageSize; let indice = index">
+                            <div class="card card-product mx-auto">
+                                    <div class="card-product-img">
+                                        <a href="shop-single.html" class="card-img-top">
+                                            <img [src]="producto.portada ? url + producto.portada : 'assets/img/default-product.png'"
+                                                alt="Product image">
+                                        </a>
+                                        <div class="card-product-widgets-top">
+                                            <div class="star-rating ml-auto">
+                                                <i class="sr-star cxi-star-filled active"></i>
+                                                <i class="sr-star cxi-star-filled active"></i>
+                                                <i class="sr-star cxi-star-filled active"></i>
+                                                <i class="sr-star cxi-star-filled active"></i>
+                                                <i class="sr-star cxi-star-filled active"></i>
+                                            </div>
+                                        </div>
+                                        <div class="card-product-widgets-bottom">
+                                            <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left"
+                                                title="Add to wishlist"></a>
                                         </div>
                                     </div>
-                                </div>
-                                <button type="button" class="btn btn-primary btn-block">
-                                    <i class="cxi-cart align-middle mt-n1 mr-2"></i>
-                                    Add to cart
-                                </button>
+                                    <div class="card-body pb-2">
+                                        <h3 class="card-product-title text-truncate mb-2">
+                                            <a href="shop-single.html" class="nav-link">{{producto.titulo}}</a>
+                                        </h3>
+                                        <div class="d-flex align-items-center">
+                                            <span class="h5 d-inline-block mb-0">Gs. {{producto.precio}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="d-flex align-items-center mb-2 pb-1">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <a href="">{{producto.categoria}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary btn-block">
+                                            <i class="cxi-cart align-middle mt-n1 mr-2"></i>
+                                            Add to cart
+                                        </button>
+                                    </div>
                             </div>
                         </div>
-                    </div>
-
-
+                    </ng-container>
                 </div>
 
                 <!-- Toolbar + Pagination -->
@@ -324,33 +339,7 @@
                         <span class="font-size-sm text-muted text-nowrap ml-2 d-none d-md-block">productos por página</span>
                     </div>
                     <nav class="pt-1 ml-auto" aria-label="Pagination">
-                        <ul class="pagination mb-0">
-                            <li class="page-item d-sm-none">
-                                <span class="page-link page-link-static">1 / 5</span>
-                            </li>
-                            <li class="page-item active d-none d-sm-block" aria-current="page">
-                                <span class="page-link">1
-                                    <span class="sr-only">(current)</span>
-                                </span>
-                            </li>
-                            <li class="page-item d-none d-sm-block">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item d-none d-sm-block">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item d-none d-sm-block">
-                                <a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item d-none d-sm-block">
-                                <a class="page-link" href="#">5</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">
-                                    <i class="cxi-arrow-right"></i>
-                                </a>
-                            </li>
-                        </ul>
+                         <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="productos.length"></ngb-pagination>
                     </nav>
                 </div>
             </div>
