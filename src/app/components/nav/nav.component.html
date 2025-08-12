@@ -87,7 +87,7 @@
             <a [routerLink]="['/productos']" class="nav-link dropdown-toggle" data-toggle="dropdown">Tienda</a>
             <ul class="dropdown-menu">
               <li *ngFor="let item of config_global.categorias">
-                <a href="checkout.html" class="dropdown-item"><i class="{{item.icono}}"></i> &nbsp; {{item.titulo}}</a>
+                <a [routerLink]="['/productos/categoria', item.titulo]" class="dropdown-item"><i class="{{item.icono}}"></i> &nbsp; {{item.titulo}}</a>
               </li>
             </ul>
           </li>

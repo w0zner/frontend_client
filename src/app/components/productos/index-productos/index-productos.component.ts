@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NouisliderComponent } from 'ng2-nouislider';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { UsuarioService } from 'src/app/services/usuario.service';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-index-productos',
@@ -17,16 +17,30 @@ export class IndexProductosComponent implements OnInit {
   public url: any;
   nombre_categoria: string = '';
   filter_productos: string=""
+  filter_categorias: string = 'todos'
   loading: boolean = false;
   mostrarLimpiar = false;
 
-  constructor(private usuarioService: UsuarioService) {
+  constructor(private usuarioService: UsuarioService, private route: ActivatedRoute) {
     this.url = GLOBAL.url + 'productos/obtenerPortada/'
     this.obtenerConfiguracionPublica();
-    this.obtenerListadoProductos();
+    //this.obtenerListadoProductos();
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const route_categoria = params['categoria']
+      if(route_categoria){
+        this.usuarioService.listarProductos(this.filter_productos).subscribe({
+          next: (response: any) => {
+            this.productos = response.data
+            this.productos = this.productos.filter(producto => producto.categoria.toLowerCase() == route_categoria.toLowerCase())
+          }
+        })
+      } else {
+        this.obtenerListadoProductos()
+      }
+    })
   }
 
   obtenerConfiguracionPublica() {
@@ -42,15 +56,12 @@ export class IndexProductosComponent implements OnInit {
     this.loading = true;
     this.usuarioService.listarProductos(this.filter_productos).subscribe({
       next: (response: any) => {
-        console.log(response)
-        this.productos = response.data
-        setTimeout(() => {
-          this.loading = false;
-        }, 1000);
+        this.productos = response.data;
+        this.loading = false;
       }
     })
   }
- 
+
 
   changeSomeRange(index: number, value: number) {
     let newRange = [this.someRange[0], this.someRange[1]];
@@ -71,15 +82,28 @@ export class IndexProductosComponent implements OnInit {
   filtrarPorPrecio() {
     if(this.someRange[0] && this.someRange[1]){
       this.mostrarLimpiar=true
-      const min = this.someRange[0]  
+      const min = this.someRange[0]
       const max = this.someRange[1]
 
-      this.productos = this.productos.filter(producto => producto.precio >= min && producto.precio <= max) 
+      this.productos = this.productos.filter(producto => producto.precio >= min && producto.precio <= max)
     }
   }
 
   limpiarFiltroPrecio() {
     this.mostrarLimpiar=false
     this.obtenerListadoProductos()
+  }
+
+  buscarPorCategoria() {
+    if(this.filter_categorias == 'todos'){
+      this.obtenerListadoProductos()
+    }else{
+      this.usuarioService.listarProductos(this.filter_productos).subscribe({
+        next: (response: any) => {
+          this.productos = response.data
+          this.productos = this.productos.filter(producto => producto.categoria == this.filter_categorias)
+        }
+      })
+    }
   }
 }

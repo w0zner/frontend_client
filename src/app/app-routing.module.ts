@@ -9,6 +9,7 @@ const routes: Routes = [
   {path: '', component: InicioComponent},
   {path: 'login', component: LoginComponent},
   {path: 'productos', component: IndexProductosComponent },
+  {path: 'productos/categoria/:categoria', component: IndexProductosComponent },
 
   {path: 'cuenta/perfil', component: PerfilComponent, canActivate: [authGuard]}
 ];
