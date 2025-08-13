@@ -19,7 +19,7 @@
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
     "@auth0/angular-jwt": "^5.2.0",
-    "@ng-bootstrap/ng-bootstrap": "^19.0.1",
+    "@ng-bootstrap/ng-bootstrap": "^15.1.2",
     "frontend-client": "file:",
     "ng2-nouislider": "^2.0.0",
     "nouislider": "^15.8.1",

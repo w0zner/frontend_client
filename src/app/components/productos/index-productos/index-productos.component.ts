@@ -21,7 +21,7 @@ export class IndexProductosComponent implements OnInit {
   loading: boolean = false;
   mostrarLimpiar = false;
   page=1
-  pageSize=5
+  pageSize=3
 
   constructor(private usuarioService: UsuarioService, private route: ActivatedRoute) {
     this.url = GLOBAL.url + 'productos/obtenerPortada/'
