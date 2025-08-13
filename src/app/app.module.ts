@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,6 +15,11 @@ import { PerfilComponent } from './components/usuario/perfil/perfil.component';
 import { SidebarComponent } from './components/usuario/sidebar/sidebar.component';
 import { IndexProductosComponent } from './components/productos/index-productos/index-productos.component';
 import { NouisliderModule } from "ng2-nouislider";
+import { registerLocaleData } from '@angular/common';
+import localePy from '@angular/common/locales/es-PY';
+import { ShowProductoComponent } from './components/productos/show-producto/show-producto.component';
+
+registerLocaleData(localePy, 'es-PY');
 
 @NgModule({
   declarations: [
@@ -25,7 +30,8 @@ import { NouisliderModule } from "ng2-nouislider";
     LoginComponent,
     PerfilComponent,
     SidebarComponent,
-    IndexProductosComponent
+    IndexProductosComponent,
+    ShowProductoComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,9 @@ import { NouisliderModule } from "ng2-nouislider";
     NouisliderModule,
     NgbModule
 ],
-  providers: [],
+  providers: [
+     { provide: LOCALE_ID, useValue: 'es-PY' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

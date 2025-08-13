@@ -22,6 +22,7 @@ export class IndexProductosComponent implements OnInit {
   mostrarLimpiar = false;
   page=1
   pageSize=3
+  sortBy: string = 'defecto'
 
   constructor(private usuarioService: UsuarioService, private route: ActivatedRoute) {
     this.url = GLOBAL.url + 'productos/obtenerPortada/'
@@ -112,5 +113,67 @@ export class IndexProductosComponent implements OnInit {
   resetListadoProductos() {
     this.filter_productos=''
     this.obtenerListadoProductos();
+  }
+
+  ordernarPor() {
+    console.log(this.sortBy)
+    if(this.sortBy == 'defecto') {
+      this.obtenerListadoProductos()
+    }
+    if(this.sortBy == 'popularidad') {
+      this.productos.sort(function (a, b) {
+        if (a.nventas < b.nventas) {
+          return 1;
+        }
+        if (a.nventas > b.nventas) {
+          return -1;
+        }
+        return 0;
+      })
+    }
+    if(this.sortBy == 'precio asc') {
+      this.productos.sort(function (a, b) {
+        if (a.precio > b.precio) {
+          return 1;
+        }
+        if (a.precio < b.precio) {
+          return -1;
+        }
+        return 0;
+      })
+    }
+    if(this.sortBy == 'precio desc') {
+      this.productos.sort(function (a, b) {
+        if (a.precio < b.precio) {
+          return 1;
+        }
+        if (a.precio > b.precio) {
+          return -1;
+        }
+        return 0;
+      })
+    }
+    if(this.sortBy == 'nombre asc') {
+      this.productos.sort(function (a, b) {
+        if (a.titulo > b.titulo) {
+          return 1;
+        }
+        if (a.titulo < b.titulo) {
+          return -1;
+        }
+        return 0;
+      })
+    }
+    if(this.sortBy == 'nombre desc') {
+      this.productos.sort(function (a, b) {
+        if (a.titulo < b.titulo) {
+          return 1;
+        }
+        if (a.titulo > b.titulo) {
+          return -1;
+        }
+        return 0;
+      })
+    }
   }
 }
