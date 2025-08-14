@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-declare var tns: (arg0: { container: string; controlsText: string[]; navPosition: string; controlsPosition: string; mouseDrag: boolean; speed: number; autoplayHoverPause: boolean; autoplayButtonOutput: boolean; navContainer: string; navAsThumbnails: boolean; gutter: number; }) => void;
+declare var tns: any;
+declare var lightGallery: any;
 
 @Component({
   selector: 'app-show-producto',
@@ -22,6 +23,44 @@ export class ShowProductoComponent implements OnInit {
       navContainer: "#cs-thumbnails",
       navAsThumbnails: true,
       gutter: 15,
+    });
+
+    var e = document.querySelectorAll(".cs-gallery");
+    if (e.length){
+      for (var t = 0; t < e.length; t++){
+        lightGallery(e[t], { selector: ".cs-gallery-item", download: !1, videojs: !0, youtubePlayerParams: { modestbranding: 1, showinfo: 0, rel: 0 }, vimeoPlayerParams: { byline: 0, portrait: 0 } });
+      }
+    }
+
+    tns({
+      container: '.cs-carousel-inner-two',
+      controlsText: ['<i class="cxi-arrow-left"></i>', '<i class="cxi-arrow-right"></i>'],
+      navPosition: "top",
+      controlsPosition: "top",
+      mouseDrag: !0,
+      speed: 600,
+      autoplayHoverPause: !0,
+      autoplayButtonOutput: !1,
+      nav: false,
+      controlsContainer: "#custom-controls-related",
+      responsive: {
+        0: {
+          items: 1,
+          gutter: 20
+        },
+        480: {
+          items: 2,
+          gutter: 24
+        },
+        700: {
+          items: 3,
+          gutter: 24
+        },
+        1100: {
+          items: 4,
+          gutter: 30
+        }
+      }
     });
   }
 
