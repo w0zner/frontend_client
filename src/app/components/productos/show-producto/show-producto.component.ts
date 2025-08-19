@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { GuestService } from 'src/app/services/guest.service';
 declare var tns: any;
 declare var lightGallery: any;
 
@@ -9,8 +11,23 @@ declare var lightGallery: any;
 })
 export class ShowProductoComponent implements OnInit {
 
+  public producto: any= {}
+
+  constructor(private route: ActivatedRoute, private guestService: GuestService) {
+
+  }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const slug = params['slug']
+      this.guestService.obtenerProductoPorSlug(slug).subscribe({
+        next: (response:any) => {
+          console.log(response.data)
+          this.producto = response.data;
+        }
+      })
+    })
+
     tns({
       container: '.cs-carousel-inner',
       controlsText: ['<i class="cxi-arrow-left"></i>', '<i class="cxi-arrow-right"></i>'],
