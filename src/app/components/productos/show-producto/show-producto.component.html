@@ -20,6 +20,7 @@
     <section class="container d-md-flex align-items-center justify-content-between py-3 py-md-4 mb-3">
         <h1 class="mb-2 mb-md-0">{{producto.titulo}}</h1>
         <span class="text-muted"><strong>Art. No.</strong> {{producto._id?.toUpperCase()}}</span>
+
     </section>
 
     <!-- Single product -->
@@ -132,7 +133,7 @@
                     <span class="d-inline-block pl-2 text-muted" id="colorOptionText">Pink</span>
                   </div>
                 </div>
-              
+
               </div> -->
 
               <div class="col-sm-8 order-sm-1 order-2">
@@ -190,7 +191,7 @@
                 <div class="collapse" id="delivery" aria-labelledby="delivery-card" data-parent="#productTerms">
                   <div class="card-body">
                     <p class="font-size-sm">
-                      
+
                       Envío estándar gratuito en pedidos <strong>superiores a Gs. 250.000</strong>, más devoluciones gratuitas.
                     </p>
 
@@ -280,65 +281,19 @@
       <div class="py-5" style="background-color: #e5e8ed;">
         <section  class="container my-lg-2 py-2 py-md-4" >
           <div class="row">
-            <div class="col-lg-7 col-md-8 mb-md-0 mb-4">
-              <h3 class="h5 mb-3">Details</h3>
-              <p>Id habitant tempor aliquam vulputate enim velit tincidunt sed. Urna sed facilisis nulla feugiat amet venenatis. Id suspendisse ut quis tellus aliquam pellentesque neque, semper donec.</p>
-              <ul class="pl-3">
-                <li>Brand: Jordan</li>
-                <li>Color: gray / red / yellow</li>
-                <li>Mid-cut design</li>
-                <li>Lace-up fastening</li>
-                <li>Rubber outsole pods for durability and traction</li>
-                <li>Moulded grooves in forefoot offer added flexibility</li>
-                <li>Padded cuff with inner nodes designed to offer comfort and support around the Achilles tendon</li>
-              </ul>
-              <hr class="my-4">
-              <h3 class="h5 mb-3">Fabric</h3>
-              <ul class="pl-3">
-                <li>Upper: 50% real leather, 50% textile</li>
-                <li>Lining: 100% textile</li>
-                <li>Sole: 100% other materials</li>
-              </ul>
-              <hr class="my-4">
-              <h3 class="h5 mb-3">Care</h3>
-              <ul class="pl-0">
-                <li class="media">
-                  <img src="../../assets/img/ecommerce/shop/single/care/hand-wash.svg" alt="Icon" class="d-block mr-3">
-                  <div class="media-body pl-1">
-                    Hand wash only (30°)
-                  </div>
-                </li>
-                <li class="media">
-                  <img src="../../assets/img/ecommerce/shop/single/care/no-ironing.svg" alt="Icon" class="d-block mr-3">
-                  <div class="media-body pl-1">
-                    No ironing
-                  </div>
-                </li>
-                <li class="media">
-                  <img src="../../assets/img/ecommerce/shop/single/care/no-bleach.svg" alt="Icon" class="d-block mr-3">
-                  <div class="media-body pl-1">
-                    Do not use any bleach
-                  </div>
-                </li>
-                <li class="media">
-                  <img src="../../assets/img/ecommerce/shop/single/care/no-tumble-dry.svg" alt="Icon" class="d-block mr-3">
-                  <div class="media-body pl-1">
-                    Do not tumble dry
-                  </div>
-                </li>
-              </ul>
+            <div class="col-lg-7 col-md-8 mb-md-0 mb-4" [innerHTML]="producto.contenido">
             </div>
             <div class="col-md-4 offset-lg-1">
-
               <!-- Product card carousel -->
               <div class="card card-product">
                 <div class="card-product-img">
-                  <div class="cs-carousel cs-controls-onhover">
-                    <a class="cs-carousel-inner">
-                      <div><img class="card-img-top" src="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" alt="Product image"></div>
-
-                    </a>
-                  </div>
+                  <!--                 <div class="cs-carousel cs-controls-onhover">
+                  <a class="cs-carousel-inner"> -->
+                    <div>
+                      <img class="card-img-top" [src]="producto?.portada ? url + producto.portada : 'assets/img/safari-pinned-tab.svg'" alt="Product image">
+                    </div>
+<!--                   </a>
+                </div> -->
                   <div class="card-product-widgets-top">
                     <div class="ml-auto star-rating">
                       <i class="sr-star cxi-star-filled active"></i>
@@ -354,51 +309,15 @@
                 </div>
                 <div class="card-body pb-2" style="background-color: white;">
                   <h3 class="card-product-title text-truncate mb-2">
-                    <a href="#" class="nav-link">Basic hooded sweatshirt in pink</a>
+                    <a href="#" class="nav-link">{{producto.titulo}}</a>
                   </h3>
-                  <div class="d-flex align-items-center">
-                    <span class="h5 d-inline-block text-danger mb-0">$15.50</span>
+                  <div class="d-flex align-items-center mb-3">
+                    <span class="h5 d-inline-block text-danger mb-0">{{producto.precio | currency:'PYG ':'symbol':'1.0-0'}}</span>
                     <del class="d-inline-block ml-2 pl-1 text-muted">$31.00</del>
                   </div>
-                  <div class="d-flex align-items-center mb-2 pb-1">
-                    <div class="mt-n2">
-                      <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="size-01" id="l-1" checked>
-                        <label for="l-1" class="cs-custom-option-label">L</label>
-                      </div>
-                      <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="size-01" id="m-1">
-                        <label for="m-1" class="cs-custom-option-label">M</label>
-                      </div>
-                      <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="size-01" id="s-1">
-                        <label for="s-1" class="cs-custom-option-label">S</label>
-                      </div>
-                    </div>
-                    <div class="ml-auto">
-                      <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="color-01" id="beige-1" value="Beige" checked>
-                        <label for="beige-1" class="cs-custom-option-label">
-                          <span class="cs-color-swatch" style="background-color: #dead9c;"></span>
-                        </label>
-                      </div>
-                      <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="color-01" id="blue-1" value="Blue">
-                        <label for="blue-1" class="cs-custom-option-label">
-                          <span class="cs-color-swatch" style="background-color: #7998d1;"></span>
-                        </label>
-                      </div>
-                      <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="color-01" id="white-1" value="White">
-                        <label for="white-1" class="cs-custom-option-label">
-                          <span class="cs-color-swatch" style="background-color: #f4f4f4;"></span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="button" class="btn btn-primary btn-block">
+                  <button type="button" class="btn btn-primary btn-block mb-1">
                     <i class="cxi-cart align-middle mt-n1 mr-2"></i>
-                    Add to cart
+                    Agregar al carrito
                   </button>
                 </div>
                 <div class="card-footer">
@@ -669,16 +588,16 @@
             </nav>
           </div>
           <div class="col-md-4 offset-lg-1">
-
             <!-- Product card carousel -->
             <div class="card card-product">
               <div class="card-product-img">
-                <div class="cs-carousel cs-controls-onhover">
-                  <a class="cs-carousel-inner">
-                    <div><img class="card-img-top" src="https://createx.createx.studio/assets/img/ecommerce/shop/single/01.jpg" alt="Product image"></div>
-
-                  </a>
-                </div>
+<!--                 <div class="cs-carousel cs-controls-onhover">
+                  <a class="cs-carousel-inner"> -->
+                    <div>
+                      <img class="card-img-top" [src]="producto?.portada ? url + producto.portada : 'assets/img/safari-pinned-tab.svg'" alt="Product image">
+                    </div>
+<!--                   </a>
+                </div> -->
                 <div class="card-product-widgets-top">
                   <div class="ml-auto star-rating">
                     <i class="sr-star cxi-star-filled active"></i>
@@ -694,51 +613,15 @@
               </div>
               <div class="card-body pb-2" style="background-color: white;">
                 <h3 class="card-product-title text-truncate mb-2">
-                  <a href="#" class="nav-link">Basic hooded sweatshirt in pink</a>
+                  <a href="#" class="nav-link">{{producto.titulo}}</a>
                 </h3>
-                <div class="d-flex align-items-center">
-                  <span class="h5 d-inline-block text-danger mb-0">$15.50</span>
+                <div class="d-flex align-items-center mb-3">
+                  <span class="h5 d-inline-block text-danger mb-0">{{producto.precio | currency:'PYG ':'symbol':'1.0-0'}}</span>
                   <del class="d-inline-block ml-2 pl-1 text-muted">$31.00</del>
                 </div>
-                <div class="d-flex align-items-center mb-2 pb-1">
-                  <div class="mt-n2">
-                    <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
-                      <input type="radio" class="custom-control-input" name="size-01" id="l-1" checked>
-                      <label for="l-1" class="cs-custom-option-label">L</label>
-                    </div>
-                    <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
-                      <input type="radio" class="custom-control-input" name="size-01" id="m-1">
-                      <label for="m-1" class="cs-custom-option-label">M</label>
-                    </div>
-                    <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
-                      <input type="radio" class="custom-control-input" name="size-01" id="s-1">
-                      <label for="s-1" class="cs-custom-option-label">S</label>
-                    </div>
-                  </div>
-                  <div class="ml-auto">
-                    <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
-                      <input type="radio" class="custom-control-input" name="color-01" id="beige-1" value="Beige" checked>
-                      <label for="beige-1" class="cs-custom-option-label">
-                        <span class="cs-color-swatch" style="background-color: #dead9c;"></span>
-                      </label>
-                    </div>
-                    <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
-                      <input type="radio" class="custom-control-input" name="color-01" id="blue-1" value="Blue">
-                      <label for="blue-1" class="cs-custom-option-label">
-                        <span class="cs-color-swatch" style="background-color: #7998d1;"></span>
-                      </label>
-                    </div>
-                    <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
-                      <input type="radio" class="custom-control-input" name="color-01" id="white-1" value="White">
-                      <label for="white-1" class="cs-custom-option-label">
-                        <span class="cs-color-swatch" style="background-color: #f4f4f4;"></span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="btn btn-primary btn-block">
+                <button type="button" class="btn btn-primary btn-block mb-1">
                   <i class="cxi-cart align-middle mt-n1 mr-2"></i>
-                  Add to cart
+                  Agregar al carrito
                 </button>
               </div>
               <div class="card-footer">

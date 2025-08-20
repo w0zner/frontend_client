@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GuestService } from 'src/app/services/guest.service';
+import { GLOBAL } from 'src/app/services/GLOBAL';
 declare var tns: any;
 declare var lightGallery: any;
 
@@ -12,9 +13,10 @@ declare var lightGallery: any;
 export class ShowProductoComponent implements OnInit {
 
   public producto: any= {}
+  public url: any;
 
   constructor(private route: ActivatedRoute, private guestService: GuestService) {
-
+    this.url = GLOBAL.url + 'productos/obtenerPortada/'
   }
 
   ngOnInit(): void {
