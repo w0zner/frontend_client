@@ -18,6 +18,7 @@ import { NouisliderModule } from "ng2-nouislider";
 import { registerLocaleData } from '@angular/common';
 import localePy from '@angular/common/locales/es-PY';
 import { ShowProductoComponent } from './components/productos/show-producto/show-producto.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 registerLocaleData(localePy, 'es-PY');
 
@@ -31,7 +32,8 @@ registerLocaleData(localePy, 'es-PY');
     PerfilComponent,
     SidebarComponent,
     IndexProductosComponent,
-    ShowProductoComponent
+    ShowProductoComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,

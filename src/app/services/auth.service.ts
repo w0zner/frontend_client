@@ -18,7 +18,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.url= GLOBAL.url;
-    const usuario = JSON.parse(localStorage.getItem('userData') || '{}')
+    const usuario = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData') || '{}') : undefined
     if (usuario) this.usuarioSubject.next(usuario);
   }
 

@@ -6,6 +6,7 @@ import { PerfilComponent } from './components/usuario/perfil/perfil.component';
 import { authGuard } from './guards/auth.guard';
 import { IndexProductosComponent } from './components/productos/index-productos/index-productos.component';
 import { ShowProductoComponent } from './components/productos/show-producto/show-producto.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
 const routes: Routes = [
   {path: '', component: InicioComponent},
   {path: 'login', component: LoginComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'productos/categoria/:categoria', component: IndexProductosComponent },
   {path: 'productos/:slug', component: ShowProductoComponent },
 
-  {path: 'cuenta/perfil', component: PerfilComponent, canActivate: [authGuard]}
+  {path: 'cuenta/perfil', component: PerfilComponent, canActivate: [authGuard]},
+  {path: 'carrito', component: CarritoComponent, /*canActivate: [authGuard]*/}
 ];
 
 @NgModule({

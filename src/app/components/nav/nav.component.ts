@@ -10,8 +10,9 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class NavComponent {
 
-  userLogged: any= null
+  userLogged: any = undefined
   config_global: any = {}
+  op_carrito= false;
   
   constructor(private authService: AuthService, private router: Router, private usuarioService: UsuarioService){
     this.obtenerConfiguracionPublica()
@@ -19,8 +20,12 @@ export class NavComponent {
 
   ngOnInit(): void {
     this.authService.usuario$.subscribe((usuario: any) => {
-      this.userLogged = usuario;
+      console.log(200)
+      if(usuario){
+        this.userLogged = usuario;
+      }
     });
+    console.log(this.userLogged)
   }
 
   obtenerConfiguracionPublica() {
@@ -35,6 +40,20 @@ export class NavComponent {
   logout(){
     this.authService.logout()
     this.router.navigateByUrl('/login')
+  }
+
+  mostrarCarrito() {
+    console.log(this.op_carrito)
+    if(this.op_carrito){
+      console.log(1)
+      setTimeout(() => {
+        this.op_carrito=false;
+      }, 300);
+    } else {
+            console.log(2)
+      this.op_carrito=true;
+    }
+    
   }
 
 }
