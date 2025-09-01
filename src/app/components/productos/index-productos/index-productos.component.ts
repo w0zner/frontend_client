@@ -3,6 +3,8 @@ import { NouisliderComponent } from 'ng2-nouislider';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { NotificacionService } from 'src/app/services/notificacion.service';
 
 @Component({
   selector: 'app-index-productos',
@@ -23,11 +25,19 @@ export class IndexProductosComponent implements OnInit {
   page=1
   pageSize=3
   sortBy: string = 'defecto'
+  public carritoForm: FormGroup
 
-  constructor(private usuarioService: UsuarioService, private route: ActivatedRoute) {
+
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private route: ActivatedRoute, private notificacionesService: NotificacionService) {
     this.url = GLOBAL.url + 'productos/obtenerPortada/'
     this.obtenerConfiguracionPublica();
-    //this.obtenerListadoProductos();
+
+    this.carritoForm = this.fb.group({
+      producto: [''],
+      usuario: [''],
+      cantidad: [1],
+      variedad: ['']
+    })
   }
 
   ngOnInit(): void {
@@ -175,5 +185,40 @@ export class IndexProductosComponent implements OnInit {
         return 0;
       })
     }
+  }
+
+    agregarAlCarrito(producto: any){
+    this.carritoForm.patchValue({
+      producto: producto._id,
+      usuario: localStorage.getItem('_id'),
+      variedad: producto.variedades.length > 0 ? producto.variedades[0].titulo : ''
+    })
+
+    console.log(this.carritoForm.value)
+
+    if(!this.carritoForm.valid){
+      this.notificacionesService.notificarAlerta('Debe completar todos los campos')
+      return
+    }
+
+    if(this.carritoForm.value.cantidad > producto.stock){
+      this.notificacionesService.notificarAlerta('La cantidad seleccionada supera el stock disponible')
+      return
+    }
+
+     this.usuarioService.agregarAlCarrito(this.carritoForm.value).subscribe({
+      next: (response:any) => {
+        if(response.data === undefined){
+          this.notificacionesService.notificarError(null, 'El producto ya se encuentra en el carrito')
+          return
+        }
+        console.log(response)
+        this.notificacionesService.notificarExito('Producto agregado al carrito')
+      },
+      error: (err) => {
+        console.log(err)
+        this.notificacionesService.notificarError(null,'Error al agregar el producto al carrito')
+      }
+    })
   }
 }

@@ -240,7 +240,8 @@
                     <ng-container *ngIf="productos.length >= 1">
                         <!-- Item -->
                         <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let producto of productos | slice: (page-1)*pageSize : (page-1)*pageSize+pageSize; let indice = index">
-                            <div class="card card-product mx-auto">
+                            <form [formGroup]="carritoForm" (submit)="agregarAlCarrito(producto)">
+                              <div class="card card-product mx-auto">
                                     <div class="card-product-img">
                                         <a [routerLink]="['/productos/', producto.slug]" class="card-img-top">
                                             <img [src]="producto.portada ? url + producto.portada : 'assets/img/default-product.png'"
@@ -257,7 +258,7 @@
                                         </div>
                                         <div class="card-product-widgets-bottom">
                                             <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left"
-                                                title="Add to wishlist"></a>
+                                                title="Agregar a favoritos"></a>
                                         </div>
                                     </div>
                                     <div class="card-body pb-2">
@@ -276,12 +277,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-primary btn-block">
+                                        <button type="submit" class="btn btn-primary btn-block">
                                             <i class="cxi-cart align-middle mt-n1 mr-2"></i>
-                                            Add to cart
+                                            Agregar al carrito
                                         </button>
                                     </div>
                             </div>
+                            </form>
                         </div>
                     </ng-container>
                 </div>

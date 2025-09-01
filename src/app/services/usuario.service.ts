@@ -62,4 +62,12 @@ export class UsuarioService {
     let headers= new HttpHeaders().set('Content-Type', 'application/json')
     return this.http.get( GLOBAL.url + "productos/listar-productos/" + filtro, {headers: headers})
   }
+
+  agregarAlCarrito(data: any) {
+    return this.http.post(GLOBAL.url + 'carrito/agregar', data, {headers: this.headers})
+  }
+
+  obtenerCarritoPorUsuario(id: any) {
+    return this.http.get(GLOBAL.url + 'carrito/obtener-carrito/' + id, {headers: this.headers})
+  }
 }
