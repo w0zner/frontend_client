@@ -181,11 +181,11 @@
 </header>
 
  <!-- Carrito modal -->
-<div id="cart"  class="cs-offcanvas cs-offcanvas-right" [ngClass]="op_carrito ? 'animate__animated animate__fadeInRight' : 'animate__animated animate__fadeOutRight animate__delay-2s'">
+<div id="cart" style="background-color: antiquewhite;" class="cs-offcanvas cs-offcanvas-right" [ngClass]="op_carrito ? 'animate__animated animate__fadeInRight' : 'animate__animated animate__fadeOutRight animate__delay-2s'">
 
     <!-- Header -->
     <div class="cs-offcanvas-cap align-items-center border-bottom">
-      <h2 class="h5 mb-0">Your cart (4)</h2>
+      <h2 class="h5 mb-0">Carrito ({{carrito.length}})</h2>
       <button class="close mr-n1 " type="button" data-dismiss="offcanvas" aria-label="Close" (click)="mostrarCarrito()">
         <span class="h3 font-weight-normal mb-0" aria-hidden="true" >×</span>
       </button>
@@ -235,7 +235,7 @@
       </div>
       <a [routerLink]="['/carrito']" class="btn btn-primary btn-lg btn-block">
         <i class="cxi-credit-card font-size-lg mt-n1 mr-1"></i>
-        Checkout
+        Finalizar la compra
       </a>
     </div>
   </div>
