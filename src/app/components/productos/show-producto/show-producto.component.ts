@@ -5,6 +5,7 @@ import { GLOBAL } from 'src/app/services/GLOBAL';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { NotificacionService } from 'src/app/services/notificacion.service';
+import { CarritoService } from 'src/app/services/carrito.service';
 declare var tns: any;
 declare var lightGallery: any;
 
@@ -21,7 +22,7 @@ export class ShowProductoComponent implements OnInit {
   public carritoForm: FormGroup
 
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private guestService: GuestService, private usuarioService: UsuarioService, private notificacionesService: NotificacionService) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private guestService: GuestService, private usuarioService: UsuarioService, private notificacionesService: NotificacionService, private carritoService: CarritoService) {
     this.url = GLOBAL.url + 'productos/obtenerPortada/'
 
     this.carritoForm = this.fb.group({
@@ -122,7 +123,7 @@ export class ShowProductoComponent implements OnInit {
       return
     }
 
-     this.usuarioService.agregarAlCarrito(this.carritoForm.value).subscribe({
+     this.carritoService.agregarAlCarrito(this.carritoForm.value).subscribe({
       next: (response:any) => {
         if(response.data === undefined){
           this.notificacionesService.notificarError(null, 'El producto ya se encuentra en el carrito')

@@ -51,23 +51,10 @@ export class UsuarioService {
   registro(data: any){
     console.log(data)
     let headers= new HttpHeaders().set('Content-Type', 'application/json')
-    return this.http.post(this.url + "/" + 'registro', data, {headers: headers})
+    return this.http.post(this.url + 'registro', data, {headers: headers})
   }
 
   obtenerConfiguracionPublica() {
     return this.http.get(GLOBAL.url + 'config', {headers: new HttpHeaders({'Content-Type': 'application/json'})})
-  }
-
-  listarProductos(filtro: any) {
-    let headers= new HttpHeaders().set('Content-Type', 'application/json')
-    return this.http.get( GLOBAL.url + "productos/listar-productos/" + filtro, {headers: headers})
-  }
-
-  agregarAlCarrito(data: any) {
-    return this.http.post(GLOBAL.url + 'carrito/agregar', data, {headers: this.headers})
-  }
-
-  obtenerCarritoPorUsuario(id: any) {
-    return this.http.get(GLOBAL.url + 'carrito/obtener-carrito/' + id, {headers: this.headers})
   }
 }

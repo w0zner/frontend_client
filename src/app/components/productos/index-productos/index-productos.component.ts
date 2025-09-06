@@ -5,6 +5,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NotificacionService } from 'src/app/services/notificacion.service';
+import { CarritoService } from 'src/app/services/carrito.service';
 
 @Component({
   selector: 'app-index-productos',
@@ -28,7 +29,7 @@ export class IndexProductosComponent implements OnInit {
   public carritoForm: FormGroup
 
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private route: ActivatedRoute, private notificacionesService: NotificacionService) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private route: ActivatedRoute, private notificacionesService: NotificacionService, private carritoService: CarritoService) {
     this.url = GLOBAL.url + 'productos/obtenerPortada/'
     this.obtenerConfiguracionPublica();
 
@@ -44,7 +45,7 @@ export class IndexProductosComponent implements OnInit {
     this.route.params.subscribe(params => {
       const route_categoria = params['categoria']
       if(route_categoria){
-        this.usuarioService.listarProductos(this.filter_productos).subscribe({
+        this.carritoService.listarProductos(this.filter_productos).subscribe({
           next: (response: any) => {
             this.productos = response.data
             this.productos = this.productos.filter(producto => producto.categoria.toLowerCase() == route_categoria.toLowerCase())
@@ -67,7 +68,7 @@ export class IndexProductosComponent implements OnInit {
 
   obtenerListadoProductos() {
     this.loading = true;
-    this.usuarioService.listarProductos(this.filter_productos).subscribe({
+    this.carritoService.listarProductos(this.filter_productos).subscribe({
       next: (response: any) => {
         this.productos = response.data;
         this.loading = false;
@@ -111,7 +112,7 @@ export class IndexProductosComponent implements OnInit {
     if(this.filter_categorias == 'todos'){
       this.obtenerListadoProductos()
     }else{
-      this.usuarioService.listarProductos(this.filter_productos).subscribe({
+      this.carritoService.listarProductos(this.filter_productos).subscribe({
         next: (response: any) => {
           this.productos = response.data
           this.productos = this.productos.filter(producto => producto.categoria == this.filter_categorias)
@@ -206,7 +207,7 @@ export class IndexProductosComponent implements OnInit {
       return
     }
 
-     this.usuarioService.agregarAlCarrito(this.carritoForm.value).subscribe({
+     this.carritoService.agregarAlCarrito(this.carritoForm.value).subscribe({
       next: (response:any) => {
         if(response.data === undefined){
           this.notificacionesService.notificarError(null, 'El producto ya se encuentra en el carrito')

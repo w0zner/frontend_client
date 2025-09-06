@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { CarritoService } from 'src/app/services/carrito.service';
+import { NotificacionService } from 'src/app/services/notificacion.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -15,7 +17,7 @@ export class NavComponent {
   op_carrito= false;
   carrito: any[] = []
 
-  constructor(private authService: AuthService, private router: Router, private usuarioService: UsuarioService){
+  constructor(private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private carritoService: CarritoService, private notificacionesService: NotificacionService) {
     this.obtenerConfiguracionPublica()
   }
 
@@ -25,7 +27,7 @@ export class NavComponent {
       if(usuario){
         this.userLogged = usuario;
 
-        this.usuarioService.obtenerCarritoPorUsuario(usuario._id).subscribe({
+        this.carritoService.obtenerCarritoPorUsuario(usuario._id).subscribe({
           next: (response:any) => {
             console.log(response)
             this.carrito = response.data;
@@ -69,5 +71,20 @@ export class NavComponent {
       total += item.producto.precio * item.cantidad
     });
     return total;
+  }
+
+  eliminarItemCarrito(id: any) {
+    this.notificacionesService.alertConfirmation(
+      () => {
+        this.carritoService.eliminarItemCarrito(id).subscribe({
+      next: (response:any) => {
+        this.carrito = this.carrito.filter(item => item._id !== id);
+      }
+    });
+      },
+      'Confirma que desea eliminar este producto del carrito?',
+      'El producto se ha eliminado correctamente',
+      'Error al eliminar el producto del carrito'
+    );
   }
 }
