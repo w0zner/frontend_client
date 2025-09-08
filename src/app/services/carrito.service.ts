@@ -30,6 +30,6 @@ export class CarritoService {
   }
 
   eliminarItemCarrito(id: any) {
-    return this.http.get(this.url + '/eliminar/' + id, {headers: this.headers})
+    return this.http.delete(this.url + '/eliminar/' + id, {headers: this.headers})
   }
 }
