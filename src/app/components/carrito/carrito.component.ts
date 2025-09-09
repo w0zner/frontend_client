@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { io } from 'socket.io-client';
 import { AuthService } from 'src/app/services/auth.service';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { NotificacionService } from 'src/app/services/notificacion.service';
@@ -15,6 +16,7 @@ export class CarritoComponent implements OnInit {
 
   userLogged: any = undefined
   carrito: any[] = []
+   public socket = io('http://localhost:5000')
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private carritoService: CarritoService, private notificacionesService: NotificacionService) {
 
@@ -49,6 +51,7 @@ export class CarritoComponent implements OnInit {
       () => {
         this.carritoService.eliminarItemCarrito(id).subscribe({
       next: (response:any) => {
+        this.socket.emit('delete-carrito', {data: response.data})
         this.carrito = this.carrito.filter(item => item._id !== id);
       }
     });

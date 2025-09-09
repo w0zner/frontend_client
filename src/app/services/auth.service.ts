@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   getHeaders() {
-    let headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': this.getToken()})
+    let headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token') || ''})
     return headers;
   }
 

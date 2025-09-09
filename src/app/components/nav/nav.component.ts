@@ -29,14 +29,36 @@ export class NavComponent {
       if(usuario){
         this.userLogged = usuario;
 
-        this.carritoService.obtenerCarritoPorUsuario(usuario._id).subscribe({
+/*         this.carritoService.obtenerCarritoPorUsuario(usuario._id).subscribe({
+          next: (response:any) => {
+            console.log(response)
+            this.carrito = response.data;
+          }
+        }); */
+        this.obtenerCarrito();
+      }
+    });
+
+    this.socket.on('new-carrito', (data: any) => {
+      console.log(data)
+      this.obtenerCarrito();
+    });
+
+    this.socket.on('new-carrito-add', (data: any) => {
+      console.log("new-carrito-add ",data)
+      this.obtenerCarrito();
+    });
+  }
+
+  obtenerCarrito() {
+    if(this.userLogged){
+       this.carritoService.obtenerCarritoPorUsuario(this.userLogged._id).subscribe({
           next: (response:any) => {
             console.log(response)
             this.carrito = response.data;
           }
         });
-      }
-    });
+    }
   }
 
   obtenerConfiguracionPublica() {

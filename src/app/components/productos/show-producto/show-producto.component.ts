@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { NotificacionService } from 'src/app/services/notificacion.service';
 import { CarritoService } from 'src/app/services/carrito.service';
+import { io } from 'socket.io-client';
 declare var tns: any;
 declare var lightGallery: any;
 
@@ -20,6 +21,8 @@ export class ShowProductoComponent implements OnInit {
   public url: any;
   public productosRecomendados: any[]= [];
   public carritoForm: FormGroup
+  public socket = io('http://localhost:5000')
+
 
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private guestService: GuestService, private usuarioService: UsuarioService, private notificacionesService: NotificacionService, private carritoService: CarritoService) {
@@ -129,6 +132,8 @@ export class ShowProductoComponent implements OnInit {
           this.notificacionesService.notificarError(null, 'El producto ya se encuentra en el carrito')
           return
         }
+        this.socket.emit('add-carrito', {data: true})
+
         console.log(response)
         this.notificacionesService.notificarExito('Producto agregado al carrito')
       },
