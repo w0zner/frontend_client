@@ -19,6 +19,7 @@ import { registerLocaleData } from '@angular/common';
 import localePy from '@angular/common/locales/es-PY';
 import { ShowProductoComponent } from './components/productos/show-producto/show-producto.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component';
 
 registerLocaleData(localePy, 'es-PY');
 
@@ -33,7 +34,8 @@ registerLocaleData(localePy, 'es-PY');
     SidebarComponent,
     IndexProductosComponent,
     ShowProductoComponent,
-    CarritoComponent
+    CarritoComponent,
+    DireccionesComponent
   ],
   imports: [
     BrowserModule,

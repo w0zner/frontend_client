@@ -57,4 +57,16 @@ export class UsuarioService {
   obtenerConfiguracionPublica() {
     return this.http.get(GLOBAL.url + 'config', {headers: new HttpHeaders({'Content-Type': 'application/json'})})
   }
+
+  obtenerCiudades() {
+    return this.http.get('./assets/data/ciudades_paraguay.json')
+  }
+
+  registrarDireccion(data: any){
+    return this.http.post(this.url + '/direccion', data, {headers: this.headers})
+  }
+
+  obtenerDireccciones(id: any) {
+    return this.http.get(this.url + "/direccion/" + id, {headers: this.headers})
+  }
 }

@@ -1,0 +1,20 @@
+{
+  "capital": ["Asunción"],
+  "concepcion": ["Concepción", "Horqueta", "Vallemí", "Horqueta"],
+  "san_pedro": ["San Pedro del Ycuamandiyú", "Santa Rosa del Aguaray", "Ciudad del Este", "Nueva Germania"],
+  "cordillera": ["Caacupé", "Altos", "Atyrá", "Eusebio Ayala"],
+  "guaira": ["Villarrica", "Borja", "Mbocayaty", "Yataity del Norte"],
+  "caaguazu": ["Coronel Oviedo", "Caaguazú", "Carayaó", "Mbocayaty del Guairá"],
+  "caazapa": ["Caazapá", "Yuty", "Tebicuary", "San Juan Nepomuceno"],
+  "itapua": ["Encarnación", "San Cosme y Damián", "Cambyretá", "Tomás Romero Pereira"],
+  "misiones": ["San Juan Bautista", "Ayolas", "San Miguel", "Santa Rosa Misiones"],
+  "paraguari": ["Paraguarí", "Quiindy", "Ybycuí", "Escobar"],
+  "alto_parana": ["Ciudad del Este", "Minga Guazú", "Hernandarias", "Presidente Franco"],
+  "central": ["Lambaré", "Fernando de la Mora", "San Lorenzo", "Ñemby", "Luque", "Capiatá"],
+  "neembucu": ["Villa Hayes", "Pilar", "Desmochados", "Villa Franca"],
+  "amambay": ["Pedro Juan Caballero", "Zanja Pyta", "Karapaí", "Bella Vista Norte"],
+  "canindeyu": ["Salto del Guairá", "Ypejhú", "Katueté", "La Paloma"],
+  "presidente_hayes": ["Villa Hayes", "Benjamín Aceval", "Nanawa", "José Falcón"],
+  "boqueron": ["Filadelfia", "Loma Plata", "Mariscal Estigarribia", "Neuland"],
+  "alto_paraguay": ["Fuerte Olimpo", "Bahía Negra", "Limpio del Chaco", "Puerto Casado"]
+}

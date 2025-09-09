@@ -7,6 +7,7 @@ import { authGuard } from './guards/auth.guard';
 import { IndexProductosComponent } from './components/productos/index-productos/index-productos.component';
 import { ShowProductoComponent } from './components/productos/show-producto/show-producto.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component';
 const routes: Routes = [
   {path: '', component: InicioComponent},
   {path: 'login', component: LoginComponent},
@@ -15,6 +16,8 @@ const routes: Routes = [
   {path: 'productos/:slug', component: ShowProductoComponent },
 
   {path: 'cuenta/perfil', component: PerfilComponent, canActivate: [authGuard]},
+  {path: 'cuenta/direcciones', component: DireccionesComponent, canActivate: [authGuard]},
+
   {path: 'carrito', component: CarritoComponent, /*canActivate: [authGuard]*/}
 ];
 
