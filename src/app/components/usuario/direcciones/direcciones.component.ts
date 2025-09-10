@@ -88,12 +88,19 @@ export class DireccionesComponent implements OnInit {
       }
   }
 
-  actualizarEstado(id: any, data: any) {
-    console.log(id, data)
+  actualizarEstadoDireccion(id: any, data: any) {
     this.usuarioService.actualizarEstadoDireccion(id, data).subscribe({
       next: (response:any)=>{
         this.obtenerDirecciones()
         this.notificacionService.notificarExito('Se ha actualizado la dirección')
+      }
+    })
+  }
+
+  eliminarDireccion(id:any) {
+    this.usuarioService.eliminarDireccion(id).subscribe({
+      next: (response:any) => {
+        this.obtenerDirecciones()
       }
     })
   }

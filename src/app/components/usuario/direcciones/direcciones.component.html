@@ -117,26 +117,55 @@
                 </div> -->
                 <div class="col-sm-6 form-group">
                   <label>
-                        <input type="checkbox" formControlName="principal" />
-                        Dirección principal
+                        <input type="checkbox" formControlName="principal" /> Dirección principal
                     </label>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary btn-sm btn-hover-shadow">&nbsp;Guardar cambios&nbsp;</button>
+              <div class="text-end">
+                <button type="submit" class="btn btn-primary btn-sm btn-hover-shadow">&nbsp;Guardar cambios&nbsp;</button>
+              </div>
+              
             </form>
 
-            <div class="mt-4">
+            <div class="mt-4" *ngIf="direcciones.length == 0">
+                <hr>
+                <br>
+                <i class="cxi-danger opacity-50"></i>
+                <span class="opacity-50"> No hay direcciones registradas hasta el momento</span>
+            </div>
+            <div class="mt-4" *ngIf="direcciones.length >= 1">
                 <!-- List group with custom content -->
                 <div class="list-group" *ngFor="let direccion of direcciones">
-                    <a role="button" class="list-group-item list-group-item-action flex-column align-items-start py-3" [ngClass]="{ 'active': direccion.principal }" (click)="actualizarEstado(direccion._id, {principal: !direccion.principal})">
-                        <div class="d-flex flex-wrap w-100 justify-content-between">
-                        <h6 [ngClass]="{ 'text-white': direccion.principal }">Destinatario: <b>{{direccion.destinatario}}</b></h6>
-                        <small class="opacity-50 mb-2" [ngClass]="{ 'text-white': direccion.principal }">{{direccion.principal ? 'Dirección de Envío':'Direccion Secundaria'}}</small>
+                    <div class="row">
+                        <div class="col-11 pr-0">
+                            <a role="button" class="list-group-item list-group-item-action flex-column align-items-start py-3"
+                                [ngClass]="{ 'active': direccion.principal }"
+                                (click)="actualizarEstadoDireccion(direccion._id, {principal: !direccion.principal})"
+                                style="border-radius: 5px 0px 0px 5px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
+                                <div class="d-flex flex-wrap w-80 justify-content-between">
+                                    <h6 [ngClass]="{ 'text-white': direccion.principal }">Destinatario:
+                                        <b>{{direccion.destinatario}}</b></h6>
+                                    <small class="opacity-50 mb-2"
+                                        [ngClass]="{ 'text-white': direccion.principal }">{{direccion.principal ? 'Dirección de
+                                        Envío':'Direccion Secundaria'}}</small>
+                                </div>
+                                <span>N° Télefono: {{direccion.telefono}}</span>
+                                <p class="fs-sm fw-normal opacity-75" [ngClass]="{ 'text-white': direccion.principal }">Dirección:
+                                    {{direccion.direccion}} - Número de casa: {{direccion.numero_casa}}</p>
+                                <div class="d-flex flex-wrap w-100 justify-content-between">
+                                    <small class="opacity-70" [ngClass]="{ 'text-white': direccion.principal }">{{direccion.pais}} -
+                                        {{direccion.departamento}} - {{direccion.ciudad}}</small>
+                                </div>
+                            </a>
                         </div>
-                        <span>N° Télefono: {{direccion.telefono}}</span>
-                        <p class="fs-sm fw-normal opacity-75" [ngClass]="{ 'text-white': direccion.principal }">Dirección: {{direccion.direccion}} - Número de casa: {{direccion.numero_casa}}</p>
-                        <small class="opacity-70" [ngClass]="{ 'text-white': direccion.principal }">{{direccion.pais}} - {{direccion.departamento}} - {{direccion.ciudad}}</small>
-                    </a>
+                        <div class="col-1"
+                            style="display: flex; justify-content: center; align-items: center; background-color: #F5F5F5; border-radius: 0px 5px 5px 0px; box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
+                            <a role="button" class="btn text-danger btn-link font-size-base text-decoration-none pr-4"
+                                (click)="eliminarDireccion(direccion._id)">
+                                <i class="cxi-delete font-size-lg mt-n1 mr-2"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
           </div>

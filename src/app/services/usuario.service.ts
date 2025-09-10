@@ -73,4 +73,12 @@ export class UsuarioService {
   actualizarEstadoDireccion(id: any, data: any){
     return this.http.put(this.url + '/direccion-estado/' + id, data, {headers: this.headers})
   }
+
+  eliminarDireccion(id: any){
+    return this.http.delete(this.url + '/direccion/' + id, {headers: this.headers})
+  }
+
+  obtenerDirecccionPrincipal(usuario: any) {
+    return this.http.get(this.url + "/direccion-principal/" + usuario, {headers: this.headers})
+  }
 }

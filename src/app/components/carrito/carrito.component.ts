@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { NotificacionService } from 'src/app/services/notificacion.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+declare var Cleave: new (arg0: string, arg1: { creditCard?: boolean; date?: boolean; datePattern?: any; onCreditCardTypeChanged?: (type: any) => void; }) => any;
+declare var StickySidebar: new (arg0: string, arg1: { topSpacing: number; }) => any;
 
 @Component({
   selector: 'app-carrito',
@@ -16,10 +18,11 @@ export class CarritoComponent implements OnInit {
 
   userLogged: any = undefined
   carrito: any[] = []
+  direccion: any = null
    public socket = io('http://localhost:5000')
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private carritoService: CarritoService, private notificacionesService: NotificacionService) {
-
+    
   }
 
   ngOnInit(): void {
@@ -34,8 +37,30 @@ export class CarritoComponent implements OnInit {
             this.carrito = response.data;
           }
         });
+
+        this.usuarioService.obtenerDirecccionPrincipal(usuario._id).subscribe({
+          next:(response: any) => {
+            this.direccion = response.data
+          }
+        })
       }
     });
+
+    setTimeout(() => {
+      new Cleave('#cc-number', {
+          creditCard: true,
+          onCreditCardTypeChanged: function (type:any) {
+              // update UI ...
+          }
+      });
+
+      new Cleave('#cc-exp-date', {
+          date: true,
+          datePattern: ['m', 'y']
+      });
+    }, 100);
+
+    var sidebar = new StickySidebar('.sidebar-sticky', {topSpacing: 20});
   }
 
   calcularTotalCarrito() {
