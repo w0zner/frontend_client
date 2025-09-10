@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificacionService } from 'src/app/services/notificacion.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -8,7 +8,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   templateUrl: './direcciones.component.html',
   styleUrls: ['./direcciones.component.css']
 })
-export class DireccionesComponent {
+export class DireccionesComponent implements OnInit {
 
   direccionForm: FormGroup
   departamentos: any
@@ -27,19 +27,25 @@ export class DireccionesComponent {
       ciudad: [''],
       telefono: ['', [Validators.required]],
       principal: [false]
-    })
-
-    this.usuarioService.obtenerDireccciones(localStorage.getItem('_id')).subscribe({
-      next: (response:any)=> {
-        console.log(response)
-        this.direcciones = response.data
-      }
-    })
+    })  
 
     this.usuarioService.obtenerCiudades().subscribe({
       next: (response:any) => {
         console.log(response)
         this.departamentos = response
+      }
+    })
+  }
+
+  ngOnInit(): void {
+    this.obtenerDirecciones()
+  }
+
+  obtenerDirecciones() { 
+    this.usuarioService.obtenerDireccciones(localStorage.getItem('_id')).subscribe({
+      next: (response:any)=> {
+        console.log(response)
+        this.direcciones = response.data
       }
     })
   }
@@ -58,6 +64,7 @@ export class DireccionesComponent {
           () => {
             this.usuarioService.registrarDireccion(this.direccionForm.value).subscribe({
               next: (response)=>{
+                this.obtenerDirecciones()
                 this.direccionForm.reset({
                   destinatario: '',
                   cedula: '',
@@ -79,6 +86,16 @@ export class DireccionesComponent {
       } else {
         this.notificacionService.notificarError(null, 'Por favor, complete todos los campos requeridos.')
       }
+  }
+
+  actualizarEstado(id: any, data: any) {
+    console.log(id, data)
+    this.usuarioService.actualizarEstadoDireccion(id, data).subscribe({
+      next: (response:any)=>{
+        this.obtenerDirecciones()
+        this.notificacionService.notificarExito('Se ha actualizado la dirección')
+      }
+    })
   }
 
 }

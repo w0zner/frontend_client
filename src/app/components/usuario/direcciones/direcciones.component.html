@@ -128,14 +128,14 @@
             <div class="mt-4">
                 <!-- List group with custom content -->
                 <div class="list-group" *ngFor="let direccion of direcciones">
-                    <a role="button" class="list-group-item list-group-item-action flex-column align-items-start py-3" [ngClass]="{ 'active': direccion.principal }">
+                    <a role="button" class="list-group-item list-group-item-action flex-column align-items-start py-3" [ngClass]="{ 'active': direccion.principal }" (click)="actualizarEstado(direccion._id, {principal: !direccion.principal})">
                         <div class="d-flex flex-wrap w-100 justify-content-between">
-                        <h6 class="text-white">Destinatario: <b>{{direccion.destinatario}}</b></h6>
-                        <small class="text-white opacity-50 mb-2">{{direccion.principal ? 'Dirección princial':'Direccion Secundaria'}}</small>
+                        <h6 [ngClass]="{ 'text-white': direccion.principal }">Destinatario: <b>{{direccion.destinatario}}</b></h6>
+                        <small class="opacity-50 mb-2" [ngClass]="{ 'text-white': direccion.principal }">{{direccion.principal ? 'Dirección de Envío':'Direccion Secundaria'}}</small>
                         </div>
                         <span>N° Télefono: {{direccion.telefono}}</span>
-                        <p class="fs-sm fw-normal text-white opacity-75">Dirección: {{direccion.direccion}} - Número de casa: {{direccion.numero_casa}}</p>
-                        <small class="text-white opacity-50">{{direccion.pais}} - {{direccion.departamento}} - {{direccion.ciudad}}</small>
+                        <p class="fs-sm fw-normal opacity-75" [ngClass]="{ 'text-white': direccion.principal }">Dirección: {{direccion.direccion}} - Número de casa: {{direccion.numero_casa}}</p>
+                        <small class="opacity-70" [ngClass]="{ 'text-white': direccion.principal }">{{direccion.pais}} - {{direccion.departamento}} - {{direccion.ciudad}}</small>
                     </a>
                 </div>
             </div>

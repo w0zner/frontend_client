@@ -69,4 +69,8 @@ export class UsuarioService {
   obtenerDireccciones(id: any) {
     return this.http.get(this.url + "/direccion/" + id, {headers: this.headers})
   }
+
+  actualizarEstadoDireccion(id: any, data: any){
+    return this.http.put(this.url + '/direccion-estado/' + id, data, {headers: this.headers})
+  }
 }
