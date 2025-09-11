@@ -1,0 +1,20 @@
+[
+  {
+    "titulo": "Envío Regular",
+    "tiempo": "Entrega en 3 días hábiles",
+    "costo": 25000,
+    "disponible": true
+  },
+  {
+    "titulo": "Envío Express",
+    "tiempo": "Entrega en el día",
+    "costo": 40000,
+    "disponible": true
+  },
+  {
+    "titulo": "Pickup en tienda",
+    "tiempo": "Entrega en el dia en tienda física",
+    "costo": 0,
+    "disponible": false
+  }
+]

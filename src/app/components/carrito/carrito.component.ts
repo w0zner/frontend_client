@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { io } from 'socket.io-client';
@@ -8,6 +8,11 @@ import { NotificacionService } from 'src/app/services/notificacion.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 declare var Cleave: new (arg0: string, arg1: { creditCard?: boolean; date?: boolean; datePattern?: any; onCreditCardTypeChanged?: (type: any) => void; }) => any;
 declare var StickySidebar: new (arg0: string, arg1: { topSpacing: number; }) => any;
+declare var paypal: { Buttons: (arg0: { style: { layout: string; }; createOrder: (data: any, actions: any) => any; onApprove: (data: any, actions: any) => Promise<void>; onError: (err: any) => void; onCancel: (data: any, actions: any) => void; }) => { (): any; new(): any; render: { (arg0: any): void; new(): any; }; }; };
+
+interface HtmlInputEvent extends Event{
+  target : HTMLInputElement & EventTarget;
+}
 
 @Component({
   selector: 'app-carrito',
@@ -15,14 +20,22 @@ declare var StickySidebar: new (arg0: string, arg1: { topSpacing: number; }) => 
   styleUrls: ['./carrito.component.css']
 })
 export class CarritoComponent implements OnInit {
-
+  @ViewChild('paypalButton',{static:true}) paypalElement : ElementRef = {} as ElementRef;
   userLogged: any = undefined
   carrito: any[] = []
   direccion: any = null
-   public socket = io('http://localhost:5000')
+  metodosEnvio: any[] = []
+  precio_envio: number
+  public socket = io('http://localhost:5000')
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private carritoService: CarritoService, private notificacionesService: NotificacionService) {
-    
+    this.carritoService.obtenerMetodosDeEnvio().subscribe({
+      next: (response:any) => {
+        console.log(response)
+        this.metodosEnvio = response
+      }
+    })
+    this.precio_envio = 0
   }
 
   ngOnInit(): void {
@@ -61,6 +74,36 @@ export class CarritoComponent implements OnInit {
     }, 100);
 
     var sidebar = new StickySidebar('.sidebar-sticky', {topSpacing: 20});
+
+    paypal.Buttons({
+    style: {
+        layout: 'horizontal'
+    },
+    createOrder: (data,actions)=>{
+
+        return actions.order.create({
+          purchase_units : [{
+            description : 'Nombre del pago',
+            amount : {
+              currency_code : 'USD',
+              value: 999
+            },
+          }]
+        });
+
+    },
+    onApprove : async (data,actions)=>{
+      const order = await actions.order.capture();
+
+
+    },
+    onError : err =>{
+
+    },
+    onCancel: function (data, actions) {
+
+    }
+  }).render(this.paypalElement.nativeElement);
   }
 
   calcularTotalCarrito() {

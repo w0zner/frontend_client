@@ -112,56 +112,17 @@
 
             <!-- Shipping -->
             <h2 class="h4 mb-4">3. Método de envío</h2>
-            <div class="custom-control custom-radio mb-3">
-              <input type="radio" class="custom-control-input" id="courier" name="shipping" checked>
+            <div class="custom-control custom-radio mb-3" *ngFor="let metodo of metodosEnvio">
+              <input type="radio" class="custom-control-input" id="{{metodo.titulo}}"  name="precio_envio" [(ngModel)]="precio_envio" [value]="metodo.costo">
               <label for="courier" class="custom-control-label d-flex align-items-center">
                 <span>
-                  <strong class="d-block">Delivery a tu dirección</strong>
-                  <span class="text-muted font-size-sm">Fecha estimada: 26/08/2025</span>
+                  <strong class="d-block">{{metodo.titulo}}</strong>
+                  <span class="text-muted font-size-sm">{{metodo.tiempo}}</span>
                 </span>
-                <span class="ml-auto">Gs. 25.000</span>
+                <span class="ml-auto">Gs. {{metodo.costo}}</span>
               </label>
             </div>
-            <div class="custom-control custom-radio mb-3">
-              <input type="radio" class="custom-control-input" id="store-pickup" name="shipping">
-              <label for="store-pickup" class="custom-control-label d-flex align-items-center">
-                <span>
-                  <strong class="d-block">Pick up de la tienda</strong>
-                  <span class="text-muted font-size-sm">Todo el dia de 08:00am a 18:00pm</span>
-                </span>
-                <span class="ml-auto">Gratis</span>
-              </label>
-            </div>
-            <div class="custom-control custom-radio mb-3">
-              <input type="radio" class="custom-control-input" id="ups" name="shipping">
-              <label for="ups" class="custom-control-label d-flex align-items-center">
-                <span>
-                  <strong class="d-block">UPS Ground Shipping</strong>
-                  <span class="text-muted font-size-sm">Up to one week</span>
-                </span>
-                <span class="ml-auto">Gs. 10.000</span>
-              </label>
-            </div>
-            <div class="custom-control custom-radio mb-3">
-              <input type="radio" class="custom-control-input" id="locker-pickup" name="shipping">
-              <label for="locker-pickup" class="custom-control-label d-flex align-items-center">
-                <span>
-                  <strong class="d-block">Pick up at Createx Locker</strong>
-                  <span class="text-muted font-size-sm">Pick up on November 8 from 12:00pm</span>
-                </span>
-                <span class="ml-auto">$8.50</span>
-              </label>
-            </div>
-            <div class="custom-control custom-radio mb-3">
-              <input type="radio" class="custom-control-input" id="global-export" name="shipping">
-              <label for="global-export" class="custom-control-label d-flex align-items-center">
-                <span>
-                  <strong class="d-block">Createx Global Export</strong>
-                  <span class="text-muted font-size-sm">3-4 days</span>
-                </span>
-                <span class="ml-auto">$15.00</span>
-              </label>
-            </div>
+
 
             <hr class="border-top-0 border-bottom pt-4 mb-4">
 
@@ -214,13 +175,13 @@
                       </div>
                     </div>
                     <div class="collapse" id="paypal-card" data-parent="#payment-methods">
-                      <div class="card-body pt-3 pb-0">
-                        <a href="#" class="d-inline-block mb-2" style="max-width: 300px;">
-                          <img src="../../assets/img/ecommerce/checkout/paypal.png" alt="PayPal">
+                      <div class="card-body pt-3 pb-0" #paypalButton>
+                        <!-- <a href="#" class="d-inline-block mb-2" style="max-width: 300px;">
+                          <img src="../../assets/img/ecommerce/checkout/paypal.jpg" alt="PayPal">
                         </a>
                         <a href="#" class="d-inline-block mb-2" style="max-width: 300px;">
                           <img src="../../assets/img/ecommerce/checkout/paypal-credit.png" alt="PayPal Credit">
-                        </a>
+                        </a> -->
                       </div>
                     </div>
                   </div>
@@ -281,7 +242,7 @@
                     </li>
                     <li class="d-flex justify-content-between mb-2">
                       <span>Costo de envío:</span>
-                      <span>{{25000 | currency:'PYG ':'symbol':'1.0-0'}}</span>
+                      <span>{{precio_envio | currency:'PYG ':'symbol':'1.0-0'}}</span>
                     </li>
                     <li class="d-flex justify-content-between mb-2">
                       <span>Descuento:</span>
@@ -290,7 +251,7 @@
                   </ul>
                   <div class="d-flex justify-content-between p-4">
                     <span class="h5 mb-0">Total:</span>
-                    <span class="h5 mb-0">{{calcularTotalCarrito() + 25000 | currency:'PYG ':'symbol':'1.0-0'}}</span>
+                    <span class="h5 mb-0">{{calcularTotalCarrito() + precio_envio | currency:'PYG ':'symbol':'1.0-0'}}</span>
                   </div>
                 </div>
                 <button type="button" class="btn btn-primary btn-lg btn-block">Finalizar la compra</button>

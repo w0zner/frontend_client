@@ -32,4 +32,8 @@ export class CarritoService {
   eliminarItemCarrito(id: any) {
     return this.http.delete(this.url + '/eliminar/' + id, {headers: this.headers})
   }
+
+    obtenerMetodosDeEnvio() {
+    return this.http.get('./assets/data/metodos_envio.json')
+  }
 }
