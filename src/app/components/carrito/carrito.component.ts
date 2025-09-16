@@ -25,17 +25,29 @@ export class CarritoComponent implements OnInit {
   carrito: any[] = []
   direccion: any = null
   metodosEnvio: any[] = []
-  precio_envio: number
+  //precio_envio: number
+  ventaForm: FormGroup
   public socket = io('http://localhost:5000')
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private carritoService: CarritoService, private notificacionesService: NotificacionService) {
+    this.ventaForm = this.fb.group({
+      usuario: [''],
+      direccion: [''],
+      envio_titulo: [''],
+      envio_precio: [0],
+      subtotal: [''],
+      transaccion: [''],
+      cupon: [''],
+      nota: [''],
+    })
+
     this.carritoService.obtenerMetodosDeEnvio().subscribe({
       next: (response:any) => {
         console.log(response)
         this.metodosEnvio = response
       }
     })
-    this.precio_envio = 0
+    //this.precio_envio = 0
   }
 
   ngOnInit(): void {
@@ -43,6 +55,9 @@ export class CarritoComponent implements OnInit {
       console.log(usuario)
       if(usuario){
         this.userLogged = usuario;
+        this.ventaForm.patchValue({
+          usuario: usuario._id
+        });
 
         this.carritoService.obtenerCarritoPorUsuario(usuario._id).subscribe({
           next: (response:any) => {
@@ -54,6 +69,9 @@ export class CarritoComponent implements OnInit {
         this.usuarioService.obtenerDirecccionPrincipal(usuario._id).subscribe({
           next:(response: any) => {
             this.direccion = response.data
+            this.ventaForm.patchValue({
+              direccion: response.data._id
+            });
           }
         })
       }
@@ -94,8 +112,12 @@ export class CarritoComponent implements OnInit {
     },
     onApprove : async (data,actions)=>{
       const order = await actions.order.capture();
+      console.log(order)
 
 
+      this.ventaForm.patchValue({
+        transaccion: order.purchase_units[0].payments.captures[0].id
+      });
     },
     onError : err =>{
 
@@ -104,6 +126,21 @@ export class CarritoComponent implements OnInit {
 
     }
   }).render(this.paypalElement.nativeElement);
+
+    this.ventaForm.get('envio_precio')?.valueChanges.subscribe(() => {
+      this.actualizarSubtotal();
+    });
+  }
+
+  actualizarSubtotal() {
+    const envio = this.ventaForm.get('envio_precio')?.value || 0;
+    const totalCarrito = this.calcularTotalCarrito();
+    const subtotal = totalCarrito + envio;
+
+    this.ventaForm.patchValue(
+      { subtotal },
+      { emitEvent: false } // evita un loop infinito con valueChanges
+    );
   }
 
   calcularTotalCarrito() {
@@ -128,6 +165,15 @@ export class CarritoComponent implements OnInit {
       'El producto se ha eliminado correctamente',
       'Error al eliminar el producto del carrito'
     );
+  }
+
+  registrarCompra() {
+    this.actualizarSubtotal();
+/*     this.ventaForm.patchValue({
+      subtotal:  this.calcularTotalCarrito() + ventaForm.get('envio_precio')?.value
+    }); */
+
+    console.log(this.ventaForm.value)
   }
 
 }

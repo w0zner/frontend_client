@@ -16,8 +16,8 @@
 
       <!-- Page content -->
       <section class="container pt-3 pt-md-4 pb-3 pb-sm-4 pb-lg-5 mb-4">
-        <div class="row">
-
+        <form [formGroup]="ventaForm" (submit)="registrarCompra()">
+                  <div class="row">
           <!-- Checkout content -->
           <div class="col-lg-8 pr-lg-6">
             <div class="d-flex align-items-center justify-content-between pb-2 mb-4">
@@ -113,7 +113,7 @@
             <!-- Shipping -->
             <h2 class="h4 mb-4">3. Método de envío</h2>
             <div class="custom-control custom-radio mb-3" *ngFor="let metodo of metodosEnvio">
-              <input type="radio" class="custom-control-input" id="{{metodo.titulo}}"  name="precio_envio" [(ngModel)]="precio_envio" [value]="metodo.costo">
+              <input type="radio" class="custom-control-input" id="{{metodo.titulo}}"  name="precio_envio"  formControlName="envio_precio" [value]="metodo.costo">
               <label for="courier" class="custom-control-label d-flex align-items-center">
                 <span>
                   <strong class="d-block">{{metodo.titulo}}</strong>
@@ -212,10 +212,9 @@
             <h2 class="h4 mb-4">5. Información adicional(opcional)</h2>
             <div class="form-group">
               <label for="ch-notes">Notas</label>
-              <textarea id="ch-notes" class="form-control form-control-lg" rows="5" placeholder="Notas sobre su pedido, por ejemplo, notas especiales para la entrega."></textarea>
+              <textarea formControlName="nota" id="ch-notes" class="form-control form-control-lg" rows="5" placeholder="Notas sobre su pedido, por ejemplo, notas especiales para la entrega."></textarea>
             </div>
           </div>
-
 
           <!-- Order totals (sticky sidebar) -->
           <!-- For more sticky sidebar options visit https://abouolia.github.io/sticky-sidebar/#options -->
@@ -225,7 +224,7 @@
                 <div class="form-group">
                   <label for="promo-code">Código promocional(opcional)</label>
                   <div class="input-group input-group-lg">
-                    <input type="text" id="promo-code" class="form-control" placeholder="Ingrese el código promocional">
+                    <input type="text" id="promo-code" class="form-control" placeholder="Ingrese el código promocional" formControlName="cupon">
                     <div class="input-group-append">
                       <button type="button" class="btn btn-primary">&nbsp;&nbsp;Aplicar&nbsp;&nbsp;</button>
                     </div>
@@ -242,7 +241,7 @@
                     </li>
                     <li class="d-flex justify-content-between mb-2">
                       <span>Costo de envío:</span>
-                      <span>{{precio_envio | currency:'PYG ':'symbol':'1.0-0'}}</span>
+                      <span>{{(ventaForm.get('envio_precio')?.value || 0) | currency:'PYG ':'symbol':'1.0-0'}}</span>
                     </li>
                     <li class="d-flex justify-content-between mb-2">
                       <span>Descuento:</span>
@@ -251,14 +250,16 @@
                   </ul>
                   <div class="d-flex justify-content-between p-4">
                     <span class="h5 mb-0">Total:</span>
-                    <span class="h5 mb-0">{{calcularTotalCarrito() + precio_envio | currency:'PYG ':'symbol':'1.0-0'}}</span>
+                    <span class="h5 mb-0">{{calcularTotalCarrito() + (ventaForm.get('envio_precio')?.value || 0) | currency:'PYG ':'symbol':'1.0-0'}}</span>
                   </div>
                 </div>
-                <button type="button" class="btn btn-primary btn-lg btn-block">Finalizar la compra</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Finalizar la compra</button>
               </div>
             </div>
           </aside>
+         
         </div>
+        </form>
       </section>
 </main>
 
