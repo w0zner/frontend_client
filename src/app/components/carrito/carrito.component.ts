@@ -27,6 +27,7 @@ export class CarritoComponent implements OnInit {
   metodosEnvio: any[] = []
   //precio_envio: number
   ventaForm: FormGroup
+  detalleVenta: any[] = []
   public socket = io('http://localhost:5000')
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private carritoService: CarritoService, private notificacionesService: NotificacionService) {
@@ -39,6 +40,7 @@ export class CarritoComponent implements OnInit {
       transaccion: [''],
       cupon: [''],
       nota: [''],
+      detalleVenta: [[]]
     })
 
     this.carritoService.obtenerMetodosDeEnvio().subscribe({
@@ -63,6 +65,15 @@ export class CarritoComponent implements OnInit {
           next: (response:any) => {
             console.log(response)
             this.carrito = response.data;
+
+            this.carrito.forEach(item => {
+              this.detalleVenta.push({
+                producto: item.producto._id,
+                subtotal: item.producto.precio * item.cantidad,
+                cantidad: item.cantidad,
+                variedad: item.variedad
+              });
+            });
           }
         });
 
@@ -118,6 +129,17 @@ export class CarritoComponent implements OnInit {
       this.ventaForm.patchValue({
         transaccion: order.purchase_units[0].payments.captures[0].id
       });
+
+      this.ventaForm.patchValue({
+        detalleVenta: this.detalleVenta
+      });
+
+      console.log(this.ventaForm.value)
+
+      this.registrarCompra();
+
+      //this.notificacionesService.showSuccess('La compra se ha realizado correctamente', 'Compra realizada');
+      //this.router.navigate(['/perfil']);
     },
     onError : err =>{
 
@@ -172,8 +194,20 @@ export class CarritoComponent implements OnInit {
 /*     this.ventaForm.patchValue({
       subtotal:  this.calcularTotalCarrito() + ventaForm.get('envio_precio')?.value
     }); */
-
     console.log(this.ventaForm.value)
+
+    this.carritoService.registrarVenta(this.ventaForm.value).subscribe({
+      next: (response:any) => {
+        console.log(response)
+        this.notificacionesService.notificarExito('La compra se ha realizado correctamente');
+        //this.router.navigate(['/perfil']);
+      },
+      error: (err:any) => {
+        console.log(err)
+        this.notificacionesService.notificarError(null, 'Error al registrar la compra');
+      }
+    })
+
   }
 
 }

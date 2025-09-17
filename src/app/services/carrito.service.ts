@@ -13,7 +13,7 @@ export class CarritoService {
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.url = GLOBAL.url + 'carrito'
-    this.headers = this.authService.getHeaders()
+    //this.authService.getHeaders() = this.authService.getHeaders()
   }
 
   listarProductos(filtro: any) {
@@ -22,18 +22,22 @@ export class CarritoService {
   }
 
   agregarAlCarrito(data: any) {
-    return this.http.post(this.url + '/agregar', data, {headers: this.headers})
+    return this.http.post(this.url + '/agregar', data, {headers: this.authService.getHeaders()})
   }
 
   obtenerCarritoPorUsuario(id: any) {
-    return this.http.get(this.url + '/obtener-carrito/' + id, {headers: this.headers})
+    return this.http.get(this.url + '/obtener-carrito/' + id, {headers: this.authService.getHeaders()})
   }
 
   eliminarItemCarrito(id: any) {
-    return this.http.delete(this.url + '/eliminar/' + id, {headers: this.headers})
+    return this.http.delete(this.url + '/eliminar/' + id, {headers: this.authService.getHeaders()})
   }
 
-    obtenerMetodosDeEnvio() {
+  obtenerMetodosDeEnvio() {
     return this.http.get('./assets/data/metodos_envio.json')
+  }
+
+  registrarVenta(data: any) {
+    return this.http.post(GLOBAL.url + 'ventas/registrar', data, {headers: this.authService.getHeaders()})
   }
 }
