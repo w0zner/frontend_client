@@ -39,7 +39,20 @@
 
             <!-- Order review -->
             <h2 class="h4 mb-4">Resumen de la compra</h2>
-            <div class="bg-secondary rounded mb-5">
+            <div class="bg-secondary rounded mb-5" *ngIf="carrito.length == 0">
+              <div class="row" style="align-items: center !important;">
+                <div class="col-lg-3" style="text-align: center !important;">
+                  <img src="../../../assets/img/carrito-de-compras.png" style="width: 100%; padding: 15px;" alt="Carrito de compras vacio">
+                </div>
+                <div class="col-lg-9" style="display: flex !important; align-items: center !important;">
+                  <dl style="font-size: 1.5rem !important;">
+                    <dt>Ups! 😬</dt>
+                    <dd>Tu carrito esta vacio</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+            <div class="bg-secondary rounded mb-5" *ngIf="carrito.length >= 1">
               <!-- Item -->
               <div class="media px-2 px-sm-4 py-4 border-bottom" *ngFor="let item of carrito">
                 <a href="shop-single.html" style="min-width: 80px;">
