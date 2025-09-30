@@ -9,9 +9,11 @@ import { GLOBAL } from './GLOBAL';
 export class GuestService {
 
   private url: string;
+  private urlDescuentos: string;
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.url = GLOBAL.url + 'productos/';
+    this.urlDescuentos = GLOBAL.url + 'descuentos/';
   }
 
   obtenerProductoPorSlug(slug: any) {
@@ -22,5 +24,10 @@ export class GuestService {
   obtenerProductosRecomendados(categoria: any) {
     let headers= new HttpHeaders().set('Content-Type', 'application/json')
     return this.http.get( this.url + 'listar-productos-recomendados/' +  categoria, {headers: headers})
+  }
+
+  obtenerDescuentosActivos() {
+    let headers= new HttpHeaders().set('Content-Type', 'application/json')
+    return this.http.get( this.urlDescuentos + 'obtener-descuentos', {headers: headers})
   }
 }

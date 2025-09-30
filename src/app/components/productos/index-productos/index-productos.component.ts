@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NotificacionService } from 'src/app/services/notificacion.service';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { io } from 'socket.io-client';
+import { GuestService } from 'src/app/services/guest.service';
 
 @Component({
   selector: 'app-index-productos',
@@ -19,6 +20,7 @@ export class IndexProductosComponent implements OnInit {
   public productos: Array<any> = []
   public someRange: number[] = [100000, 3000000];
   public url: any;
+  public urlDescuentos: any;
   nombre_categoria: string = '';
   filter_productos: string=""
   filter_categorias: string = 'todos'
@@ -29,9 +31,12 @@ export class IndexProductosComponent implements OnInit {
   sortBy: string = 'defecto'
   public carritoForm: FormGroup
   public socket = io('http://localhost:5000')
+  public descuentoActivo: any = undefined
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private route: ActivatedRoute, private notificacionesService: NotificacionService, private carritoService: CarritoService) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private route: ActivatedRoute, private notificacionesService: NotificacionService, private carritoService: CarritoService, private guestService: GuestService) {
     this.url = GLOBAL.url + 'productos/obtenerPortada/'
+    this.urlDescuentos = GLOBAL.url + 'descuentos/obtenerPortada/'
+
     this.obtenerConfiguracionPublica();
 
     this.carritoForm = this.fb.group({
@@ -54,6 +59,12 @@ export class IndexProductosComponent implements OnInit {
         })
       } else {
         this.obtenerListadoProductos()
+      }
+    })
+
+    this.guestService.obtenerDescuentosActivos().subscribe({
+      next: (response: any) => {
+        this.descuentoActivo = response.data[0];
       }
     })
   }

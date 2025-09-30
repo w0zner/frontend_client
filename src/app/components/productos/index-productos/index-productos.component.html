@@ -17,6 +17,11 @@
     <!-- Page container -->
     <section class="container pt-3 pb-5 pb-md-6 mb-2 mb-lg-0">
 
+        <div class="row mb-4" *ngIf="descuentoActivo != undefined">
+          <div class="col-12">
+            <img [src]="urlDescuentos + descuentoActivo.banner" alt="Banner descuentos" style="width: 100% !important;" class="img-fluid rounded-3 mb-4">
+          </div>
+        </div>
 
         <!-- Toolbar + Pagination -->
         <div class="row mb-4 pb-2">
