@@ -253,6 +253,7 @@
                                                 alt="Product image">
                                         </a>
                                         <div class="card-product-widgets-top">
+                                            <span class="badge product-badge badge-danger" *ngIf="descuentoActivo != undefined">-{{descuentoActivo.descuento}}%</span>
                                             <div class="star-rating ml-auto">
                                                 <i class="sr-star cxi-star-filled active"></i>
                                                 <i class="sr-star cxi-star-filled active"></i>
@@ -270,8 +271,12 @@
                                         <h3 class="card-product-title text-truncate mb-2">
                                             <a [routerLink]="['/productos/', producto.slug]" class="nav-link">{{producto.titulo}}</a>
                                         </h3>
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center" *ngIf="descuentoActivo == undefined">
                                             <span class="h5 d-inline-block mb-0">{{producto.precio | currency:'PYG ':'symbol':'1.0-0'}}</span>
+                                        </div>
+                                        <div class="d-flex align-items-center" *ngIf="descuentoActivo != undefined">
+                                            <span class="h5 d-inline-block text-danger mb-0">{{ producto.precio | descuento: descuentoActivo.descuento | currency:'PYG ':'symbol':'1.0-0' }}</span>
+                                            <del class="d-inline-block ml-2 pl-1 text-muted">{{producto.precio | currency:'PYG ':'symbol':'1.0-0'}}</del>
                                         </div>
                                     </div>
                                     <div class="card-footer">

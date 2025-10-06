@@ -22,7 +22,7 @@ export class ShowProductoComponent implements OnInit {
   public productosRecomendados: any[]= [];
   public carritoForm: FormGroup
   public socket = io('http://localhost:5000')
-
+  public descuentoActivo: any = undefined
 
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private guestService: GuestService, private usuarioService: UsuarioService, private notificacionesService: NotificacionService, private carritoService: CarritoService) {
@@ -106,6 +106,12 @@ export class ShowProductoComponent implements OnInit {
         }
       });
     }, 500)
+
+    this.guestService.obtenerDescuentosActivos().subscribe({
+      next: (response: any) => {
+        this.descuentoActivo = response.data[0];
+      }
+    })
   }
 
   agregarAlCarrito(){

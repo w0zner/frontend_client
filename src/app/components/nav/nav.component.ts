@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { io } from 'socket.io-client';
 import { AuthService } from 'src/app/services/auth.service';
 import { CarritoService } from 'src/app/services/carrito.service';
+import { GuestService } from 'src/app/services/guest.service';
 import { NotificacionService } from 'src/app/services/notificacion.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -18,8 +19,9 @@ export class NavComponent {
   op_carrito= false;
   carrito: any[] = []
   public socket = io('http://localhost:5000')
+  public descuentoActivo: any = undefined
 
-  constructor(private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private carritoService: CarritoService, private notificacionesService: NotificacionService) {
+  constructor(private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private carritoService: CarritoService, private notificacionesService: NotificacionService, private guestService: GuestService) {
     this.obtenerConfiguracionPublica()
   }
 
@@ -48,6 +50,12 @@ export class NavComponent {
       console.log("new-carrito-add ",data)
       this.obtenerCarrito();
     });
+
+    this.guestService.obtenerDescuentosActivos().subscribe({
+      next: (response: any) => {
+        this.descuentoActivo = response.data[0];
+      }
+    })
   }
 
   obtenerCarrito() {
