@@ -209,9 +209,14 @@
               </ul>
               <div class="d-flex align-items-center">
                 <input type="number" class="form-control form-control-sm bg-light mr-3" readonly style="width: 4.5rem;" value="{{item.cantidad}}">
-                <div class="text-nowrap">
-                  <strong class="text-danger">{{descuentoActivo.descuento }}</strong>  <--font-size-xs-->
-                  <span class="text-muted">{{item.producto.precio }}</span>
+                <div class="text-nowrap" *ngIf="descuentoActivo == undefined">
+                  <strong class="text-danger">{{ item.producto.precio | descuento: descuentoActivo.descuento | currency:'PYG ':'symbol':'1.0-0' }}</strong>
+                </div>
+                <div class="text-nowrap" *ngIf="descuentoActivo != undefined">
+                  <strong class="text-danger">{{ item.producto.precio | descuento: descuentoActivo.descuento | currency:'PYG ':'symbol':'1.0-0' }}</strong>
+                 <!-- font-size-xs -->
+                  <br>
+                  <del class="d-inline-block text-muted font-size-xs">{{item.producto.precio | currency:'PYG ':'symbol':'1.0-0' }}</del>
                 </div>
               </div>
               <button class="btn btn-link btn-sm text-decoration-none px-0 pb-0">

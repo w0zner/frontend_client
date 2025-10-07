@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { io } from 'socket.io-client';
 import { AuthService } from 'src/app/services/auth.service';
 import { CarritoService } from 'src/app/services/carrito.service';
+import { GuestService } from 'src/app/services/guest.service';
 import { NotificacionService } from 'src/app/services/notificacion.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 declare var Cleave: new (arg0: string, arg1: { creditCard?: boolean; date?: boolean; datePattern?: any; onCreditCardTypeChanged?: (type: any) => void; }) => any;
@@ -29,8 +30,10 @@ export class CarritoComponent implements OnInit {
   ventaForm: FormGroup
   detalleVenta: any[] = []
   public socket = io('http://localhost:5000')
+  public descuentoActivo: any = undefined
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private carritoService: CarritoService, private notificacionesService: NotificacionService) {
+
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private carritoService: CarritoService, private notificacionesService: NotificacionService, private guestService: GuestService) {
     this.ventaForm = this.fb.group({
       usuario: [''],
       direccion: [''],
@@ -152,6 +155,12 @@ export class CarritoComponent implements OnInit {
     this.ventaForm.get('envio_precio')?.valueChanges.subscribe(() => {
       this.actualizarSubtotal();
     });
+
+    this.guestService.obtenerDescuentosActivos().subscribe({
+      next: (response: any) => {
+        this.descuentoActivo = response.data[0];
+      }
+    })
   }
 
   actualizarSubtotal() {
@@ -167,9 +176,15 @@ export class CarritoComponent implements OnInit {
 
   calcularTotalCarrito() {
     let total = 0;
-    this.carrito.forEach(item => {
-      total += item.producto.precio * item.cantidad
-    });
+    if(this.descuentoActivo == undefined) {
+      this.carrito.forEach(item => {
+        total += item.producto.precio * item.cantidad
+      });
+    } else {
+      this.carrito.forEach(item => {
+        total += item.producto.precio-(item.producto.precio*this.descuentoActivo.descuento/100) * item.cantidad
+      });
+    }
     return total;
   }
 

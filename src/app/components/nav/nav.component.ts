@@ -99,9 +99,16 @@ export class NavComponent {
 
   calcularTotalCarrito() {
     let total = 0;
-    this.carrito.forEach(item => {
-      total += item.producto.precio * item.cantidad
-    });
+    if(this.descuentoActivo == undefined) {
+      this.carrito.forEach(item => {
+        total += item.producto.precio * item.cantidad
+      });
+    } else {
+      this.carrito.forEach(item => {
+        total += item.producto.precio-(item.producto.precio*this.descuentoActivo.descuento/100) * item.cantidad
+      });
+    }
+
     return total;
   }
 
