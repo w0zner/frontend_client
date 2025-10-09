@@ -26,6 +26,11 @@ export class GuestService {
     return this.http.get( this.url + 'listar-productos-recomendados/' +  categoria, {headers: headers})
   }
 
+    obtenerProductosNuevos() {
+    let headers= new HttpHeaders().set('Content-Type', 'application/json')
+    return this.http.get( this.url + 'listar-productos-nuevos', {headers: headers})
+  }
+
   obtenerDescuentosActivos() {
     let headers= new HttpHeaders().set('Content-Type', 'application/json')
     return this.http.get( this.urlDescuentos + 'obtener-descuentos', {headers: headers})

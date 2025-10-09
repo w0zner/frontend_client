@@ -11,16 +11,26 @@ declare var tns: (arg0: { container: string; controlsText?: string[]; mode?: str
 export class InicioComponent implements OnInit {
 
   public descuentoActivo: any = undefined
+  public productos_nuevos: any[] = []
   public url: string;
+  public urlProductos: string;
 
   constructor(private guestService: GuestService){
     this.url = GLOBAL.url + 'descuentos/obtenerPortada'
+    this.urlProductos = GLOBAL.url + 'productos/obtenerPortada/'
   }
 
   ngOnInit(): void {
     this.guestService.obtenerDescuentosActivos().subscribe({
       next: (response: any) => {
         this.descuentoActivo = response.data[0];
+      }
+    })
+
+    this.guestService.obtenerProductosNuevos().subscribe({
+      next: (response:any) => {
+        console.log("Productos nuevos: ", response.data)
+        this.productos_nuevos = response.data
       }
     })
 

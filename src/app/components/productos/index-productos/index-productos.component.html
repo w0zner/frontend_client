@@ -17,11 +17,33 @@
     <!-- Page container -->
     <section class="container pt-3 pb-5 pb-md-6 mb-2 mb-lg-0">
 
-        <div class="row mb-4" *ngIf="descuentoActivo != undefined">
+<!--         <div class="row mb-4" *ngIf="descuentoActivo != undefined">
           <div class="col-12">
             <img [src]="urlDescuentos + descuentoActivo.banner" alt="Banner descuentos" style="width: 100% !important;" class="img-fluid rounded-3 mb-4">
           </div>
+        </div> -->
+        <div class="py-5 px-md-5 px-4 mb-4 bg-size-cover bg-position-center-y" style="background-image: url({{urlDescuentos}}{{descuentoActivo.banner}}); height: 70%;">
+            <div class="mt-md-3 mb-5 pb-5 p-md-2" style="max-width: 20rem;">
+                <h3 class="mb-2 pb-1 font-size-sm text-uppercase">Desde <b>{{descuentoActivo.fecha_inicio | date:'dd/MM/yyyy'}}</b> - hasta <b>{{descuentoActivo.fecha_fin | date:'dd/MM/yyyy'}}</b></h3>
+                <h2 class="pb-3">{{descuentoActivo.titulo}}</h2>
+                <h3 class="mb-2 pb-1 font-size-lg text-uppercase badge bg-danger text-white">Descuentos hasta <b>{{descuentoActivo.descuento}}%</b></h3>
+                <!-- <a class="btn btn-outline-primary mb-5" href="#">Explore new prices</a> -->
+            </div>
+
         </div>
+<!--         <div class="bg-size-cover py-xl-6" *ngIf="descuentoActivo != undefined" style="background-image: url({{urlDescuentos}}{{descuentoActivo.banner}}); width: 100% !important; height: auto; transform: scale(0.5);">
+          <div class="container pt-5 pb-6">
+            <div class="row pb-lg-6">
+              <div class="col-lg-6 offset-lg-1 offset-xl-0 pb-4 pb-md-6">
+                <h3 class="font-size-lg text-uppercase cs-from-left cs-delay-1">Desde <b>{{descuentoActivo.fecha_inicio | date:'dd/MM/yyyy'}}</b> - hasta <b>{{descuentoActivo.fecha_fin | date:'dd/MM/yyyy'}}</b></h3>
+                <h2 class="display-2 mb-lg-5 pb-3 cs-from-left">{{descuentoActivo.titulo}}</h2>
+                <div class="mb-4 cs-scale-up cs-delay-2">
+                  <a [routerLink]="['/productos']" class="btn btn-outline-primary btn-lg">Ver productos</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
 
         <!-- Toolbar + Pagination -->
         <div class="row mb-4 pb-2">
