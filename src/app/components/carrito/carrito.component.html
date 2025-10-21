@@ -16,7 +16,7 @@
 
       <!-- Page content -->
       <section class="container pt-3 pt-md-4 pb-3 pb-sm-4 pb-lg-5 mb-4">
-        <form [formGroup]="ventaForm" (submit)="registrarCompra()">
+        <form [formGroup]="ventaForm" >
                   <div class="row">
           <!-- Checkout content -->
           <div class="col-lg-8 pr-lg-6">
@@ -270,7 +270,7 @@
                     <span class="h5 mb-0">{{calcularTotalCarrito() + (ventaForm.get('envio_precio')?.value || 0) | currency:'PYG ':'symbol':'1.0-0'}}</span>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Finalizar la compra</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="registrarCompra()">Finalizar la compra</button>
               </div>
             </div>
           </aside>
