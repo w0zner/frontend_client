@@ -8,6 +8,7 @@ import { IndexProductosComponent } from './components/productos/index-productos/
 import { ShowProductoComponent } from './components/productos/show-producto/show-producto.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component';
+import { ContactoComponent } from './components/contacto/contacto.component';
 const routes: Routes = [
   {path: '', component: InicioComponent},
   {path: 'login', component: LoginComponent},
@@ -18,7 +19,10 @@ const routes: Routes = [
   {path: 'cuenta/perfil', component: PerfilComponent, canActivate: [authGuard]},
   {path: 'cuenta/direcciones', component: DireccionesComponent, canActivate: [authGuard]},
 
-  {path: 'carrito', component: CarritoComponent, canActivate: [authGuard]}
+  {path: 'carrito', component: CarritoComponent, canActivate: [authGuard]},
+
+    {path: 'contacto', component: ContactoComponent },
+
 ];
 
 @NgModule({

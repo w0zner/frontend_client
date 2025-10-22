@@ -147,10 +147,14 @@
               </div>
               <div class="card-body">
                 <h3 class="card-product-title text-truncate mb-2">
-                  <a href="shop-single.html" class="nav-link">{{item.titulo}}</a>
+                  <a [routerLink]="['/productos/', item.slug]" class="nav-link">{{item.titulo}}</a>
                 </h3>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center" *ngIf="descuentoActivo == undefined">
                   <span class="h5 d-inline-block mb-0">{{item.precio | currency:'PYG ':'symbol':'1.0-0'}}</span>
+                </div>
+                <div class="d-flex align-items-center" *ngIf="descuentoActivo != undefined">
+                  <span class="h5 d-inline-block mb-0">{{item.precio | descuento: descuentoActivo.descuento | currency:'PYG ':'symbol':'1.0-0'}}</span>
+                  <del class="d-inline-block ml-2 pl-1 text-muted">{{item.precio | currency:'PYG ':'symbol':'1.0-0'}}</del>
                 </div>
               </div>
             </div>
@@ -161,7 +165,7 @@
   </section>
 
    <!-- Trending products (carousel) -->
-  <section class="py-5" style="background-color: #e5e8ed;">
+   <section class="py-5" style="background-color: #e5e8ed;">
       <div class="container my-lg-2 py-2 py-md-4">
         <div class="d-flex align-items-center justify-content-between pb-sm-1 mb-5">
           <h2 class="h1 mb-0">Tendencia ahora</h2>
@@ -175,16 +179,14 @@
           </div>
         </div>
         <div class="cs-carousel pb-2">
-          <div class="cs-carousel-inner cs-carousel-inner-four" data-carousel-options='{
+          <div class="cs-carousel-inner cs-carousel-inner-four" data-carousel-options='{ }'>
 
-          }'>
 
-            <!-- Item -->
-            <div>
+            <div *ngFor="let item of productos_mas_vendidos">
               <div class="card card-product mx-auto">
                 <div class="card-product-img">
-                  <a href="shop-single.html" class="card-img-top">
-                    <img src="../../assets/img/ecommerce/shop/01.jpg" alt="Product image">
+                  <a [routerLink]="['/productos/', item.slug]" class="card-img-top">
+                    <img [src]="item.portada ? urlProductos + item.portada : 'assets/img/default-product.png'" alt="Product image">
                   </a>
                   <div class="card-product-widgets-top">
                     <div class="star-rating ml-auto">
@@ -201,195 +203,45 @@
                 </div>
                 <div class="card-body bg-0 pb-2">
                   <h3 class="card-product-title text-truncate mb-2">
-                    <a href="shop-single.html" class="nav-link">Shirt with insertion lace trims</a>
+                    <a [routerLink]="['/productos/', item.slug]" class="nav-link">{{item.titulo}}</a>
                   </h3>
-                  <div class="d-flex align-items-center">
-                    <span class="h5 d-inline-block mb-0">$49.95</span>
+                  <div class="d-flex align-items-center" *ngIf="descuentoActivo == undefined">
+                    <span class="h5 d-inline-block mb-0">{{item.precio | currency:'PYG ':'symbol':'1.0-0'}}</span>
+                  </div>
+                  <div class="d-flex align-items-center" *ngIf="descuentoActivo != undefined">
+                    <span class="h5 d-inline-block mb-0">{{item.precio | descuento: descuentoActivo.descuento | currency:'PYG ':'symbol':'1.0-0'}}</span>
+                    <del class="d-inline-block ml-2 pl-1 text-muted">{{item.precio | currency:'PYG ':'symbol':'1.0-0'}}</del>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Item -->
-            <div>
-              <div class="card card-product mx-auto">
-                <div class="card-product-img">
-                  <a href="shop-single.html" class="card-img-top">
-                    <img src="../../assets/img/ecommerce/shop/07.jpg" alt="Product image">
-                  </a>
-                  <div class="card-product-widgets-top">
-                    <div class="star-rating ml-auto">
-                      <i class="sr-star cxi-star-filled active"></i>
-                      <i class="sr-star cxi-star-filled active"></i>
-                      <i class="sr-star cxi-star-filled active"></i>
-                      <i class="sr-star cxi-star-filled active"></i>
-                      <i class="sr-star cxi-star"></i>
-                    </div>
-                  </div>
-                  <div class="card-product-widgets-bottom">
-                    <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
-                  </div>
-                </div>
-                <div class="card-body bg-0 pb-2">
-                  <h3 class="card-product-title text-truncate mb-2">
-                    <a href="shop-single.html" class="nav-link">Chrono watch with gold rim and blue strap</a>
-                  </h3>
-                  <div class="d-flex align-items-center">
-                    <span class="h5 d-inline-block mb-0">$120.60</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Item -->
-            <div>
-              <div class="card card-product mx-auto">
-                <div class="card-product-img">
-                  <a href="shop-single.html" class="card-img-top">
-                    <img src="../../assets/img/ecommerce/shop/05.jpg" alt="Product image">
-                  </a>
-                  <div class="card-product-widgets-bottom">
-                    <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
-                  </div>
-                </div>
-                <div class="card-body bg-0 pb-2">
-                  <h3 class="card-product-title text-truncate mb-2">
-                    <a href="shop-single.html" class="nav-link">Check coat with color contrast</a>
-                  </h3>
-                  <div class="d-flex align-items-center">
-                    <span class="h5 d-inline-block mb-0">$183.45</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Item -->
-            <div>
-              <div class="card card-product mx-auto">
-                <div class="card-product-img">
-                  <a href="shop-single.html" class="card-img-top">
-                    <img src="../../assets/img/ecommerce/shop/12.jpg" alt="Product image">
-                  </a>
-                  <div class="card-product-widgets-bottom">
-                    <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
-                  </div>
-                </div>
-                <div class="card-body bg-0 pb-2">
-                  <h3 class="card-product-title text-truncate mb-2">
-                    <a href="shop-single.html" class="nav-link">Men fashion gray shoes</a>
-                  </h3>
-                  <div class="d-flex align-items-center">
-                    <span class="h5 d-inline-block mb-0">$85.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Item -->
-            <div>
-              <div class="card card-product mx-auto">
-                <div class="card-product-img">
-                  <a href="shop-single.html" class="card-img-top">
-                    <img src="../../assets/img/ecommerce/shop/06.jpg" alt="Product image">
-                  </a>
-                  <div class="card-product-widgets-top">
-                    <div class="star-rating ml-auto">
-                      <i class="sr-star cxi-star-filled active"></i>
-                      <i class="sr-star cxi-star-filled active"></i>
-                      <i class="sr-star cxi-star-filled active"></i>
-                      <i class="sr-star cxi-star"></i>
-                      <i class="sr-star cxi-star"></i>
-                    </div>
-                  </div>
-                  <div class="card-product-widgets-bottom">
-                    <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
-                  </div>
-                </div>
-                <div class="card-body bg-0 pb-2">
-                  <h3 class="card-product-title text-truncate mb-2">
-                    <a href="shop-single.html" class="nav-link">Red dangle earrings</a>
-                  </h3>
-                  <div class="d-flex align-items-center">
-                    <span class="h5 d-inline-block mb-0">$29.95</span>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <div class="text-center pt-4 pt-md-5">
-          <a href="shop-catalog.html" class="btn btn-outline-primary btn-lg">Explore top sellers</a>
+          <a [routerLink]="['/productos']" class="btn btn-outline-primary btn-lg">Ver en la tienda</a>
         </div>
       </div>
-  </section>
+  </section> 
 
   <!-- Popular categories -->
   <section class="container mt-1 mb-3 my-sm-4 py-5 py-lg-6">
-      <h2 class="h1 mb-5 pb-3 text-center">Popular categories</h2>
+      <h2 class="h1 mb-5 pb-3 text-center">Categorias populares</h2>
       <div class="cs-carousel cs-nav-outside">
         <div class="cs-carousel-inner cs-carousel-inner-five" data-carousel-options='{
 
         }'>
 
           <!-- Category -->
-          <div class="pb-2">
-            <a href="shop-catalog.html" class="d-block cs-image-scale cs-heading-highlight text-center">
+          <div class="pb-2" *ngFor="let item of categories">
+            <a [routerLink]="['/productos/categoria', item.titulo]" class="d-block cs-image-scale cs-heading-highlight text-center">
               <div class="cs-image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                <img src="../../assets/img/ecommerce/home/categories/04.jpg" alt="Category image">
+                <img [src]="item.portada" alt="Category image">
               </div>
-              <h3 class="h5 mb-3">Tops</h3>
+              <h3 class="h5 mb-3">{{item.titulo}}</h3>
             </a>
           </div>
 
-          <!-- Category -->
-          <div class="pb-2">
-            <a href="shop-catalog.html" class="d-block cs-image-scale cs-heading-highlight text-center">
-              <div class="cs-image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                <img src="../../assets/img/ecommerce/home/categories/05.jpg" alt="Category image">
-              </div>
-              <h3 class="h5 mb-3">T-shirts</h3>
-            </a>
-          </div>
-
-          <!-- Category -->
-          <div class="pb-2">
-            <a href="shop-catalog.html" class="d-block cs-image-scale cs-heading-highlight text-center">
-              <div class="cs-image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                <img src="../../assets/img/ecommerce/home/categories/06.jpg" alt="Category image">
-              </div>
-              <h3 class="h5 mb-3">Caps</h3>
-            </a>
-          </div>
-
-          <!-- Category -->
-          <div class="pb-2">
-            <a href="shop-catalog.html" class="d-block cs-image-scale cs-heading-highlight text-center">
-              <div class="cs-image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                <img src="../../assets/img/ecommerce/home/categories/07.jpg" alt="Category image">
-              </div>
-              <h3 class="h5 mb-3">Sandals</h3>
-            </a>
-          </div>
-
-          <!-- Category -->
-          <div class="pb-2">
-            <a href="shop-catalog.html" class="d-block cs-image-scale cs-heading-highlight text-center">
-              <div class="cs-image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                <img src="../../assets/img/ecommerce/home/categories/08.jpg" alt="Category image">
-              </div>
-              <h3 class="h5 mb-3">Jackets</h3>
-            </a>
-          </div>
-
-          <!-- Category -->
-          <div class="pb-2">
-            <a href="shop-catalog.html" class="d-block cs-image-scale cs-heading-highlight text-center">
-              <div class="cs-image-inner rounded-circle mx-auto mb-4" style="max-width: 180px;">
-                <img src="../../assets/img/ecommerce/home/categories/09.jpg" alt="Category image">
-              </div>
-              <h3 class="h5 mb-3">Coats</h3>
-            </a>
-          </div>
         </div>
       </div>
   </section>
@@ -402,17 +254,18 @@
             <img src="../../assets/img/ecommerce/home/mobile-app-illustration.png" class="d-block mx-auto my-4 mb-lg-0 mt-lg-n4" width="498" alt="Illustartion">
           </div>
           <div class="col-md-7 col-lg-6 pt-3 pb-5 pt-md-5 pb-md-4 ml-auto">
-            <h2 class="text-light text-center text-md-left pb-3">Enjoy mobile shopping with our Createx Store App!</h2>
-            <div class="d-flex flex-wrap flex-sm-nowrap justify-content-center justify-content-md-start">
+            <h2 class="text-light text-center text-md-left pb-0">¡Disfruta de las compras con nuestra aplicación Createx Store!</h2>
+            <h4 class="text-light text-center text-md-left pb-3">Desde cualquier dispositivo</h4>
+            <!-- <div class="d-flex flex-wrap flex-sm-nowrap justify-content-center justify-content-md-start">
               <a href="#" class="btn-market btn-apple mb-3 mx-2 ml-md-0 mr-md-3" role="button">
-                <span class="btn-market-subtitle">Download on the</span>
+                <span class="btn-market-subtitle">Disonible</span>
                 <span class="btn-market-title">App Store</span>
               </a>
               <a href="#" class="btn-market btn-google mb-3 mx-2 mx-md-0" role="button">
                 <span class="btn-market-subtitle">Download on the</span>
                 <span class="btn-market-title">Google Play</span>
               </a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -423,26 +276,26 @@
       <div class="row py-3">
         <div class="col-sm-6 col-md-3 text-center mb-md-0 mb-4 pb-md-0 pb-3">
           <img class="mb-4" src="../../assets/img/ecommerce/home/services/delivery.svg" width="48" alt="Worldwide Shipping">
-          <h5 class="h5 mb-2">Fast Worldwide Shipping</h5>
-          <p class="mb-0 text-muted">Get free shipping over $250</p>
+          <h5 class="h5 mb-2">Envíos a todo el país</h5>
+          <p class="mb-0 text-muted">Obtenga envío gratuitos según la zona y el día</p>
         </div>
         <span class="divider-vertical d-sm-block d-none"></span>
         <div class="col-sm-6 col-md-3 text-center mb-md-0 mb-4 pb-md-0 pb-3">
           <img class="mb-4" src="../../assets/img/ecommerce/home/services/support.svg" width="48" alt="Customer Support">
-          <h5 class="h5 mb-2">24/7 Customer Support</h5>
-          <p class="mb-0 text-muted">Friendly 24/7 customer support</p>
+          <h5 class="h5 mb-2">Atención al cliente 24/7</h5>
+          <p class="mb-0 text-muted">Atención al cliente amigable</p>
         </div>
         <span class="divider-vertical d-sm-block d-none"></span>
         <div class="col-sm-6 col-md-3 text-center mb-md-0 mb-4 pb-md-0 pb-3">
           <img class="mb-4" src="../../assets/img/ecommerce/home/services/guarantee.svg" width="48" alt="Customer Support">
-          <h5 class="h5 mb-2">Money Back Guarantee</h5>
-          <p class="mb-0 text-muted">We return money within 30 days</p>
+          <h5 class="h5 mb-2">Garantía de devolución</h5>
+          <p class="mb-0 text-muted">Devolvemos el dinero en 30 días</p>
         </div>
         <span class="divider-vertical d-sm-block d-none"></span>
         <div class="col-sm-6 col-md-3 text-center mb-md-0 mb-4 pb-md-0 pb-3">
           <img class="mb-4" src="../../assets/img/ecommerce/home/services/payment.svg" width="48" alt="Customer Support">
-          <h5 class="h5 mb-2">Secure Online Payment</h5>
-          <p class="mb-0 text-muted">Accept all major credit cards</p>
+          <h5 class="h5 mb-2">Varias vías de pago seguro</h5>
+          <p class="mb-0 text-muted">Pago por la web, por transferencia, QR o contra entrega</p>
         </div>
       </div>
   </section>
@@ -453,11 +306,11 @@
       <div class="container pt-md-4 pb-2 pt-lg-0 pb-lg-0">
         <div class="row">
           <div class="col-md-4 text-center text-md-left pb-2 pb-md-0 mb-4 mb-md-0">
-            <p class="text-dark text-uppercase mb-2">Follow us on Instagram</p>
+            <p class="text-dark text-uppercase mb-2">Síguenos en Instagram</p>
             <h2 class="h1 pb-2 pb-md-3">@createx_store</h2>
             <a href="#" class="btn btn-outline-primary btn-lg">
               <i class="cxi-instagram font-size-lg mr-1"></i>
-              Follow Instagram
+              Seguinos en Instagram
             </a>
           </div>
           <div class="col-md-8">

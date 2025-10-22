@@ -21,6 +21,7 @@ import { ShowProductoComponent } from './components/productos/show-producto/show
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component';
 import { DescuentoPipe } from './pipes/descuento.pipe';
+import { ContactoComponent } from './components/contacto/contacto.component';
 
 registerLocaleData(localePy, 'es-PY');
 
@@ -37,7 +38,8 @@ registerLocaleData(localePy, 'es-PY');
     ShowProductoComponent,
     CarritoComponent,
     DireccionesComponent,
-    DescuentoPipe
+    DescuentoPipe,
+    ContactoComponent
   ],
   imports: [
     BrowserModule,

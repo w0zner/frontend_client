@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { GuestService } from 'src/app/services/guest.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 declare var tns: (arg0: { container: string; controlsText?: string[]; mode?: string; navContainer?: string; responsive: { 0: { controls: boolean; }; 991: { controls: boolean; }; } | { 0: { gutter: number; }; 400: { items: number; gutter: number; }; 520: { gutter: number; }; 768: { items: number; gutter: number; }; } | { 0: { items: number; gutter: number; }; 420: { items: number; gutter: number; }; 600: { items: number; gutter: number; }; 700: { items: number; gutter: number; }; 900: { items: number; gutter: number; }; 1200: { items: number; gutter: number; }; 1400: { items: number; gutter: number; }; } | { 0: { items: number; gutter: number; }; 480: { items: number; gutter: number; }; 700: { items: number; gutter: number; }; 1100: { items: number; gutter: number; }; } | { 0: { items: number; }; 380: { items: number; }; 550: { items: number; }; 750: { items: number; }; 1000: { items: number; }; 1250: { items: number; }; } | { 0: { items: number; }; 500: { items: number; }; 1200: { items: number; }; }; controls?: boolean; mouseDrag?: boolean; nav?: boolean; controlsContainer?: string; gutter?: number; }) => void;
 
 @Component({
@@ -12,10 +13,14 @@ export class InicioComponent implements OnInit {
 
   public descuentoActivo: any = undefined
   public productos_nuevos: any[] = []
+  public productos_mas_vendidos: any[] = []
   public url: string;
   public urlProductos: string;
+  public config_global: any = {}
+  public categories: any[] = []
 
-  constructor(private guestService: GuestService){
+
+  constructor(private guestService: GuestService, private usuarioService: UsuarioService){
     this.url = GLOBAL.url + 'descuentos/obtenerPortada'
     this.urlProductos = GLOBAL.url + 'productos/obtenerPortada/'
   }
@@ -31,6 +36,30 @@ export class InicioComponent implements OnInit {
       next: (response:any) => {
         console.log("Productos nuevos: ", response.data)
         this.productos_nuevos = response.data
+      }
+    })
+
+    this.guestService.obtenerProductosMasVendidos().subscribe({
+      next: (response:any) => {
+        console.log("Productos mas vendidos: ", response.data)
+        this.productos_mas_vendidos = response.data
+      }
+    })
+
+    this.usuarioService.obtenerConfiguracionPublica().subscribe({
+      next: (response: any) => {
+        this.config_global = response.data;
+        console.log('config ', this.config_global.categorias)
+
+        let categorias = this.config_global.categorias
+
+        this.categories = categorias.map((element: any) => (
+          { ...element,
+             portada: 'assets/img/ecommerce/home/categories/' + element.titulo + '.jpg'
+          }
+        ))
+
+        console.log('categories ', this.categories)
       }
     })
 
