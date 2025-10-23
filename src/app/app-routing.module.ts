@@ -9,6 +9,8 @@ import { ShowProductoComponent } from './components/productos/show-producto/show
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { DireccionesComponent } from './components/usuario/direcciones/direcciones.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+import { IndexOrdenesComponent } from './components/usuario/ordenes/index-ordenes/index-ordenes.component';
+import { DetalleOrdenComponent } from './components/usuario/ordenes/detalle-orden/detalle-orden.component';
 const routes: Routes = [
   {path: '', component: InicioComponent},
   {path: 'login', component: LoginComponent},
@@ -18,6 +20,8 @@ const routes: Routes = [
 
   {path: 'cuenta/perfil', component: PerfilComponent, canActivate: [authGuard]},
   {path: 'cuenta/direcciones', component: DireccionesComponent, canActivate: [authGuard]},
+  {path: 'cuenta/ordenes', component: IndexOrdenesComponent, canActivate: [authGuard]},
+  {path: 'cuenta/ordenes/:id', component: DetalleOrdenComponent, canActivate: [authGuard]},
 
   {path: 'carrito', component: CarritoComponent, canActivate: [authGuard]},
 
