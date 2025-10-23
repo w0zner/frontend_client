@@ -44,7 +44,7 @@
 
             <!-- Tab: Contact Us -->
             <div id="contact" class="tab-pane pb-5 fade show active" role="tabpanel" aria-labelledby="contact-tab">
-            <p class="text-dark lead font-weight-bold">Si tiene alguna pregunta, inquietud o comentario, ¡nos encantaría saberlo! 
+            <p class="text-dark lead font-weight-bold">Si tiene alguna pregunta, inquietud o comentario, ¡nos encantaría saberlo!
                 <br> Envíe su consulta a través de cualquiera de los siguientes métodos:</p>
             <div class="nav-dark mb-5">
                 <a href="tel:4055550128" class="nav-link d-flex align-items-center font-weight-normal p-0 mb-2">
@@ -65,29 +65,29 @@
                 </a>
             </div>
             <p class="text-dark lead font-weight-bold pb-2">O póngase en contacto con nosotros completando el siguiente formulario:</p>
-            <form class="needs-validation" novalidate="">
+            <form class="needs-validation" novalidate="" [formGroup]="contactoForm" (submit)="enviarContacto()">
                 <div class="row">
                 <div class="col-sm-6 form-group">
                     <label for="cont-name">Nombre y Apellido *</label>
-                    <input type="text" id="cont-name" class="form-control form-control-lg" placeholder="John Doe" required="">
+                    <input type="text" id="cont-name" formControlName="cliente" class="form-control form-control-lg" placeholder="John Doe" required="">
                     <div class="invalid-feedback">Ingrese su nombre y apellido.</div>
                 </div>
                 <div class="col-sm-6 form-group">
                     <label for="cont-email">Email *</label>
-                    <input type="email" id="cont-email" class="form-control form-control-lg" placeholder="johndoe@example.com" required="">
+                    <input type="email" id="cont-email" formControlName="correo" class="form-control form-control-lg" placeholder="johndoe@example.com" required="">
                     <div class="invalid-feedback">Ingrese su correo eléctronico.</div>
                 </div>
                 <div class="col-sm-6 form-group">
                     <label for="cont-phone">Celular</label>
-                    <input type="text" id="cont-phone" class="form-control form-control-lg bg-0" placeholder="0900 000-000">
+                    <input type="text" id="cont-phone" formControlName="telefono" class="form-control form-control-lg bg-0" placeholder="0900 000-000">
                 </div>
                 <div class="col-sm-6 form-group">
                     <label for="cont-subject">Asunto</label>
-                    <input type="text" id="cont-subject" class="form-control form-control-lg bg-0" placeholder="Ingrese el asunto">
+                    <input type="text" id="cont-subject" formControlName="asunto" class="form-control form-control-lg bg-0" placeholder="Ingrese el asunto">
                 </div>
                 <div class="col-12 form-group">
                     <label for="cont-message">Mensaje *</label>
-                    <textarea id="cont-message" class="form-control form-control-lg" rows="5" placeholder="Ingrese su mensaje" required=""></textarea>
+                    <textarea id="cont-message" formControlName="mensaje" class="form-control form-control-lg" rows="5" placeholder="Ingrese su mensaje" required=""></textarea>
                     <div class="invalid-feedback">Ingrese su mensaje.</div>
                 </div>
                 <div class="col-lg-4 col-sm-5 pt-2">
