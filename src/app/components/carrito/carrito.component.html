@@ -150,7 +150,7 @@
                 <div class="accordion-alt" id="payment-methods">
 
                   <!-- Card: Credit card -->
-                  <div class="card mb-3 px-4 py-3 border rounded box-shadow-sm">
+                  <!-- <div class="card mb-3 px-4 py-3 border rounded box-shadow-sm">
                     <div class="card-header py-2">
                       <div class="accordion-heading custom-control custom-radio" data-toggle="collapse" data-target="#cc-card">
                         <input type="radio" class="custom-control-input" id="cc" name="payment" checked>
@@ -178,13 +178,34 @@
                         </div>
                       </div>
                     </div>
+                  </div> -->
+                  <div class="card mb-3 px-4 py-3 border rounded box-shadow-sm">
+                    <div class="card-header py-2">
+                      <div class="accordion-heading custom-control custom-radio" data-toggle="collapse" data-target="#cash-card">
+                        <input type="radio" class="custom-control-input" id="cash" name="payment" formControlName="payment" value="transferencia">
+                        <label for="cash" class="custom-control-label">
+                          <strong class="d-block mr-3">Pago con transferencia</strong>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="collapse" id="cash-card" data-parent="#payment-methods">
+                      <div class="card-body pt-3 pb-0">
+                        <p class="mb-2 text-muted"><b>Datos.</b></p>
+                        <p class="mb-2 text-muted">N° Cuenta: 61-85472990.</p>
+                        <p class="mb-2 text-muted">Denominación: Web Store PY</p>
+                        <p class="mb-2 text-muted">RUC: 8004577-8</p>
+                        <hr>
+                        <p class="mb-2 text-muted"><b>Alias.</b></p>
+                        <p class="mb-2 text-muted">Alias - RUC: 8004577-8</p>
+                      </div>
+                    </div>
                   </div>
 
                   <!-- Card: PayPal -->
                   <div class="card mb-3 px-4 py-3 border rounded box-shadow-sm">
                     <div class="card-header py-2">
                       <div class="accordion-heading custom-control custom-radio" data-toggle="collapse" data-target="#paypal-card">
-                        <input type="radio" class="custom-control-input" id="paypal" name="payment">
+                        <input type="radio" class="custom-control-input" id="paypal" name="payment" formControlName="payment" value="paypal">
                         <label for="paypal" class="custom-control-label d-flex align-items-center">
                           <strong class="d-block mr-3">PayPal</strong>
                           <img src="../../assets/img/ecommerce/checkout/paypal-badge.png" width="48" alt="PayPal">
@@ -207,7 +228,7 @@
                   <div class="card mb-3 px-4 py-3 border rounded box-shadow-sm">
                     <div class="card-header py-2">
                       <div class="accordion-heading custom-control custom-radio" data-toggle="collapse" data-target="#cash-card">
-                        <input type="radio" class="custom-control-input" id="cash" name="payment">
+                        <input type="radio" class="custom-control-input" id="cash" name="payment" formControlName="payment" value="efectivo">
                         <label for="cash" class="custom-control-label">
                           <strong class="d-block mr-3">Pago en efectivo</strong>
                         </label>
@@ -215,7 +236,7 @@
                     </div>
                     <div class="collapse" id="cash-card" data-parent="#payment-methods">
                       <div class="card-body pt-3 pb-0">
-                        <p class="mb-2 text-muted">You have selected to pay with cash upon delivery.</p>
+                        <p class="mb-2 text-muted">Ha seleccionado pagar en efectivo al momento de la entrega.</p>
                       </div>
                     </div>
                   </div>
@@ -271,6 +292,9 @@
                   </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="registrarCompra()">Finalizar la compra</button>
+                <div class="alert alert-warning" role="alert" *ngIf="!direccion">
+                  Debe agregar una dirección para Finalizar la compra.
+                </div>
               </div>
             </div>
           </aside>

@@ -40,38 +40,31 @@
 
             <!-- Orders accordion -->
             <div class="accordion-alt" id="orders">
-
-              <!-- Order -->
               
 
               <!-- Order -->
-              <div class="card border-bottom">
+              <div class="card border-bottom" *ngFor="let orden of ordenes | slice: (page-1)*pageSize : (page-1)*pageSize+pageSize; let indice = index">
                 <div class="card-header accordion-heading py-1">
                   <a href="#order-2" class="d-flex flex-wrap justify-content-between py-3" data-toggle="collapse" aria-expanded="false">
-                    <span class="pr-2"># 50HV46580V84</span>
+                    <span class="pr-2">#{{orden._id.slice(-8)}}</span>
                     <span class="font-size-sm text-muted text-nowrap px-2">
                       <i class="cxi-clock font-size-base align-middle mt-n1 mr-1"></i>
-                      Nov 27, 2020
+                      {{orden.createdAt | date}}
                     </span>
-                    <span class="badge badge-info">En progreso</span>
-                    <span class="text-dark pl-1">$87.40</span>
+                    <span class="badge badge-info">{{orden.estado}}</span>
+                    <span class="text-dark pl-1">{{orden.subtotal | currency:'PYG ':'symbol':'1.0-0'}}</span>
                   </a>
-                </div>
-                
+                </div>  
               </div>
-
-             
             </div>
-
-            <!-- Load more btn -->
-           <!--  <div class="text-center pt-4 pb-sm-2 mt-3">
-              <button class="btn btn-lg btn-link load-more-btn p-0 text-decoration-none" type="button">
-                <i class="cxi-arrow-convert mt-n1 mr-3 align-middle"></i>
-                Load more
-              </button>
-            </div> -->
+            <div class="card-footer border-0 pl-0">
+                <ngb-pagination
+                [(page)]="page"
+                [pageSize]="pageSize"
+                [collectionSize]="ordenes.length"
+                ></ngb-pagination>
+            </div> 
           </div>
-
         </div>
       </section>
 </main>

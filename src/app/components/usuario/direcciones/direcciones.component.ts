@@ -14,6 +14,7 @@ export class DireccionesComponent implements OnInit {
   departamentos: any
   ciudades: any[] = []
   direcciones: any[] = []
+  mostrarForm=false
 
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private notificacionService: NotificacionService){
     this.direccionForm = this.fb.group({
@@ -65,6 +66,7 @@ export class DireccionesComponent implements OnInit {
             this.usuarioService.registrarDireccion(this.direccionForm.value).subscribe({
               next: (response)=>{
                 this.obtenerDirecciones()
+                this.mostrarForm=false
                 this.direccionForm.reset({
                   destinatario: '',
                   cedula: '',

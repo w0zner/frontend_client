@@ -241,9 +241,12 @@
         <span class="text-muted mr-2">Subtotal:</span>
         <span class="h5 mb-0">{{calcularTotalCarrito() | currency:'PYG ':'symbol':'1.0-0'}}</span>
       </div>
-      <a [routerLink]="['/carrito']" class="btn btn-primary btn-lg btn-block">
+      <a [routerLink]="['/carrito']" class="btn btn-primary btn-lg btn-block" *ngIf="carrito.length !== 0">
         <i class="cxi-credit-card font-size-lg mt-n1 mr-1"></i>
         Finalizar la compra
       </a>
+      <div class="alert alert-warning" role="alert" *ngIf="carrito.length === 0">
+        Tu carrito aun esta vacío.
+      </div>
     </div>
   </div>

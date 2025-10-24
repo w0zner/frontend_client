@@ -8,6 +8,10 @@ import { OrdenesService } from 'src/app/services/ordenes.service';
 })
 export class IndexOrdenesComponent {
 
+  public ordenes: any[] = []
+  page=1
+  pageSize=5
+
   constructor(private ordenesService: OrdenesService){
     this.obtenerOrdenes();
   }
@@ -16,6 +20,7 @@ export class IndexOrdenesComponent {
     this.ordenesService.obtenerListaOrdenes(localStorage.getItem('_id')).subscribe({
       next: (response:any) => {
         console.log(response)
+        this.ordenes = response.data
       }
     })
   }

@@ -89,7 +89,7 @@ export class NavComponent {
       console.log(1)
       setTimeout(() => {
         this.op_carrito=false;
-      }, 300);
+      }, 200);
     } else {
             console.log(2)
       this.op_carrito=true;
