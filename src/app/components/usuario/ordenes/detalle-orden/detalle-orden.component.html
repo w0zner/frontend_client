@@ -25,7 +25,7 @@
           <!-- Content -->
           <div class="col-lg-8 ml-auto">
             <div class="d-flex align-items-center justify-content-between mb-4 pb-sm-2">
-              <h1 class="h2 mb-0">My orders</h1>
+              <h1 class="h2 mb-0">Mi Ordén</h1>
               
             </div>
 
@@ -36,17 +36,25 @@
                     <div class="col-lg-6">
                       <table class="table mb-0">
                         <tbody>
-                          <tr>
-                            <th class="border-0 py-2 pl-0">Order No:</th>
-                            <td class="border-0 py-2 px-0 text-muted">34BV66580K92</td>
+                          <!-- <tr>
+                            <th class="border-0 py-2 pl-0">N° Ordén:</th>
+                            <td class="border-0 py-2 px-0 text-muted">{{orden?._id}}</td>
+                          </tr> -->
+                           <tr>
+                            <th class="border-0 py-2 pl-0">N° Venta:</th>
+                            <td class="border-0 py-2 px-0 text-muted">{{orden?.nventa}}</td>
                           </tr>
                           <tr>
-                            <th class="border-0 py-2 pl-0">Shiped via:</th>
-                            <td class="border-0 py-2 px-0 text-muted">UPS Ground</td>
+                            <th class="border-0 py-2 pl-0">Forma de pago:</th>
+                            <td class="border-0 py-2 px-0 text-muted">{{orden?.payment}}</td>
                           </tr>
                           <tr>
-                            <th class="border-0 py-2 pl-0">Shipped on:</th>
-                            <td class="border-0 py-2 px-0 text-muted">August 29, 2020, 6:00pm</td>
+                            <th class="border-0 py-2 pl-0">N° Transacción:</th>
+                            <td class="border-0 py-2 px-0 text-muted">{{orden?.transaccion}}</td>
+                          </tr>
+                          <tr>
+                            <th class="border-0 py-2 pl-0">Cliente:</th>
+                            <td class="border-0 py-2 px-0 text-muted">{{orden?.usuario?.cedula}} - {{orden?.usuario?.nombres}} {{orden?.usuario?.apellidos}}</td>
                           </tr>
                          
                         </tbody>
@@ -56,17 +64,21 @@
                       <table class="table mb-0">
                         <tbody>
                         
-                          <tr>
-                            <th class="border-0 py-2 pl-0">Destination:</th>
-                            <td class="border-0 py-2 px-0 text-muted">London, United Kingdom</td>
+                         <tr>
+                            <th class="border-0 py-2 pl-0">Tipo Envío:</th>
+                            <td class="border-0 py-2 px-0 text-muted">{{orden?.envio_titulo}}</td>
                           </tr>
                           <tr>
-                            <th class="border-0 py-2 pl-0">Expected date:</th>
-                            <td class="border-0 py-2 px-0 text-muted">September 4, 2020</td>
+                            <th class="border-0 py-2 pl-0">dirección:</th>
+                            <td class="border-0 py-2 px-0 text-muted">{{orden?.direccion?.direccion}}</td>
                           </tr>
                           <tr>
-                            <th class="border-0 py-2 pl-0">Status:</th>
-                            <td class="border-0 py-2 px-0 text-muted">In Transit</td>
+                            <th class="border-0 py-2 pl-0">Ciudad:</th>
+                            <td class="border-0 py-2 px-0 text-muted">{{orden?.direccion?.ciudad}}</td>
+                          </tr>
+                          <tr>
+                            <th class="border-0 py-2 pl-0">Fecha de ordén:</th>
+                            <td class="border-0 py-2 px-0 text-muted">{{ orden?.createdAt | date:'medium' }}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -82,14 +94,14 @@
             
             <div class="card border-bottom">
               <div class="card-header accordion-heading py-1">
-                <a href="#order-1" class="d-flex flex-wrap justify-content-between py-3" data-toggle="collapse" aria-expanded="true">
-                  <span class="pr-2"># 34BV66580K92</span>
-                  <span class="font-size-sm text-muted text-nowrap px-2">
+                <a [routerLink]="['/cuenta/ordenes', orden?._id]" class="d-flex flex-wrap justify-content-between py-3" data-toggle="collapse" aria-expanded="true">
+                  <span class="pr-2">#{{orden?._id}}</span>
+                  <!-- <span class="font-size-sm text-muted text-nowrap px-2">
                     <i class="cxi-clock font-size-base align-middle mt-n1 mr-1"></i>
                     Dec 9, 2020
-                  </span>
-                  <span class="badge badge-info">In progress</span>
-                  <span class="text-dark pl-1">$230.00</span>
+                  </span> -->
+                  <span class="badge badge-info">{{orden?.estado}}</span>
+                  <span class="text-dark pl-1">{{orden?.subtotal | currency:'PYG ':'symbol':'1.0-0'}}</span>
                 </a>
               </div>
               <div id="order-1" class="collapse show" data-parent="#orders">

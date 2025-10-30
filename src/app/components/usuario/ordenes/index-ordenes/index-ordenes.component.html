@@ -43,8 +43,11 @@
               
 
               <!-- Order -->
-              <div class="alert alert-secondary" role="alert" *ngIf="ordenes.length === 0 || ordenes === null">
-                No tienes ordenes hasta el momento.
+              <div class="mt-4" *ngIf="ordenes.length === 0 || ordenes === null">
+                  <hr>
+                  <br>
+                  <i class="cxi-danger opacity-50"></i>
+                  <span class="opacity-50"> No tienes ordenes hasta el momento</span>
               </div>
               <div class="card border-bottom" *ngFor="let orden of ordenes | slice: (page-1)*pageSize : (page-1)*pageSize+pageSize; let indice = index">
                 <div class="card-header accordion-heading py-1">

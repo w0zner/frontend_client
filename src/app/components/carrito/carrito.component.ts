@@ -208,26 +208,35 @@ export class CarritoComponent implements OnInit {
     );
   }
 
+  setTipoEnvio(){
+    const envio = this.ventaForm.get('envio_precio')?.value
+    const tipoEnvio = this.metodosEnvio.filter(metodo => metodo.costo === envio)
+     this.ventaForm.patchValue({
+          envio_titulo: tipoEnvio[0].titulo
+      })  
+  }
+
   registrarCompra() {
     this.actualizarSubtotal();
+    this.setTipoEnvio()
 /*     this.ventaForm.patchValue({
       subtotal:  this.calcularTotalCarrito() + ventaForm.get('envio_precio')?.value
     }); */
     console.log(this.ventaForm.value)
-    console.log(this.detalleVenta)
+    console.log('Detalle venta', this.detalleVenta)
 
     if(this.ventaForm.get('direccion')?.value !== null) {
-      const detalles: any[] = this.ventaForm.get('detalleVenta')?.value
-      if(detalles.length > 0) {
-        this.ventaForm.patchValue({
+      this.ventaForm.patchValue({
           detalleVenta: this.detalleVenta
-        })  
+      })  
+      const detalles: any[] = this.ventaForm.get('detalleVenta')?.value
 
+      if(detalles.length > 0) {
         this.carritoService.registrarVenta(this.ventaForm.value).subscribe({
           next: (response:any) => {
             console.log(response)
             this.notificacionesService.notificarExito('La compra se ha realizado correctamente');
-            //this.router.navigate(['/perfil']);
+            this.router.navigate(['/cuenta/ordenes/', response.venta._id ]);
           },
           error: (err:any) => {
             console.log(err)

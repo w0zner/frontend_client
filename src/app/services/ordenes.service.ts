@@ -19,4 +19,9 @@ export class OrdenesService {
   obtenerListaOrdenes(usuario:any){
     return this.http.get(this.url + '/obtener-ventas-usuario/' + usuario, {headers: this.headers})
   }
+
+  obtenerVentaPorId(id:any){
+    return this.http.get(this.url + '/obtener-venta/' + id, {headers: this.headers})
+  }
+  
 }
