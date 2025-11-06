@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GLOBAL } from 'src/app/services/GLOBAL';
 import { OrdenesService } from 'src/app/services/ordenes.service';
 
 @Component({
@@ -9,12 +10,13 @@ import { OrdenesService } from 'src/app/services/ordenes.service';
 })
 export class DetalleOrdenComponent implements OnInit {
 
-  id: string | null = null
-  detalle: any[] = []
+  public id: string | null = null
+  detalles: any[] = []
   orden: any;
+  public urlProducto: string;
 
   constructor(private acivatedRoute: ActivatedRoute, private ordenesservice: OrdenesService) {
-
+    this.urlProducto = GLOBAL.url + 'productos/obtenerPortada/'
   }
 
   ngOnInit(): void {
@@ -26,8 +28,8 @@ export class DetalleOrdenComponent implements OnInit {
             
             this.orden = response.venta;
             console.log('orde', this.orden)
-            this.detalle = response.detalles;
-            console.log('Detalle ', this.detalle)
+            this.detalles = response.detalles;
+            console.log('Detalle ', this.detalles)
           }
         })
       }

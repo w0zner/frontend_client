@@ -8,7 +8,8 @@
             <li class="breadcrumb-item">
               <a [routerLink]="['/']"><i class="cxi-home"></i></a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Mis Ordenes</li>
+            <li class="breadcrumb-item" aria-current="page"><a [routerLink]="['/cuenta/ordenes']">Mis Ordenes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{id}}</li>
           </ol>
         </div>
       </nav>
@@ -25,7 +26,7 @@
           <!-- Content -->
           <div class="col-lg-8 ml-auto">
             <div class="d-flex align-items-center justify-content-between mb-4 pb-sm-2">
-              <h1 class="h2 mb-0">Mi Ordén</h1>
+              <h1 class="h2 mb-0">Mi Orden</h1>
               
             </div>
 
@@ -109,168 +110,39 @@
                   <div class="table-responsive">
                     <table class="table mb-0">
                       <tbody>
-                        <tr>
+                        <tr *ngFor="let detalle of detalles">
                           <td class="border-top-0">
                             <div class="media pl-2 py-2">
-                              <a href="shop-single.html" style="min-width: 80px;">
-                                <img src="../../assets/img/ecommerce/cart/01.png" width="80" alt="Product thumb">
+                              <a [routerLink]="['/productos/', detalle.producto.slug]" style="min-width: 80px;">
+                                <img [src]="detalle.producto.portada ? urlProducto + detalle.producto.portada : 'assets/img/default-product.png'" width="80" alt="Product thumb">
                               </a>
                               <div class="media-body pl-3">
                                 <h3 class="font-size-sm mb-3">
-                                  <a href="shop-single.html" class="nav-link font-weight-bold">Basic hooded sweatshirt in pink</a>
+                                  <a [routerLink]="['/productos/', detalle.producto.slug]" class="nav-link font-weight-bold">{{detalle.producto.titulo}}</a>
                                 </h3>
-                                <ul class="list-unstyled font-size-xs mt-n2 mb-2">
+                                <!-- <ul class="list-unstyled font-size-xs mt-n2 mb-2">
                                   <li class="mb-0"><span class="text-muted">Color:</span> Pink</li>
                                   <li class="mb-0"><span class="text-muted">Size:</span> S</li>
-                                </ul>
+                                </ul> -->
                               </div>
                             </div>
                           </td>
                           <td class="border-top-0">
                             <div class="py-2">
-                              <div class="font-size-xs text-muted mb-1">Price:</div>
-                              <div class="font-size-sm text-dark">$15.00</div>
+                              <div class="font-size-xs text-muted mb-1">Precio:</div>
+                              <div class="font-size-sm text-dark">{{detalle.producto.precio | currency:'PYG ':'symbol':'1.0-0'}}</div>
                             </div>
                           </td>
                           <td class="border-top-0">
                             <div class="py-2">
-                              <div class="font-size-xs text-muted mb-1">Quantity:</div>
-                              <div class="font-size-sm text-dark">1</div>
+                              <div class="font-size-xs text-muted mb-1">Cantidad:</div>
+                              <div class="font-size-sm text-dark">{{detalle.cantidad}}</div>
                             </div>
                           </td>
                           <td class="border-top-0">
                             <div class="py-2 pr-3 text-right">
                               <div class="font-size-xs text-muted mb-1">Subtotal:</div>
-                              <div class="font-size-sm font-weight-bold text-dark">$15.00</div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="media pl-2 py-2">
-                              <a href="shop-single.html" style="min-width: 80px;">
-                                <img src="../../assets/img/ecommerce/cart/02.png" width="80" alt="Product thumb">
-                              </a>
-                              <div class="media-body pl-3">
-                                <h3 class="font-size-sm mb-3">
-                                  <a href="shop-single.html" class="nav-link font-weight-bold">Black and white sport cap</a>
-                                </h3>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="py-2">
-                              <div class="font-size-xs text-muted mb-1">Price:</div>
-                              <div class="font-size-sm text-dark">$18.15</div>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="py-2">
-                              <div class="font-size-xs text-muted mb-1">Quantity:</div>
-                              <div class="font-size-sm text-dark">1</div>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="py-2 pr-3 text-right">
-                              <div class="font-size-xs text-muted mb-1">Subtotal:</div>
-                              <div class="font-size-sm font-weight-bold text-dark">$18.15</div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="media pl-2 py-2">
-                              <a href="shop-single.html" style="min-width: 80px;">
-                                <img src="../../assets/img/ecommerce/cart/03.png" width="80" alt="Product thumb">
-                              </a>
-                              <div class="media-body pl-3">
-                                <h3 class="font-size-sm mb-3">
-                                  <a href="shop-single.html" class="nav-link font-weight-bold">Mid-rise slim cropped fit jeans</a>
-                                </h3>
-                                <ul class="list-unstyled font-size-xs mt-n2 mb-2">
-                                  <li class="mb-0"><span class="text-muted">Size:</span> M</li>
-                                </ul>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="py-2">
-                              <div class="font-size-xs text-muted mb-1">Price:</div>
-                              <div class="font-size-sm text-dark">$76.00</div>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="py-2">
-                              <div class="font-size-xs text-muted mb-1">Quantity:</div>
-                              <div class="font-size-sm text-dark">1</div>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="py-2 pr-3 text-right">
-                              <div class="font-size-xs text-muted mb-1">Subtotal:</div>
-                              <div class="font-size-sm font-weight-bold text-dark">$76.00</div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="media pl-2 py-2">
-                              <a href="shop-single.html" style="min-width: 80px;">
-                                <img src="../../assets/img/ecommerce/cart/04.png" width="80" alt="Product thumb">
-                              </a>
-                              <div class="media-body pl-3">
-                                <h3 class="font-size-sm mb-3">
-                                  <a href="shop-single.html" class="nav-link font-weight-bold">Men fashion gray shoes</a>
-                                </h3>
-                                <ul class="list-unstyled font-size-xs mt-n2 mb-2">
-                                  <li class="mb-0"><span class="text-muted">Color:</span> Gray</li>
-                                  <li class="mb-0"><span class="text-muted">Size:</span> 10.5</li>
-                                </ul>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="py-2">
-                              <div class="font-size-xs text-muted mb-1">Price:</div>
-                              <div class="font-size-sm text-dark">$84.00</div>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="py-2">
-                              <div class="font-size-xs text-muted mb-1">Quantity:</div>
-                              <div class="font-size-sm text-dark">1</div>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="py-2 pr-3 text-right">
-                              <div class="font-size-xs text-muted mb-1">Subtotal:</div>
-                              <div class="font-size-sm font-weight-bold text-dark">$84.00</div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="py-2 pl-2">
-                              <span class="font-size-xs text-muted">Subtotal: </span>
-                              <span class="font-size-sm text-dark">$198.65</span>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="py-2">
-                              <span class="font-size-xs text-muted">Shipping: </span>
-                              <span class="font-size-sm text-dark">$25.00</span>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="py-2">
-                              <span class="font-size-xs text-muted">Tax: </span>
-                              <span class="font-size-sm text-dark">$6.35</span>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="py-2 pr-3 text-right">
-                              <span class="font-size-xs text-muted">Total: </span>
-                              <span class="font-size-sm font-weight-bold text-dark">$230.00</span>
+                              <div class="font-size-sm font-weight-bold text-dark">{{detalle.subtotal | currency:'PYG ':'symbol':'1.0-0'}}</div>
                             </div>
                           </td>
                         </tr>
@@ -278,7 +150,7 @@
                     </table>
                   </div>
                 </div>
-                <div class="d-flex justify-content-end align-items-center mb-4">
+                <div class="d-flex justify-content-end align-items-center mb-4 pr-3">
                   <span class="font-weight-bold text-dark mr-3">You can track your order here</span>
                   <a href="order-tracking.html" class="btn btn-outline-primary btn-sm">Order tracking</a>
                 </div>
