@@ -95,15 +95,21 @@
             
             <div class="card border-bottom">
               <div class="card-header accordion-heading py-1">
-                <a [routerLink]="['/cuenta/ordenes', orden?._id]" class="d-flex flex-wrap justify-content-between py-3" data-toggle="collapse" aria-expanded="true">
-                  <span class="pr-2">#{{orden?._id}}</span>
+                <div class="d-flex flex-wrap justify-content-between py-3" data-toggle="collapse" aria-expanded="true">
+                    <span class="pr-2">#{{orden?._id}}</span>
                   <!-- <span class="font-size-sm text-muted text-nowrap px-2">
                     <i class="cxi-clock font-size-base align-middle mt-n1 mr-1"></i>
                     Dec 9, 2020
                   </span> -->
                   <span class="badge badge-info">{{orden?.estado}}</span>
-                  <span class="text-dark pl-1">{{orden?.subtotal | currency:'PYG ':'symbol':'1.0-0'}}</span>
-                </a>
+                  <span class="text-dark pl-1">Total {{orden?.subtotal | currency:'PYG ':'symbol':'1.0-0'}}</span>
+                </div>
+                <!-- <a [routerLink]="['/cuenta/ordenes', orden?._id]" class="d-flex flex-wrap justify-content-between py-3" data-toggle="collapse" aria-expanded="true">
+                  <span class="pr-2">#{{orden?._id}}</span>
+            
+                  <span class="badge badge-info">{{orden?.estado}}</span>
+                  <span class="text-dark pl-1">Total {{orden?.subtotal | currency:'PYG ':'symbol':'1.0-0'}}</span>
+                </a> -->
               </div>
               <div id="order-1" class="collapse show" data-parent="#orders">
                 <div class="bg-secondary rounded mb-4">
@@ -120,10 +126,41 @@
                                 <h3 class="font-size-sm mb-3">
                                   <a [routerLink]="['/productos/', detalle.producto.slug]" class="nav-link font-weight-bold">{{detalle.producto.titulo}}</a>
                                 </h3>
-                                <!-- <ul class="list-unstyled font-size-xs mt-n2 mb-2">
-                                  <li class="mb-0"><span class="text-muted">Color:</span> Pink</li>
-                                  <li class="mb-0"><span class="text-muted">Size:</span> S</li>
-                                </ul> -->
+                                <a class="text-muted font-size-xs mt-n2 mb-2" style="cursor: pointer;" role="button" data-toggle="modal" data-target="#modalCentered">Emitir Reseña</a>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalCentered" tabindex="-1" role="dialog" aria-labelledby="modalCenteredLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="modalCenteredLabel">Emitir reseña</h4>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="d-flex">
+                                        <a class="nav-link me-3 p-3 fs-sm">
+                                            <i class="cxi-like me-2 fs-base align-middle mt-n1 text-success"></i>
+                                            Me gusta
+                                        </a>
+                                        <a class="nav-link p-3 fs-sm">
+                                            <i class="cxi-dislike me-2 fs-base align-middle mt-n1 text-danger"></i>
+                                            Se puede mejorar
+                                        </a>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cerrar</button>
+                                        <button class="btn btn-primary btn-sm" type="button">Guardar</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                  <!--   <ul class="list-unstyled font-size-xs mt-n2 mb-2">
+                                  <li class="mb-0"><span class="text-muted">{{detalle.producto.variedad}}:</span> Pink</li>
+                                   <li class="mb-0"><span class="text-muted">Size:</span> S</li> 
+                                </ul>    -->
                               </div>
                             </div>
                           </td>
@@ -148,7 +185,14 @@
                         </tr>
                       </tbody>
                     </table>
+                    <hr>
+                    <div *ngIf="orden?.envio_precio !== 0">
+                        <div style="width: 100%; text-align: right; padding: 10px; padding-right: 24px; vertical-align: middle;">
+                            <b style="margin: 0;">Envio: {{orden?.envio_precio | currency:'PYG ':'symbol':'1.0-0'}}</b>
+                        </div>
+                    </div>
                   </div>
+                  
                 </div>
                 <div class="d-flex justify-content-end align-items-center mb-4 pr-3">
                   <span class="font-weight-bold text-dark mr-3">You can track your order here</span>
