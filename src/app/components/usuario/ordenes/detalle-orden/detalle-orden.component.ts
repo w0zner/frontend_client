@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { GLOBAL } from 'src/app/services/GLOBAL';
 import { OrdenesService } from 'src/app/services/ordenes.service';
@@ -14,9 +15,18 @@ export class DetalleOrdenComponent implements OnInit {
   detalles: any[] = []
   orden: any;
   public urlProducto: string;
+  opcionResenha: string | undefined
+  reviewForm: FormGroup
 
-  constructor(private acivatedRoute: ActivatedRoute, private ordenesservice: OrdenesService) {
+  constructor(private fb: FormBuilder, private acivatedRoute: ActivatedRoute, private ordenesservice: OrdenesService) {
     this.urlProducto = GLOBAL.url + 'productos/obtenerPortada/'
+    this.reviewForm = this.fb.group({
+      producto: [''],
+      usuario: [''],
+      venta: [''],
+      mensaje: [''],
+      opcion: ['']
+    })
   }
 
   ngOnInit(): void {
@@ -33,6 +43,19 @@ export class DetalleOrdenComponent implements OnInit {
           }
         })
       }
+    })
+  }
+
+  elegirResenha(opcion: string) {
+    this.opcionResenha = opcion
+    this.reviewForm.patchValue({
+      opcion: opcion
+    })
+  }
+
+  emitirResenha(){
+    this.reviewForm.patchValue({
+      
     })
   }
 

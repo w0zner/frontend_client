@@ -139,16 +139,23 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="d-flex">
-                                        <a class="nav-link me-3 p-3 fs-sm">
-                                            <i class="cxi-like me-2 fs-base align-middle mt-n1 text-success"></i>
-                                            Me gusta
-                                        </a>
-                                        <a class="nav-link p-3 fs-sm">
-                                            <i class="cxi-dislike me-2 fs-base align-middle mt-n1 text-danger"></i>
-                                            Se puede mejorar
-                                        </a>
+                                        <form [formGroup]="reviewForm" (Submit)="emitirResenha()">
+                                            <div class="d-flex" style="padding-bottom: 10px;">
+                                            <a class="nav-link me-3 fs-sm" [ngClass]="{'badge bg-secondary pt-3 text-success': opcionResenha === 'me gusta'}" (click)="elegirResenha('me gusta')">
+                                                <i class="cxi-like me-2 fs-base align-middle mt-n1 text-success"></i>
+                                                Me gusta
+                                            </a>
+                                            <a class="nav-link p-2 fs-sm" [ngClass]="{'badge bg-secondary pt-3 text-danger': opcionResenha === 'no me gusta'}" (click)="elegirResenha('no me gusta')">
+                                                <i class="cxi-dislike me-2 fs-base align-middle mt-n1 text-danger"></i>
+                                                Se puede mejorar
+                                            </a>
                                         </div>
+                                        <hr>
+                                        <div class="mt-2">
+                                            <label class="text-muted">Reseña</label>
+                                            <textarea class="form-control" placeholder="Que te pareció?" required rows="5"></textarea>
+                                        </div>
+                                        </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cerrar</button>
