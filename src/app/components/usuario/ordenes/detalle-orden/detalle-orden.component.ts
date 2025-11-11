@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { GLOBAL } from "src/app/services/GLOBAL";
+import { NotificacionService } from "src/app/services/notificacion.service";
 import { OrdenesService } from "src/app/services/ordenes.service";
 
 @Component({
@@ -16,11 +17,15 @@ export class DetalleOrdenComponent implements OnInit {
   public urlProducto: string;
   opcionResenha: string | undefined;
   reviewForm: FormGroup;
+  public haPasadoUnMes= false;
+  idReview: any= null;
 
   constructor(
     private fb: FormBuilder,
     private acivatedRoute: ActivatedRoute,
+    private route: Router,
     private ordenesService: OrdenesService,
+    private notificacionesService: NotificacionService
   ) {
     this.urlProducto = GLOBAL.url + "productos/obtenerPortada/";
     this.reviewForm = this.fb.group({
@@ -42,13 +47,28 @@ export class DetalleOrdenComponent implements OnInit {
             console.log("orde", this.orden);
             this.detalles = response.detalles;
             console.log("Detalle ", this.detalles);
+            this.verificarFecha(this.orden.createdAt);
           },
         });
       }
     });
   }
 
+  verificarFecha(fechaOrden: any) {
+    const fechaCreacion = new Date(fechaOrden);
+    const ahora = new Date();
+
+    const fechaMasUnMes = new Date(fechaCreacion);
+    fechaMasUnMes.setMonth(fechaMasUnMes.getMonth() + 1);
+
+    // Comparar si la fecha actual es mayor o igual a un mes después
+    this.haPasadoUnMes = ahora >= fechaMasUnMes;
+
+    console.log(this.haPasadoUnMes); 
+  }
+
   setResenha(producto: any) {
+    console.log(producto)
     this.ordenesService
       .obtenerResenhaPorVentaProducto(this.orden._id, producto)
       .subscribe({
@@ -61,34 +81,10 @@ export class DetalleOrdenComponent implements OnInit {
             mensaje: response?.data[0]?.mensaje,
             opcion: response?.data[0]?.opcion,
           });
+          this.idReview = response.data[0]?._id;
           this.opcionResenha = response?.data[0]?.opcion;
           console.log(this.reviewForm.value);
-
-          //VALIDACION DE FECHA PARA Reseña
-          // const fechaCreacion = new Date("2025-11-11T01:49:02.535Z");
-          //const ahora = new Date();
-
-          // Crear una copia de la fecha de creación y sumarle 1 mes
-          //const fechaMasUnMes = new Date(fechaCreacion);
-          //fechaMasUnMes.setMonth(fechaMasUnMes.getMonth() + 1);
-
-          // Comparar si la fecha actual es mayor o igual a un mes después
-          //const haPasadoUnMes = ahora >= fechaMasUnMes;
-
-          //console.log(haPasadoUnMes); // true o false
-          //
-          // O
-          //
-          //
-          // const fechaCreacion = new Date("2025-11-11T01:49:02.535Z");
-          //const ahora = new Date();
-
-          //const unMesEnMs = 30 * 24 * 60 * 60 * 1000; // 30 días aprox.
-          //const diferencia = ahora.getTime() - fechaCreacion.getTime();
-
-          //const haPasadoUnMes = diferencia >= unMesEnMs;
-
-          //console.log(haPasadoUnMes);
+          console.log(this.idReview)
         },
       });
   }
@@ -100,17 +96,29 @@ export class DetalleOrdenComponent implements OnInit {
     });
   }
 
-  emitirResenha(producto: any) {
-    this.reviewForm.patchValue({
-      venta: this.orden._id,
-      usuario: this.orden.usuario._id,
-      producto: producto,
-    });
+  emitirResenha() {
+    // this.reviewForm.patchValue({
+    //   venta: this.orden._id,
+    //   usuario: this.orden.usuario._id,
+    //   producto: producto,
+    // });
     console.info(this.reviewForm.value);
-    this.ordenesService.guardarResenha(this.reviewForm.value).subscribe({
-      next: (response: any) => {
-        console.info(response);
-      },
-    });
+    //const idReview = this.reviewForm.get('_id')?.value;
+    if(this.idReview === null || this.idReview === undefined) {
+      this.ordenesService.guardarResenha(this.reviewForm.value).subscribe({
+        next: (response: any) => {
+          console.info(response);
+          this.notificacionesService.notificarExito("Reseña agregada correctamente!")
+        },
+      });
+    } else {
+      this.ordenesService.actualizarResenha(this.idReview, this.reviewForm.value).subscribe({
+        next: (response: any) => {
+          console.info(response);
+          this.notificacionesService.notificarExito("Reseña actualizada correctamente!")
+          this.idReview=null
+        },
+      });
+    }
   }
 }

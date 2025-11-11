@@ -42,6 +42,12 @@ export class OrdenesService {
     });
   }
 
+  obtenerResenhaPorUsuario(usuario: any) {
+    return this.http.get(this.urlReview + "/" + usuario, {
+      headers: this.headers,
+    });
+  }
+
   actualizarResenha(id: any, data: any) {
     return this.http.put(this.urlReview + "/" + id, data, {
       headers: this.headers,

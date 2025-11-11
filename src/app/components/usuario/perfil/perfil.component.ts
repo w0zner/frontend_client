@@ -23,9 +23,13 @@ export class PerfilComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       telefono: [''],
       fecha_nacimiento: [''],
-      pais: [''],
+      ciudad: [''],
       cedula: ['', [Validators.required]],
-      genero: ['']
+      genero: [''],
+      extranjero: [false],
+      ruc: [''],
+      denominacion: [''],
+      tipo_documento: ['']
     })
   }
 
@@ -41,7 +45,7 @@ export class PerfilComponent implements OnInit {
         fecha_nacimiento: this.userLogged?.fecha_nacimiento,
         cedula: this.userLogged.cedula,
         genero: this.userLogged?.genero ?? '',
-        pais: this.userLogged?.pais ?? ''
+        ciudad: this.userLogged?.ciudad ?? ''
       })
     });
   }

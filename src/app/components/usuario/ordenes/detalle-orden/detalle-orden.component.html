@@ -1,373 +1,313 @@
 <app-nav></app-nav>
 
 <main class="cs-page-wrapper">
-  <!-- Breadcrumb -->
-  <nav class="bg-secondary mb-3" aria-label="breadcrumb">
-    <div class="container">
-      <ol class="breadcrumb breadcrumb-alt mb-0">
-        <li class="breadcrumb-item">
-          <a [routerLink]="['/']"><i class="cxi-home"></i></a>
-        </li>
-        <li class="breadcrumb-item" aria-current="page">
-          <a [routerLink]="['/cuenta/ordenes']">Mis Ordenes</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">{{ id }}</li>
-      </ol>
-    </div>
-  </nav>
-
-  <!-- Page container -->
-  <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
-    <div class="row pb-2 pb-lg-0">
-      <!-- Account menu (sticky sidebar) -->
-      <aside class="col-xl-3 col-lg-4 pb-3 mb-4 mb-lg-0">
-        <app-sidebar></app-sidebar>
-      </aside>
-
-      <!-- Content -->
-      <div class="col-lg-8 ml-auto">
-        <div
-          class="d-flex align-items-center justify-content-between mb-4 pb-sm-2"
-        >
-          <h1 class="h2 mb-0">Mi Orden</h1>
+    <!-- Breadcrumb -->
+    <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+                <li class="breadcrumb-item">
+                    <a [routerLink]="['/']"><i class="cxi-home"></i></a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page">
+                    <a [routerLink]="['/cuenta/ordenes']">Mis Ordenes</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{ id }}</li>
+            </ol>
         </div>
+    </nav>
 
-        <div class="row">
-          <div class="col-12 mb-4">
-            <div class="card card-body py-3 box-shadow">
-              <div class="row">
-                <div class="col-lg-6">
-                  <table class="table mb-0">
-                    <tbody>
-                      <!-- <tr>
+    <!-- Page container -->
+    <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+        <div class="row pb-2 pb-lg-0">
+            <!-- Account menu (sticky sidebar) -->
+            <aside class="col-xl-3 col-lg-4 pb-3 mb-4 mb-lg-0">
+                <app-sidebar></app-sidebar>
+            </aside>
+
+            <!-- Content -->
+            <div class="col-lg-8 ml-auto">
+                <div class="d-flex align-items-center justify-content-between mb-4 pb-sm-2">
+                    <h1 class="h2 mb-0">Mi Orden</h1>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="card card-body py-3 box-shadow">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <table class="table mb-0">
+                                        <tbody>
+                                            <!-- <tr>
                             <th class="border-0 py-2 pl-0">N° Ordén:</th>
                             <td class="border-0 py-2 px-0 text-muted">{{orden?._id}}</td>
                           </tr> -->
-                      <tr>
-                        <th class="border-0 py-2 pl-0">N° Venta:</th>
-                        <td class="border-0 py-2 px-0 text-muted">
-                          {{ orden?.nventa }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th class="border-0 py-2 pl-0">Forma de pago:</th>
-                        <td class="border-0 py-2 px-0 text-muted">
-                          {{ orden?.payment }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th class="border-0 py-2 pl-0">N° Transacción:</th>
-                        <td class="border-0 py-2 px-0 text-muted">
-                          {{ orden?.transaccion }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th class="border-0 py-2 pl-0">Cliente:</th>
-                        <td class="border-0 py-2 px-0 text-muted">
-                          {{ orden?.usuario?.cedula }} -
-                          {{ orden?.usuario?.nombres }}
-                          {{ orden?.usuario?.apellidos }}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                                            <tr>
+                                                <th class="border-0 py-2 pl-0">N° Venta:</th>
+                                                <td class="border-0 py-2 px-0 text-muted">
+                                                    {{ orden?.nventa }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-0 py-2 pl-0">Forma de pago:</th>
+                                                <td class="border-0 py-2 px-0 text-muted">
+                                                    {{ orden?.payment }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-0 py-2 pl-0">N° Transacción:</th>
+                                                <td class="border-0 py-2 px-0 text-muted">
+                                                    {{ orden?.transaccion }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-0 py-2 pl-0">Cliente:</th>
+                                                <td class="border-0 py-2 px-0 text-muted">
+                                                    {{ orden?.usuario?.cedula }} -
+                                                    {{ orden?.usuario?.nombres }}
+                                                    {{ orden?.usuario?.apellidos }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-6">
+                                    <table class="table mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <th class="border-0 py-2 pl-0">Tipo Envío:</th>
+                                                <td class="border-0 py-2 px-0 text-muted">
+                                                    {{ orden?.envio_titulo }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-0 py-2 pl-0">dirección:</th>
+                                                <td class="border-0 py-2 px-0 text-muted">
+                                                    {{ orden?.direccion?.direccion }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-0 py-2 pl-0">Ciudad:</th>
+                                                <td class="border-0 py-2 px-0 text-muted">
+                                                    {{ orden?.direccion?.ciudad }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="border-0 py-2 pl-0">Fecha de ordén:</th>
+                                                <td class="border-0 py-2 px-0 text-muted">
+                                                    {{ orden?.createdAt | date: "medium" }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12"></div>
                 </div>
-                <div class="col-lg-6">
-                  <table class="table mb-0">
-                    <tbody>
-                      <tr>
-                        <th class="border-0 py-2 pl-0">Tipo Envío:</th>
-                        <td class="border-0 py-2 px-0 text-muted">
-                          {{ orden?.envio_titulo }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th class="border-0 py-2 pl-0">dirección:</th>
-                        <td class="border-0 py-2 px-0 text-muted">
-                          {{ orden?.direccion?.direccion }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th class="border-0 py-2 pl-0">Ciudad:</th>
-                        <td class="border-0 py-2 px-0 text-muted">
-                          {{ orden?.direccion?.ciudad }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th class="border-0 py-2 pl-0">Fecha de ordén:</th>
-                        <td class="border-0 py-2 px-0 text-muted">
-                          {{ orden?.createdAt | date: "medium" }}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12"></div>
-        </div>
 
-        <div class="card border-bottom">
-          <div class="card-header accordion-heading py-1">
-            <div
-              class="d-flex flex-wrap justify-content-between py-3"
-              data-toggle="collapse"
-              aria-expanded="true"
-            >
-              <span class="pr-2">#{{ orden?._id }}</span>
-              <!-- <span class="font-size-sm text-muted text-nowrap px-2">
+                <div class="card border-bottom">
+                    <div class="card-header accordion-heading py-1">
+                        <div class="d-flex flex-wrap justify-content-between py-3" data-toggle="collapse"
+                            aria-expanded="true">
+                            <span class="pr-2">#{{ orden?._id }}</span>
+                            <!-- <span class="font-size-sm text-muted text-nowrap px-2">
                     <i class="cxi-clock font-size-base align-middle mt-n1 mr-1"></i>
                     Dec 9, 2020
                   </span> -->
-              <span class="badge badge-info">{{ orden?.estado }}</span>
-              <span class="text-dark pl-1"
-                >Total
-                {{
-                  orden?.subtotal | currency: "PYG " : "symbol" : "1.0-0"
-                }}</span
-              >
-            </div>
-            <!-- <a [routerLink]="['/cuenta/ordenes', orden?._id]" class="d-flex flex-wrap justify-content-between py-3" data-toggle="collapse" aria-expanded="true">
+                            <span class="badge badge-info">{{ orden?.estado }}</span>
+                            <span class="text-dark pl-1">Total
+                                {{
+                                orden?.subtotal | currency: "PYG " : "symbol" : "1.0-0"
+                                }}</span>
+                        </div>
+                        <!-- <a [routerLink]="['/cuenta/ordenes', orden?._id]" class="d-flex flex-wrap justify-content-between py-3" data-toggle="collapse" aria-expanded="true">
                   <span class="pr-2">#{{orden?._id}}</span>
 
                   <span class="badge badge-info">{{orden?.estado}}</span>
                   <span class="text-dark pl-1">Total {{orden?.subtotal | currency:'PYG ':'symbol':'1.0-0'}}</span>
                 </a> -->
-          </div>
-          <div id="order-1" class="collapse show" data-parent="#orders">
-            <div class="bg-secondary rounded mb-4">
-              <div class="table-responsive">
-                <table class="table mb-0">
-                  <tbody>
-                    <tr *ngFor="let detalle of detalles">
-                      <td class="border-top-0">
-                        <div class="media pl-2 py-2">
-                          <a
-                            [routerLink]="[
+                    </div>
+                    <div id="order-1" class="collapse show" data-parent="#orders">
+                        <div class="bg-secondary rounded mb-4">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <tbody>
+                                        <tr *ngFor="let detalle of detalles">
+                                            <td class="border-top-0">
+                                                <div class="media pl-2 py-2">
+                                                    <a [routerLink]="[
                               '/productos/',
                               detalle.producto.slug,
-                            ]"
-                            style="min-width: 80px"
-                          >
-                            <img
-                              [src]="
+                            ]" style="min-width: 80px">
+                                                        <img [src]="
                                 detalle.producto.portada
                                   ? urlProducto + detalle.producto.portada
                                   : 'assets/img/default-product.png'
-                              "
-                              width="80"
-                              alt="Product thumb"
-                            />
-                          </a>
-                          <div class="media-body pl-3">
-                            <h3 class="font-size-sm mb-3">
-                              <a
-                                [routerLink]="[
+                              " width="80" alt="Product thumb" />
+                                                    </a>
+                                                    <div class="media-body pl-3">
+                                                        <h3 class="font-size-sm mb-3">
+                                                            <a [routerLink]="[
                                   '/productos/',
                                   detalle.producto.slug,
-                                ]"
-                                class="nav-link font-weight-bold"
-                                >{{ detalle.producto.titulo }}</a
-                              >
-                            </h3>
-                            <a
-                              class="text-muted font-size-xs mt-n2 mb-2"
-                              style="cursor: pointer"
-                              role="button"
-                              (click)="setResenha(detalle.producto._id)"
-                              data-toggle="modal"
-                              data-target="#modalCentered"
-                              >Emitir Reseña</a
-                            >
+                                ]" class="nav-link font-weight-bold">{{ detalle.producto.titulo }}</a>
+                                                        </h3>
+                                                        <a class="text-muted font-size-xs mt-n2 mb-2"
+                                                            style="cursor: pointer" role="button"
+                                                            (click)="setResenha(detalle.producto._id)"
+                                                            data-toggle="modal" data-target="#modalCentered">Emitir Reseña</a>
 
-                            <!-- Modal -->
-                            <div
-                              class="modal fade"
-                              id="modalCentered"
-                              tabindex="-1"
-                              role="dialog"
-                              aria-labelledby="modalCenteredLabel"
-                              aria-hidden="true"
-                            >
-                              <div
-                                class="modal-dialog modal-dialog-centered"
-                                role="document"
-                              >
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4
-                                      class="modal-title"
-                                      id="modalCenteredLabel"
-                                    >
-                                      Emitir reseña
-                                    </h4>
-                                    <button
-                                      class="close"
-                                      type="button"
-                                      data-dismiss="modal"
-                                      aria-label="Close"
-                                    >
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <form
-                                    [formGroup]="reviewForm"
-                                    (Submit)="
-                                      emitirResenha(detalle.producto._id)
-                                    "
-                                  >
-                                    <div class="modal-body">
-                                      <div
-                                        class="d-flex"
-                                        style="padding-bottom: 10px"
-                                      >
-                                        <a
-                                          class="nav-link me-3 fs-sm"
-                                          [ngClass]="{
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="modalCentered" tabindex="-1"
+                                                            role="dialog" aria-labelledby="modalCenteredLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered"
+                                                                role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title" id="modalCenteredLabel">
+                                                                            Emitir reseña
+                                                                        </h4>
+                                                                        <button class="close" type="button"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <form [formGroup]="reviewForm" (Submit)="
+                                      emitirResenha()
+                                    ">
+                                                                        <div class="modal-body">
+                                                                            <div *ngIf="haPasadoUnMes">
+                                                                                <div class="alert alert-warning"
+                                                                                    role="alert">
+                                                                                    Ha pasado más de 30 días de su
+                                                                                    compra.
+                                                                                </div>
+                                                                            </div>
+                                                                            <div *ngIf="!haPasadoUnMes">
+                                                                                <div class="d-flex"
+                                                                                    style="padding-bottom: 10px">
+                                                                                    <a class="nav-link me-3 fs-sm"
+                                                                                        [ngClass]="{
                                             'badge bg-secondary pt-3 text-success':
                                               opcionResenha === 'me gusta',
-                                          }"
-                                          (click)="elegirResenha('me gusta')"
-                                        >
-                                          <i
-                                            class="cxi-like me-2 fs-base align-middle mt-n1 text-success"
-                                          ></i>
-                                          Me gusta
-                                        </a>
-                                        <a
-                                          class="nav-link p-2 fs-sm"
-                                          [ngClass]="{
+                                          }" (click)="elegirResenha('Me gusta')">
+                                                                                        <i
+                                                                                            class="cxi-like me-2 fs-base align-middle mt-n1 text-success"></i>
+                                                                                        Me gusta
+                                                                                    </a>
+                                                                                    <a class="nav-link p-2 fs-sm"
+                                                                                        [ngClass]="{
                                             'badge bg-secondary pt-3 text-danger':
                                               opcionResenha === 'no me gusta',
-                                          }"
-                                          (click)="elegirResenha('no me gusta')"
-                                        >
-                                          <i
-                                            class="cxi-dislike me-2 fs-base align-middle mt-n1 text-danger"
-                                          ></i>
-                                          Se puede mejorar
-                                        </a>
-                                      </div>
-                                      <hr />
-                                      <div class="mt-2">
-                                        <label class="text-muted">Reseña</label>
-                                        <textarea
-                                          class="form-control"
-                                          formControlName="mensaje"
-                                          placeholder="Que te pareció?"
-                                          required
-                                          rows="5"
-                                        ></textarea>
-                                      </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button
-                                        class="btn btn-secondary btn-sm"
-                                        type="button"
-                                        data-dismiss="modal"
-                                      >
-                                        Cerrar
-                                      </button>
-                                      <button
-                                        class="btn btn-primary btn-sm"
-                                        (click)="
-                                          emitirResenha(detalle.producto._id)
-                                        "
-                                        type="submit"
-                                      >
-                                        Guardar
-                                      </button>
-                                    </div>
-                                  </form>
-                                </div>
-                              </div>
-                            </div>
-                            <!--   <ul class="list-unstyled font-size-xs mt-n2 mb-2">
+                                          }" (click)="elegirResenha('No me gusta')">
+                                                                                        <i
+                                                                                            class="cxi-dislike me-2 fs-base align-middle mt-n1 text-danger"></i>
+                                                                                        Se puede mejorar
+                                                                                    </a>
+                                                                                </div>
+                                                                                <hr />
+                                                                                <div class="mt-2">
+                                                                                    <label
+                                                                                        class="text-muted">Reseña</label>
+                                                                                    <textarea class="form-control"
+                                                                                        formControlName="mensaje"
+                                                                                        placeholder="Que te pareció?"
+                                                                                        required rows="5"></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn btn-secondary btn-sm"
+                                                                                type="button" data-dismiss="modal">
+                                                                                Cerrar
+                                                                            </button>
+                                                                            <button class="btn btn-primary btn-sm"
+                                                                                (click)="
+                                          emitirResenha()
+                                        " type="submit" [disabled]="haPasadoUnMes">
+                                                                                {{idReview!==undefined ? 'Actualizar' :
+                                                                                'Guardar'}}
+                                                                            </button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--   <ul class="list-unstyled font-size-xs mt-n2 mb-2">
                                   <li class="mb-0"><span class="text-muted">{{detalle.producto.variedad}}:</span> Pink</li>
                                    <li class="mb-0"><span class="text-muted">Size:</span> S</li>
                                 </ul>    -->
-                          </div>
-                        </div>
-                      </td>
-                      <td class="border-top-0">
-                        <div class="py-2">
-                          <div class="font-size-xs text-muted mb-1">
-                            Precio:
-                          </div>
-                          <div class="font-size-sm text-dark">
-                            {{
-                              detalle.producto.precio
-                                | currency: "PYG " : "symbol" : "1.0-0"
-                            }}
-                          </div>
-                        </div>
-                      </td>
-                      <td class="border-top-0">
-                        <div class="py-2">
-                          <div class="font-size-xs text-muted mb-1">
-                            Cantidad:
-                          </div>
-                          <div class="font-size-sm text-dark">
-                            {{ detalle.cantidad }}
-                          </div>
-                        </div>
-                      </td>
-                      <td class="border-top-0">
-                        <div class="py-2 pr-3 text-right">
-                          <div class="font-size-xs text-muted mb-1">
-                            Subtotal:
-                          </div>
-                          <div class="font-size-sm font-weight-bold text-dark">
-                            {{
-                              detalle.subtotal
-                                | currency: "PYG " : "symbol" : "1.0-0"
-                            }}
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <hr />
-                <div *ngIf="orden?.envio_precio !== 0">
-                  <div
-                    style="
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="border-top-0">
+                                                <div class="py-2">
+                                                    <div class="font-size-xs text-muted mb-1">
+                                                        Precio:
+                                                    </div>
+                                                    <div class="font-size-sm text-dark">
+                                                        {{
+                                                        detalle.producto.precio
+                                                        | currency: "PYG " : "symbol" : "1.0-0"
+                                                        }}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="border-top-0">
+                                                <div class="py-2">
+                                                    <div class="font-size-xs text-muted mb-1">
+                                                        Cantidad:
+                                                    </div>
+                                                    <div class="font-size-sm text-dark">
+                                                        {{ detalle.cantidad }}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="border-top-0">
+                                                <div class="py-2 pr-3 text-right">
+                                                    <div class="font-size-xs text-muted mb-1">
+                                                        Subtotal:
+                                                    </div>
+                                                    <div class="font-size-sm font-weight-bold text-dark">
+                                                        {{
+                                                        detalle.subtotal
+                                                        | currency: "PYG " : "symbol" : "1.0-0"
+                                                        }}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <hr />
+                                <div *ngIf="orden?.envio_precio !== 0">
+                                    <div style="
                       width: 100%;
                       text-align: right;
                       padding: 10px;
                       padding-right: 24px;
                       vertical-align: middle;
-                    "
-                  >
-                    <b style="margin: 0"
-                      >Envio:
-                      {{
-                        orden?.envio_precio
-                          | currency: "PYG " : "symbol" : "1.0-0"
-                      }}</b
-                    >
-                  </div>
+                    ">
+                                        <b style="margin: 0">Envio:
+                                            {{
+                                            orden?.envio_precio
+                                            | currency: "PYG " : "symbol" : "1.0-0"
+                                            }}</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end align-items-center mb-4 pr-3">
+                            <span class="font-weight-bold text-dark mr-3">You can track your order here</span>
+                            <a href="order-tracking.html" class="btn btn-outline-primary btn-sm">Order tracking</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div
-              class="d-flex justify-content-end align-items-center mb-4 pr-3"
-            >
-              <span class="font-weight-bold text-dark mr-3"
-                >You can track your order here</span
-              >
-              <a
-                href="order-tracking.html"
-                class="btn btn-outline-primary btn-sm"
-                >Order tracking</a
-              >
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </main>
 
 <app-footer></app-footer>

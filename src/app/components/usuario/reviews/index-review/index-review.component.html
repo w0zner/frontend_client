@@ -1,0 +1,78 @@
+<app-nav></app-nav>
+
+<main  class="cs-page-wrapper">
+    <!-- Breadcrumb -->
+      <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+        <div class="container">
+          <ol class="breadcrumb breadcrumb-alt mb-0">
+            <li class="breadcrumb-item">
+              <a [routerLink]="['/']"><i class="cxi-home"></i></a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Mis Ordenes</li>
+          </ol>
+        </div>
+      </nav>
+
+      <!-- Page container -->
+      <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+        <div class="row pb-2 pb-lg-0">
+
+          <!-- Account menu (sticky sidebar) -->
+          <aside class="col-xl-3 col-lg-4 pb-3 mb-4 mb-lg-0">
+            <app-sidebar></app-sidebar>
+          </aside>
+
+          <!-- Content -->
+          <div class="col-lg-8 ml-auto">
+            <div class="d-flex align-items-center justify-content-between mb-4 pb-sm-2">
+              <h1 class="h2 mb-0">Mis Reseñas</h1>
+            </div>
+            <hr />
+            <!-- Orders accordion -->
+            <div class="accordion-alt" id="orders">
+              
+
+              <!-- Order -->
+              <div class="mt-4" *ngIf="items.length === 0 || items === null">
+                  <hr>
+                  <br>
+                  <i class="cxi-danger opacity-50"></i>
+                  <span class="opacity-50"> No tienes ordenes hasta el momento</span>
+              </div>
+              <div class="card" *ngFor="let item of items | slice: (page-1)*pageSize : (page-1)*pageSize+pageSize; let indice = index">
+                <div class="mb-4 mt-4 pb-4 border-bottom">
+                <div class="row">
+                    <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
+                        <h6 class="mb-2 fs-lg">{{item.producto.titulo}}</h6>
+                        <span class="d-block mb-3 fs-sm text-muted" style="display: inline;"> 
+                            {{item.opcion}}
+                            <i *ngIf="item.opcion == 'Me gusta'" class="cxi-like me-2 fs-base align-middle mt-n1 text-success"></i>
+                            <i *ngIf="item.opcion == 'No me gusta'" class="cxi-dislike me-2 fs-base align-middle mt-n1 text-danger"></i>
+                        </span>
+                    </div>
+                    <div class="col">
+                    <p class="mb-3">
+                        <b> Venta Ref.:<a class="me-1 fw-bold text-decoration-none" [routerLink]="['/cuenta/ordenes', item.venta._id]">#{{item.venta._id}}</a></b>
+                        <br>
+                        <b>Reseña: </b> {{item.mensaje}}
+                        <br>
+                        {{item.createdAt | date}}
+                    </p>
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer border-0 pl-0" *ngIf="items.length > 0">
+                <ngb-pagination
+                [(page)]="page"
+                [pageSize]="pageSize"
+                [collectionSize]="items.length"
+                ></ngb-pagination>
+            </div> 
+          </div>
+        </div>
+      </section>
+</main>
+
+<app-footer></app-footer>

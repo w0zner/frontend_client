@@ -34,6 +34,12 @@
             <form [formGroup]="usuarioForm" (submit)="actualizar()">
               <div class="row pb-3">
                 <div class="col-sm-6 form-group">
+                  <input class="form-check-input" type="checkbox" id="ex-check-1">
+                  <label class="form-check-label" for="ex-check-1">Soy extranjero</label>
+                </div>
+              </div>
+              <div class="row pb-3">
+                <div class="col-sm-6 form-group">
                   <label for="ac-address">Documento de identidad</label>
                   <input type="text" id="ac-address" class="form-control" formControlName="cedula" value="4786912">
                 </div>
@@ -50,18 +56,30 @@
                   <input type="text" id="ac-ln" class="form-control" value="Black" formControlName="apellidos">
                 </div>
                 <div class="col-sm-6 form-group">
-                  <label for="ac-country">Pais</label>
-                  <select id="ac-country" class="custom-select rounded-0" formControlName="pais">
-                    <option value="" disabled>Seleccionar</option>
-                    <option value="argentina">Argentina</option>
-                    <option value="colombia">Colombia</option>
-                    <option value="chile">Chile</option>
-                    <option value="uruguay">Uruguay</option>
-                    <option value="paraguay">Paraguay</option>
-                    <option value="peru">Peru</option>
-                    <option value="bolivia">Bolivia</option>
-                    <option value="mexico">Mexico</option>
-                    <option value="estados unidos">Estados Unidos</option>
+                  <label for="ac-country">Ciudad</label>
+                  <select id="ac-city" class="custom-select rounded-0" formControlName="ciudad">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <option value="asuncion">Asunción</option>
+                    <option value="ciudad-del-este">Ciudad del Este</option>
+                    <option value="encarnacion">Encarnación</option>
+                    <option value="luque">Luque</option>
+                    <option value="lambare">Lambaré</option>
+                    <option value="san-lorenzo">San Lorenzo</option>
+                    <option value="capiata">Capiatá</option>
+                    <option value="fernando-de-la-mora">Fernando de la Mora</option>
+                    <option value="limpio">Limpio</option>
+                    <option value="mariano-roque-alonso">Mariano Roque Alonso</option>
+                    <option value="ita">Itá</option>
+                    <option value="itaqua">Itauguá</option>
+                    <option value="villarrica">Villarrica</option>
+                    <option value="caacupe">Caacupé</option>
+                    <option value="coronel-oviedo">Coronel Oviedo</option>
+                    <option value="concepcion">Concepción</option>
+                    <option value="pedro-juan-caballero">Pedro Juan Caballero</option>
+                    <option value="pilar">Pilar</option>
+                    <option value="ayolas">Ayolas</option>
+                    <option value="san-pedro">San Pedro</option>
+                    <option value="villalbin">San Juan Bautista (Misiones)</option>
                   </select>
                 </div>
                 <div class="col-sm-6 form-group">
