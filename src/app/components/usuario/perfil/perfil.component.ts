@@ -45,14 +45,25 @@ export class PerfilComponent implements OnInit {
         fecha_nacimiento: this.userLogged?.fecha_nacimiento,
         cedula: this.userLogged.cedula,
         genero: this.userLogged?.genero ?? '',
-        ciudad: this.userLogged?.ciudad ?? ''
+        ciudad: this.userLogged?.ciudad ?? '',
+        denominacion: this.userLogged?.denominacion ?? '',
+        tipo_documento: this.userLogged?.tipo_documento ?? '',
+        ruc: this.userLogged?.ruc ?? '',
+        extranjero: this.userLogged?.extranjero ?? '',
       })
     });
   }
 
-  actualizar() {
-      if(this.usuarioForm.valid) {
+  completarCampoFacturacion() {
+    this.usuarioForm.patchValue({
+      ruc: this.usuarioForm.get('cedula')?.value,
+      denominacion: this.usuarioForm.get('nombres')?.value + " " + this.usuarioForm.get('apellidos')?.value,
+    })
+  }
 
+  actualizar() {
+    console.log('usuarioForm ', this.usuarioForm.value)
+      if(this.usuarioForm.valid) {
         this.notificacionService.alertConfirmation(
           () => {
             this.usuarioService.updateUsuarioCliente(this.userLogged._id, this.usuarioForm.value).subscribe({

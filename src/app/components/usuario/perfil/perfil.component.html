@@ -48,7 +48,7 @@
                 Soy extranjero
               </label>
             </div>
-            <div class="col-sm-8 form-group">
+            <div class="col-sm-8 form-group" *ngIf="usuarioForm.get('extranjero')?.value == true">
               <label for="ac-country">Tipo documento</label>
               <select
                 id="ac-city"
@@ -56,9 +56,9 @@
                 formControlName="tipo_documento"
               >
                 <option value="" disabled selected>Seleccionar</option>
-                <option value="asuncion">DNI</option>
-                <option value="ciudad-del-este">RUC</option>
-                <option value="encarnacion">Pasaporte</option>
+                <option value="dni">DNI</option>
+                <option value="ruc">RUC</option>
+                <option value="pasaporte">Pasaporte</option>
               </select>
             </div>
             <div class="col-sm-6 form-group">
@@ -69,6 +69,7 @@
                 class="form-control"
                 formControlName="cedula"
                 value="4786912"
+                (blur)="completarCampoFacturacion()"
               />
             </div>
             <div class="col-sm-6 form-group">
@@ -89,6 +90,7 @@
                 class="form-control"
                 value="Annette"
                 formControlName="nombres"
+                (blur)="completarCampoFacturacion()"
               />
             </div>
             <div class="col-sm-6 form-group">
@@ -99,6 +101,7 @@
                 class="form-control"
                 value="Black"
                 formControlName="apellidos"
+                (blur)="completarCampoFacturacion()"
               />
             </div>
             <div class="col-sm-6 form-group">
