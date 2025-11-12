@@ -1,104 +1,195 @@
 <app-nav></app-nav>
 
-<main  class="cs-page-wrapper">
-      <!-- Breadcrumb -->
-      <nav class="bg-secondary mb-3" aria-label="breadcrumb">
-        <div class="container">
-          <ol class="breadcrumb breadcrumb-alt mb-0">
-            <li class="breadcrumb-item">
-              <a [routerLink]="['/']"><i class="cxi-home"></i></a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">Mi Perfil</li>
-          </ol>
+<main class="cs-page-wrapper">
+  <!-- Breadcrumb -->
+  <nav class="bg-secondary mb-3" aria-label="breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb breadcrumb-alt mb-0">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/']"><i class="cxi-home"></i></a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Mi Perfil</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Page container -->
+  <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+    <div class="row pb-2 pb-lg-0">
+      <!-- Account menu (sticky sidebar) -->
+      <aside class="col-xl-3 col-lg-4 pb-3 mb-4 mb-lg-0">
+        <app-sidebar></app-sidebar>
+      </aside>
+
+      <!-- Content -->
+      <div class="col-lg-8 ml-auto">
+        <div
+          class="d-flex align-items-center justify-content-between mb-4 pb-1 pb-sm-3"
+        >
+          <h1 class="h2 mb-0">Mi Perfil</h1>
+          <a
+            href="#"
+            class="btn text-danger btn-link font-size-base text-decoration-none pr-0"
+          >
+            <i class="cxi-delete font-size-lg mt-n1 mr-2"></i>
+            Eliminar cuenta
+          </a>
         </div>
-      </nav>
-
-      <!-- Page container -->
-      <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
-        <div class="row pb-2 pb-lg-0">
-
-          <!-- Account menu (sticky sidebar) -->
-          <aside class="col-xl-3 col-lg-4 pb-3 mb-4 mb-lg-0">
-            <app-sidebar></app-sidebar>
-          </aside>
-
-          <!-- Content -->
-          <div class="col-lg-8 ml-auto">
-            <div class="d-flex align-items-center justify-content-between mb-4 pb-1 pb-sm-3">
-              <h1 class="h2 mb-0">Mi Perfil</h1>
-              <a href="#" class="btn text-danger btn-link font-size-base text-decoration-none pr-0">
-                <i class="cxi-delete font-size-lg mt-n1 mr-2"></i>
-                Eliminar cuenta
-              </a>
+        <form [formGroup]="usuarioForm" (submit)="actualizar()">
+          <div class="row pb-3">
+            <div class="col-sm-12 form-group ml-4">
+              <input
+                class="form-check-input"
+                formControlName="extranjero"
+                type="checkbox"
+                id="ex-check-1"
+              />
+              <label class="form-check-label" for="ex-check-1">
+                Soy extranjero
+              </label>
             </div>
-            <form [formGroup]="usuarioForm" (submit)="actualizar()">
-              <div class="row pb-3">
-                <div class="col-sm-6 form-group">
-                  <input class="form-check-input" type="checkbox" id="ex-check-1">
-                  <label class="form-check-label" for="ex-check-1">Soy extranjero</label>
-                </div>
-              </div>
-              <div class="row pb-3">
-                <div class="col-sm-6 form-group">
-                  <label for="ac-address">Documento de identidad</label>
-                  <input type="text" id="ac-address" class="form-control" formControlName="cedula" value="4786912">
-                </div>
-                <div class="col-sm-6 form-group">
-                  <label for="ac-email">Correo Electronico</label>
-                  <input type="email" id="ac-email" class="form-control" value="ann.black@example.com" formControlName="email">
-                </div>
-                <div class="col-sm-6 form-group">
-                  <label for="ac-fn">Nombre</label>
-                  <input type="text" id="ac-fn" class="form-control" value="Annette" formControlName="nombres">
-                </div>
-                <div class="col-sm-6 form-group">
-                  <label for="ac-ln">Apellido</label>
-                  <input type="text" id="ac-ln" class="form-control" value="Black" formControlName="apellidos">
-                </div>
-                <div class="col-sm-6 form-group">
-                  <label for="ac-country">Ciudad</label>
-                  <select id="ac-city" class="custom-select rounded-0" formControlName="ciudad">
-                    <option value="" disabled selected>Seleccionar</option>
-                    <option value="asuncion">Asunción</option>
-                    <option value="ciudad-del-este">Ciudad del Este</option>
-                    <option value="encarnacion">Encarnación</option>
-                    <option value="luque">Luque</option>
-                    <option value="lambare">Lambaré</option>
-                    <option value="san-lorenzo">San Lorenzo</option>
-                    <option value="capiata">Capiatá</option>
-                    <option value="fernando-de-la-mora">Fernando de la Mora</option>
-                    <option value="limpio">Limpio</option>
-                    <option value="mariano-roque-alonso">Mariano Roque Alonso</option>
-                    <option value="ita">Itá</option>
-                    <option value="itaqua">Itauguá</option>
-                    <option value="villarrica">Villarrica</option>
-                    <option value="caacupe">Caacupé</option>
-                    <option value="coronel-oviedo">Coronel Oviedo</option>
-                    <option value="concepcion">Concepción</option>
-                    <option value="pedro-juan-caballero">Pedro Juan Caballero</option>
-                    <option value="pilar">Pilar</option>
-                    <option value="ayolas">Ayolas</option>
-                    <option value="san-pedro">San Pedro</option>
-                    <option value="villalbin">San Juan Bautista (Misiones)</option>
-                  </select>
-                </div>
-                <div class="col-sm-6 form-group">
-                  <label for="ac-phone">Telefono</label>
-                  <input type="text" id="ac-phone" class="form-control" value="(629) 555-0129" formControlName="telefono">
-                </div>
-                <div class="col-sm-6 form-group">
-                  <label for="genero" class="form-label">Genero</label>
-                        <select class="form-control custom-select rounded-0" formControlName="genero" id="genero">
-                          <option value="" selected disabled>Seleccionar</option>
-                          <option value="Masculino">Masculino</option>
-                          <option value="Femenino">Femenino</option>
-                        </select>
-                </div>
-                <div class="col-sm-6 form-group">
-                  <label for="ac-zip">Fecha de Nacimiento</label>
-                  <input class="form-control" type="date" formControlName="fecha_nacimiento">
-                </div>
-                <!-- <div class="col-sm-6 form-group">
+            <div class="col-sm-8 form-group">
+              <label for="ac-country">Tipo documento</label>
+              <select
+                id="ac-city"
+                class="custom-select rounded-0 form-control form-control-sm"
+                formControlName="tipo_documento"
+              >
+                <option value="" disabled selected>Seleccionar</option>
+                <option value="asuncion">DNI</option>
+                <option value="ciudad-del-este">RUC</option>
+                <option value="encarnacion">Pasaporte</option>
+              </select>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-address">Documento de identidad</label>
+              <input
+                type="text"
+                id="ac-address"
+                class="form-control"
+                formControlName="cedula"
+                value="4786912"
+              />
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-email">Correo Electronico</label>
+              <input
+                type="email"
+                id="ac-email"
+                class="form-control"
+                value="ann.black@example.com"
+                formControlName="email"
+              />
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-fn">Nombre</label>
+              <input
+                type="text"
+                id="ac-fn"
+                class="form-control"
+                value="Annette"
+                formControlName="nombres"
+              />
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-ln">Apellido</label>
+              <input
+                type="text"
+                id="ac-ln"
+                class="form-control"
+                value="Black"
+                formControlName="apellidos"
+              />
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-country">Ciudad</label>
+              <select
+                id="ac-city"
+                class="custom-select rounded-0"
+                formControlName="ciudad"
+              >
+                <option value="" disabled selected>Seleccionar</option>
+                <option value="asuncion">Asunción</option>
+                <option value="ciudad-del-este">Ciudad del Este</option>
+                <option value="encarnacion">Encarnación</option>
+                <option value="luque">Luque</option>
+                <option value="lambare">Lambaré</option>
+                <option value="san-lorenzo">San Lorenzo</option>
+                <option value="capiata">Capiatá</option>
+                <option value="fernando-de-la-mora">Fernando de la Mora</option>
+                <option value="limpio">Limpio</option>
+                <option value="mariano-roque-alonso">
+                  Mariano Roque Alonso
+                </option>
+                <option value="ita">Itá</option>
+                <option value="itaqua">Itauguá</option>
+                <option value="villarrica">Villarrica</option>
+                <option value="caacupe">Caacupé</option>
+                <option value="coronel-oviedo">Coronel Oviedo</option>
+                <option value="concepcion">Concepción</option>
+                <option value="pedro-juan-caballero">
+                  Pedro Juan Caballero
+                </option>
+                <option value="pilar">Pilar</option>
+                <option value="ayolas">Ayolas</option>
+                <option value="san-pedro">San Pedro</option>
+                <option value="villalbin">San Juan Bautista (Misiones)</option>
+              </select>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-phone">Telefono</label>
+              <input
+                type="text"
+                id="ac-phone"
+                class="form-control"
+                value="(629) 555-0129"
+                formControlName="telefono"
+              />
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="genero" class="form-label">Genero</label>
+              <select
+                class="form-control custom-select rounded-0"
+                formControlName="genero"
+                id="genero"
+              >
+                <option value="" selected disabled>Seleccionar</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+              </select>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-zip">Fecha de Nacimiento</label>
+              <input
+                class="form-control"
+                type="date"
+                formControlName="fecha_nacimiento"
+              />
+            </div>
+
+            <div class="col-sm-12 form-group">
+              <u><b>Datos de facturación</b></u>
+            </div>
+
+            <div class="col-sm-6 form-group">
+              <label for="ac-address">RUC</label>
+              <input
+                type="text"
+                id="ac-ruc"
+                class="form-control"
+                formControlName="ruc"
+              />
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-email">Denominación</label>
+              <input
+                type="text"
+                id="ac-denominacion"
+                class="form-control"
+                formControlName="denominacion"
+              />
+            </div>
+            <!-- <div class="col-sm-6 form-group">
                   <label for="ac-password">Contraseña</label>
                   <div class="cs-password-toggle input-group-overlay">
                     <input type="password" id="ac-password" class="form-control">
@@ -124,13 +215,14 @@
                     </div>
                   </div>
                 </div> -->
-              </div>
-              <button type="submit" class="btn btn-primary btn-sm btn-hover-shadow">&nbsp;Guardar cambios&nbsp;</button>
-            </form>
           </div>
-        </div>
-      </section>
-
+          <button type="submit" class="btn btn-primary btn-sm btn-hover-shadow">
+            &nbsp;Guardar cambios&nbsp;
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
 </main>
 
 <app-footer></app-footer>
