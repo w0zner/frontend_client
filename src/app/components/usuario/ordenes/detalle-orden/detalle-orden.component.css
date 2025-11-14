@@ -1,0 +1,14 @@
+.rating {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.rating i {
+  font-size: 28px;
+  color: #bbb;
+  transition: color 0.2s;
+}
+
+.rating i.active {
+  color: gold;
+}

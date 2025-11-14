@@ -186,9 +186,18 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div *ngIf="!haPasadoUnMes">
-                                                                                <div class="d-flex"
+                                                                                <div class="d-flex pb-3"
                                                                                     style="padding-bottom: 10px">
-                                                                                    <a class="nav-link me-3 fs-sm"
+                                                                                    <div class="rating">
+                                                                                        <i class="cxi-star"
+                                                                                            *ngFor="let star of stars; let i = index"
+                                                                                            [class.active]="i < (hoverRating || rating)"
+                                                                                            (mouseover)="onHover(i + 1)"
+                                                                                            (mouseleave)="onLeave()"
+                                                                                            (click)="onRate(i + 1)">
+                                                                                        </i>
+                                                                                    </div>
+                                                                                    <!-- <a class="nav-link me-3 fs-sm"
                                                                                         [ngClass]="{
                                             'badge bg-secondary pt-3 text-success':
                                               opcionResenha === 'me gusta',
@@ -205,7 +214,7 @@
                                                                                         <i
                                                                                             class="cxi-dislike me-2 fs-base align-middle mt-n1 text-danger"></i>
                                                                                         Se puede mejorar
-                                                                                    </a>
+                                                                                    </a> -->
                                                                                 </div>
                                                                                 <hr />
                                                                                 <div class="mt-2">

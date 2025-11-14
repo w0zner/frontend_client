@@ -53,4 +53,8 @@ export class OrdenesService {
       headers: this.headers,
     });
   }
+
+    obtenerResenhasPorProducto(producto:any) {
+    return this.http.get(this.urlReview + "/obtener-resenhas/" + producto,  {headers: this.headers})
+  }
 }

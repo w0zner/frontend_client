@@ -45,9 +45,12 @@
                     <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
                         <h6 class="mb-2 fs-lg">{{item.producto.titulo}}</h6>
                         <span class="d-block mb-3 fs-sm text-muted" style="display: inline;"> 
-                            {{item.opcion}}
-                            <i *ngIf="item.opcion == 'Me gusta'" class="cxi-like me-2 fs-base align-middle mt-n1 text-success"></i>
-                            <i *ngIf="item.opcion == 'No me gusta'" class="cxi-dislike me-2 fs-base align-middle mt-n1 text-danger"></i>
+                            <div class="rating">
+                                <i class="cxi-star-filled"
+                                    *ngFor="let star of stars; let i = index"
+                                    [class.active]="i < (item.estrellas)">
+                                </i>
+                            </div>
                         </span>
                     </div>
                     <div class="col">

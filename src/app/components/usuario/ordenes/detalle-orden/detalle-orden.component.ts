@@ -15,10 +15,14 @@ export class DetalleOrdenComponent implements OnInit {
   detalles: any[] = [];
   orden: any;
   public urlProducto: string;
-  opcionResenha: string | undefined;
+  opcionResenha: number | undefined;
   reviewForm: FormGroup;
   public haPasadoUnMes= false;
   idReview: any= null;
+
+  rating = 0;      // valor final guardado
+  hoverRating = 0;
+  stars = [1, 2, 3, 4, 5]; // cantidad de estrellas
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +37,7 @@ export class DetalleOrdenComponent implements OnInit {
       usuario: [""],
       venta: [""],
       mensaje: [""],
-      opcion: [""],
+      estrellas: [""],
     });
   }
 
@@ -52,6 +56,22 @@ export class DetalleOrdenComponent implements OnInit {
         });
       }
     });
+  }
+
+  onHover(value: number) {
+    this.hoverRating = value;
+  }
+
+  onLeave() {
+    this.hoverRating = 0; // se borra hover, queda solo el rating final
+  }
+
+  onRate(value: number) {
+    this.rating = value; // guarda para siempre
+    this.reviewForm.patchValue({
+      estrellas: value,
+    });
+    console.log("Valor seleccionado:", this.rating);
   }
 
   verificarFecha(fechaOrden: any) {
@@ -79,20 +99,20 @@ export class DetalleOrdenComponent implements OnInit {
             usuario: this.orden.usuario._id,
             producto: producto,
             mensaje: response?.data[0]?.mensaje,
-            opcion: response?.data[0]?.opcion,
+            estrellas: response?.data[0]?.opcion,
           });
           this.idReview = response.data[0]?._id;
-          this.opcionResenha = response?.data[0]?.opcion;
+          this.rating = response?.data[0]?.estrellas;
           console.log(this.reviewForm.value);
           console.log(this.idReview)
         },
       });
   }
 
-  elegirResenha(opcion: string) {
+  elegirResenha(opcion: number) {
     this.opcionResenha = opcion;
     this.reviewForm.patchValue({
-      opcion: opcion,
+      estrellas: opcion,
     });
   }
 

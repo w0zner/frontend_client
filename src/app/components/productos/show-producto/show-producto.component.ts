@@ -7,6 +7,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { NotificacionService } from 'src/app/services/notificacion.service';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { io } from 'socket.io-client';
+import { OrdenesService } from 'src/app/services/ordenes.service';
 declare var tns: any;
 declare var lightGallery: any;
 
@@ -23,9 +24,11 @@ export class ShowProductoComponent implements OnInit {
   public carritoForm: FormGroup
   public socket = io('http://localhost:5000')
   public descuentoActivo: any = undefined
+  public reviews: any[] = []
+  stars = [1, 2, 3, 4, 5];
 
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private guestService: GuestService, private usuarioService: UsuarioService, private notificacionesService: NotificacionService, private carritoService: CarritoService) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private guestService: GuestService, private usuarioService: UsuarioService, private notificacionesService: NotificacionService, private carritoService: CarritoService, private ordenesService: OrdenesService) {
     this.url = GLOBAL.url + 'productos/obtenerPortada/'
 
     this.carritoForm = this.fb.group({
@@ -47,6 +50,13 @@ export class ShowProductoComponent implements OnInit {
             next: (response:any) => {
               console.log(response.data)
               this.productosRecomendados = response.data;
+            }
+          })
+
+          this.ordenesService.obtenerResenhasPorProducto(this.producto._id).subscribe({
+            next: (response:any) => {
+              console.log('reseñas ', response)
+              this.reviews = response.data;
             }
           })
         }

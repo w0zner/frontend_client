@@ -369,7 +369,7 @@
             </div>
 
             <!-- Button + sorting -->
-            <div class="d-flex align-items-center justify-content-between mb-4 pb-2 pb-sm-4">
+            <!-- <div class="d-flex align-items-center justify-content-between mb-4 pb-2 pb-sm-4">
               <a href="#modal-review" data-toggle="modal" class="btn btn-primary">Leave a review</a>
               <div class="form-inline">
                 <label for="sort-orders" class="d-none d-sm-block font-weight-bold mr-2 pr-1">Sort by</label>
@@ -380,127 +380,28 @@
                   <option>Low rating</option>
                 </select>
               </div>
-            </div>
+            </div> -->
 
             <!-- Review -->
-            <div class="mb-4 pb-4 border-bottom">
+            <div class="mb-4 pb-4 border-bottom" *ngFor="let item of reviews">
               <div class="row">
                 <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
-                  <h3 class="mb-2 font-size-lg">Devon Lane</h3>
-                  <span class="d-block mb-3 font-size-sm text-muted">3 days ago</span>
-                  <div class="mt-n1 star-rating">
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
+                  <h3 class="mb-2 font-size-lg">{{item.usuario.nombres + ' ' + item.usuario.apellidos}}</h3>
+                  <div class="rating">
+                      <i class="cxi-star-filled"
+                          *ngFor="let star of stars; let i = index"
+                          [class.active]="i < (item.estrellas)">
+                      </i>
                   </div>
+                  <p class="text-muted" style="font-size: 12px;"><i>[{{item.estrellas}} estrellas]</i></p>
                 </div>
                 <div class="col">
-                  <p class="mb-3">Vel velit pulvinar montes, sit rhoncus odio molestie. Venenatis nunc fames ut proin adipiscing sit. Etiam egestas elit varius a, vestibulum bibendum nibh sociis in. Ut facilisis sit eget cum fringilla. Dapibus mauris viverra est sed risus quam lacinia.</p>
-                  <div class="d-flex justify-content-end">
-                    <a class="nav-link mr-3 p-0 font-size-sm" href="#">
-                      <i class="cxi-like mr-2 font-size-base align-middle mt-n1 text-success"></i>
-                      2
-                    </a>
-                    <a class="nav-link p-0 font-size-sm" href="#">
-                      <i class="cxi-dislike mr-2 font-size-base align-middle mt-n1 text-danger"></i>
-                      0
-                    </a>
-                  </div>
+                  <p class="mb-3">{{item.mensaje}}</p>
+                  <span class="d-block mb-3 font-size-sm text-muted">{{item.createdAt | date}}</span>
                 </div>
               </div>
             </div>
 
-            <!-- Review -->
-            <div class="mb-4 pb-4 border-bottom">
-              <div class="row">
-                <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
-                  <h3 class="mb-2 font-size-lg">Annette Black</h3>
-                  <span class="d-block mb-3 font-size-sm text-muted">November 29, 2020</span>
-                  <div class="mt-n1 star-rating">
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star"></i>
-                  </div>
-                </div>
-                <div class="col">
-                  <p class="mb-3">Amet ut augue dignissim lorem. Diam volutpat porttitor vel, pulvinar semper. Faucibus vel accumsan mi diam magna. Nunc diam lorem semper rhoncus in ut. Quis risus viverra bibendum eu.</p>
-                  <div class="d-flex justify-content-end">
-                    <a class="nav-link mr-3 p-0 font-size-sm" href="#">
-                      <i class="cxi-like mr-2 font-size-base align-middle mt-n1 text-success"></i>
-                      5
-                    </a>
-                    <a class="nav-link p-0 font-size-sm" href="#">
-                      <i class="cxi-dislike mr-2 font-size-base align-middle mt-n1 text-danger"></i>
-                      1
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Review -->
-            <div class="mb-4 pb-4 border-bottom">
-              <div class="row">
-                <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
-                  <h3 class="mb-2 font-size-lg">Albert Flores</h3>
-                  <span class="d-block mb-3 font-size-sm text-muted">November 5, 2020</span>
-                  <div class="mt-n1 star-rating">
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star"></i>
-                  </div>
-                </div>
-                <div class="col">
-                  <p class="mb-3">Et, enim pellentesque ut malesuada interdum. Id odio proin molestie ac tellus ornare lectus amet semper. Bibendum non nulla leo pharetra, mi ultrices proin rhoncus diam.</p>
-                  <div class="d-flex justify-content-end">
-                    <a class="nav-link mr-3 p-0 font-size-sm" href="#">
-                      <i class="cxi-like mr-2 font-size-base align-middle mt-n1 text-success"></i>
-                      0
-                    </a>
-                    <a class="nav-link p-0 font-size-sm" href="#">
-                      <i class="cxi-dislike mr-2 font-size-base align-middle mt-n1 text-danger"></i>
-                      0
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Review -->
-            <div class="mb-4 pb-4 border-bottom">
-              <div class="row">
-                <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
-                  <h3 class="mb-2 font-size-lg">Marvin McKinney</h3>
-                  <span class="d-block mb-3 font-size-sm text-muted">October 13, 2020</span>
-                  <div class="mt-n1 star-rating">
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                    <i class="sr-star cxi-star-filled active"></i>
-                  </div>
-                </div>
-                <div class="col">
-                  <p class="mb-3">Eu duis ac, faucibus et egestas morbi elementum urna in. Feugiat natoque vestibulum, augue nisi. Vulputate vitae felis quis mauris morbi massa ut. Dolor in amet volutpat facilisi luctus duis mauris.</p>
-                  <div class="d-flex justify-content-end">
-                    <a class="nav-link mr-3 p-0 font-size-sm" href="#">
-                      <i class="cxi-like mr-2 font-size-base align-middle mt-n1 text-success"></i>
-                      9
-                    </a>
-                    <a class="nav-link p-0 font-size-sm" href="#">
-                      <i class="cxi-dislike mr-2 font-size-base align-middle mt-n1 text-danger"></i>
-                      2
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <!-- Pagination: With icons -->
             <nav class="mt-4 pt-4" aria-label="Reviews pagination">
@@ -530,6 +431,7 @@
               </ul>
             </nav>
           </div>
+
           <div class="col-md-4 offset-lg-1">
             <!-- Product card carousel -->
             <div class="card card-product">
