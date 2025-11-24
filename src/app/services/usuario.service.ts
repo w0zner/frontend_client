@@ -51,7 +51,7 @@ export class UsuarioService {
   registro(data: any){
     console.log(data)
     let headers= new HttpHeaders().set('Content-Type', 'application/json')
-    return this.http.post(this.url + 'registro', data, {headers: headers})
+    return this.http.post(this.url + '/registro', data, {headers: headers})
   }
 
   obtenerConfiguracionPublica() {
