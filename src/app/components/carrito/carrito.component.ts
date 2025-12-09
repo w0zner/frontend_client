@@ -31,6 +31,7 @@ export class CarritoComponent implements OnInit {
   detalleVenta: any[] = []
   public socket = io('http://localhost:5000')
   public descuentoActivo: any = undefined
+  step:number=0;
 
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private carritoService: CarritoService, private notificacionesService: NotificacionService, private guestService: GuestService) {
@@ -56,7 +57,28 @@ export class CarritoComponent implements OnInit {
     //this.precio_envio = 0
   }
 
+  siguiente() {
+    console.log(this.step)
+    if(this.step < Number(4)) {
+      console.log('entro')
+      this.step += 1
+    }
+    console.log(this.step)
+  }
+
+  atras() {
+    console.log(this.step)
+    if(this.step != 0) {
+      this.step -= 1
+    }
+    console.log(this.step)
+  }
+
   ngOnInit(): void {
+    console.log('step al iniciar:', this.step);
+
+
+
     this.authService.usuario$.subscribe((usuario: any) => {
       console.log(usuario)
       if(usuario){
@@ -196,10 +218,11 @@ export class CarritoComponent implements OnInit {
     this.notificacionesService.alertConfirmation(
       () => {
         this.carritoService.eliminarItemCarrito(id).subscribe({
-      next: (response:any) => {
-        this.socket.emit('delete-carrito', {data: response.data})
-        this.carrito = this.carrito.filter(item => item._id !== id);
-      }
+          next: (response:any) => {
+            this.socket.emit('delete-carrito', {data: response.data})
+            this.carrito = this.carrito.filter(item => item._id !== id);
+            this.detalleVenta.pop()
+          }
     });
       },
       'Confirma que desea eliminar este producto del carrito?',

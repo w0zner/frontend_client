@@ -37,20 +37,30 @@
 
             <hr class="border-top-0 border-bottom pt-2 mb-4">
 
-            <!-- Order review -->
-            <h2 class="h4 mb-4">Resumen de la compra</h2>
+            <!-- Horizontal step wrapper -->
+<div class="steps row">
+
+  <!-- Step -->
+  <div class="col-md-12">
+    <div class="step mb-md-0 mb-5" *ngIf="step==0">
+      <div class="step-head mb-3">
+        <span class="step-indicator">Paso - 01</span>
+        <span class="step-line"></span>
+      </div>
+      <div class="step-body">
+            <h3 class="h5 mb-2">Resumen de la compra</h3>
             <div class="bg-secondary rounded mb-5" *ngIf="carrito.length == 0">
-              <div class="row" style="align-items: center !important;">
-                <div class="col-lg-3" style="text-align: center !important;">
-                  <img src="../../../assets/img/carrito-de-compras.png" style="width: 100%; padding: 15px;" alt="Carrito de compras vacio">
-                </div>
-                <div class="col-lg-9" style="display: flex !important; align-items: center !important;">
-                  <dl style="font-size: 1.5rem !important;">
-                    <dt>Ups! 😬</dt>
-                    <dd>Tu carrito esta vacio</dd>
-                  </dl>
-                </div>
-              </div>
+                  <div class="row" style="align-items: center !important;">
+                    <div class="col-lg-3" style="text-align: center !important;">
+                      <img src="../../../assets/img/carrito-de-compras.png" style="width: 100%; padding: 15px;" alt="Carrito de compras vacio">
+                    </div>
+                    <div class="col-lg-9" style="display: flex !important; align-items: center !important;">
+                      <dl style="font-size: 1.5rem !important;">
+                        <dt>Ups! 😬</dt>
+                        <dd>Tu carrito esta vacio</dd>
+                      </dl>
+                    </div>
+                  </div>
             </div>
             <div class="bg-secondary rounded mb-5" *ngIf="carrito.length >= 1">
               <!-- Item -->
@@ -94,10 +104,20 @@
                 <span class="text-muted">Subtotal:<strong class="text-dark font-size-lg ml-2">{{calcularTotalCarrito() | currency:'PYG ':'symbol':'1.0-0'}}</strong></span>
               </div>
             </div>
+      </div>
+    </div>
+  </div>
 
-            <!-- Adresses -->
-            <h2 class="h4 mb-4">2. Dirección de envío</h2>
-            <div class="row pb-3">
+  <!-- Step -->
+  <div class="col-md-12">
+    <div class="step mb-md-0 mb-5" *ngIf="step==1">
+      <div class="step-head mb-3">
+        <span class="step-indicator">Paso - 02</span>
+        <span class="step-line"></span>
+      </div>
+      <div class="step-body">
+        <h3 class="h5 mb-2">Dirección de envío</h3>
+        <div class="row pb-3">
               <div class="col-12">
                 <div class="card">
                   <div class="card-body">
@@ -124,13 +144,20 @@
                 </div>
               </div>
             </div>
+      </div>
+    </div>
+  </div>
 
-            <hr class="mb-4 pb-2">
-
-            <!-- Shipping -->
-            <h2 class="h4 mb-4">3. Método de envío</h2>
-            <div class="custom-control custom-radio mb-3" *ngFor="let metodo of metodosEnvio">
-              <input type="radio" class="custom-control-input" id="{{metodo.titulo}}"  name="precio_envio"  formControlName="envio_precio" [value]="metodo.costo">
+  <!-- Step -->
+  <div class="col-md-12">
+    <div class="step" *ngIf="step==2">
+      <div class="step-head mb-3">
+        <span class="step-indicator">Paso - 03</span>
+      </div>
+      <div class="step-body">
+        <h3 class="h5 mb-2">Método de envío</h3>
+        <div class="custom-control custom-radio mb-3" *ngFor="let metodo of metodosEnvio">
+              <input type="radio" class="custom-control-input" id="{{metodo.titulo}}"  name="envio_precio"  formControlName="envio_precio" [value]="metodo.costo">
               <label for="courier" class="custom-control-label d-flex align-items-center">
                 <span>
                   <strong class="d-block">{{metodo.titulo}}</strong>
@@ -139,13 +166,19 @@
                 <span class="ml-auto">Gs. {{metodo.costo}}</span>
               </label>
             </div>
+      </div>
+    </div>
+  </div>
 
-
-            <hr class="border-top-0 border-bottom pt-4 mb-4">
-
-            <!-- Payment -->
-            <h2 class="h4 pt-2 mb-4">4. Método de pago</h2>
-            <div class="row pb-4">
+   <!-- Step -->
+  <div class="col-md-12">
+    <div class="step" *ngIf="step==3">
+      <div class="step-head mb-3">
+        <span class="step-indicator">Paso - 04</span>
+      </div>
+      <div class="step-body">
+        <h3 class="h5 mb-2">Método de pago</h3>
+        <div class="row pb-4">
               <div class="col-lg-7">
                 <div class="accordion-alt" id="payment-methods">
 
@@ -214,12 +247,12 @@
                     </div>
                     <div class="collapse" id="paypal-card" data-parent="#payment-methods">
                       <div class="card-body pt-3 pb-0" #paypalButton>
-                        <!-- <a href="#" class="d-inline-block mb-2" style="max-width: 300px;">
+                         <a href="#" class="d-inline-block mb-2" style="max-width: 300px;">
                           <img src="../../assets/img/ecommerce/checkout/paypal.jpg" alt="PayPal">
                         </a>
                         <a href="#" class="d-inline-block mb-2" style="max-width: 300px;">
                           <img src="../../assets/img/ecommerce/checkout/paypal-credit.png" alt="PayPal Credit">
-                        </a> -->
+                        </a> 
                       </div>
                     </div>
                   </div>
@@ -243,15 +276,67 @@
                 </div>
               </div>
             </div>
+      </div>
+    </div>
+  </div>
 
-            <hr class="mb-4 pb-2">
-
-            <!-- Additional info -->
-            <h2 class="h4 mb-4">5. Información adicional(opcional)</h2>
-            <div class="form-group">
+    <!-- Step -->
+  <div class="col-md-12">
+    <div class="step" *ngIf="step==4">
+      <div class="step-head mb-3">
+        <span class="step-indicator">Paso - 05</span>
+      </div>
+      <div class="step-body">
+        <h3 class="h5 mb-2">Información adicional(opcional)</h3>
+        <div class="form-group">
               <label for="ch-notes">Notas</label>
               <textarea formControlName="nota" id="ch-notes" class="form-control form-control-lg" rows="5" placeholder="Notas sobre su pedido, por ejemplo, notas especiales para la entrega."></textarea>
             </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div style="display: flex; align-items: center; justify-content: center; ">
+    <button type="button" class="btn btn-primary" [disabled]="step==0" (click)="atras()"><i class="cxi-angle-left"></i></button>
+    <button type="button" class="btn btn-primary ml-2" [disabled]="step==4 || this.carrito.length == 0" (click)="siguiente()"><i class="cxi-angle-right"></i></button>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="alert alert-info mt-3" role="alert" *ngIf="step == 4 && direccion">
+      Ha llegado al final, ya puede finalizar la compra 
+    </div>
+    <div class="alert alert-warning mt-3" role="alert" *ngIf="step == 4 && !direccion">
+      Complete la Información requerida en los pasos previos para finalizar la compra. 
+    </div>
+    <!-- <div class="alert alert-warning mt-3" role="alert" *ngIf="this.ventaForm.get('detalleVenta')?.value.length == 0">
+      Debe tener un producto en el carrito para realizar la compra. 
+    </div> -->
+  </div>
+</div>
+
+            <!-- Order review -->
+
+
+            <!-- Adresses -->
+<!--             <h2 class="h4 mb-4">2. Dirección de envío</h2>
+            
+
+            <hr class="mb-4 pb-2">
+
+            <h2 class="h4 mb-4">3. Método de envío</h2>
+            
+
+
+            <hr class="border-top-0 border-bottom pt-4 mb-4">
+
+            <h2 class="h4 pt-2 mb-4">4. Método de pago</h2>
+            
+
+            <hr class="mb-4 pb-2">
+
+            <h2 class="h4 mb-4">5. Información adicional(opcional)</h2> -->
+            
           </div>
 
           <!-- Order totals (sticky sidebar) -->
@@ -294,6 +379,9 @@
                 <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="registrarCompra()">Finalizar la compra</button>
                 <div class="alert alert-warning" role="alert" *ngIf="!direccion">
                   Debe agregar una dirección para Finalizar la compra.
+                </div>
+                <div class="alert alert-warning" role="alert" *ngIf="this.carrito.length == 0">
+                  Debe agregar un producto al carrito para realizar una compra.
                 </div>
               </div>
             </div>
