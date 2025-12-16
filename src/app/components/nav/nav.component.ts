@@ -18,7 +18,7 @@ export class NavComponent {
   config_global: any = {}
   op_carrito= false;
   carrito: any[] = []
-  public socket = io('http://localhost:5000')
+  public socket = io('https://api.mystore.mom')
   public descuentoActivo: any = undefined
 
   constructor(private authService: AuthService, private router: Router, private usuarioService: UsuarioService, private carritoService: CarritoService, private notificacionesService: NotificacionService, private guestService: GuestService) {

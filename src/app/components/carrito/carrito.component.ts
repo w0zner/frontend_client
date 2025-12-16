@@ -29,7 +29,7 @@ export class CarritoComponent implements OnInit {
   //precio_envio: number
   ventaForm: FormGroup
   detalleVenta: any[] = []
-  public socket = io('http://localhost:5000')
+  public socket = io('https://api.mystore.mom')
   public descuentoActivo: any = undefined
 
 
@@ -213,7 +213,7 @@ export class CarritoComponent implements OnInit {
     const tipoEnvio = this.metodosEnvio.filter(metodo => metodo.costo === envio)
      this.ventaForm.patchValue({
           envio_titulo: tipoEnvio[0].titulo
-      })  
+      })
   }
 
   registrarCompra() {
@@ -228,7 +228,7 @@ export class CarritoComponent implements OnInit {
     if(this.ventaForm.get('direccion')?.value !== null) {
       this.ventaForm.patchValue({
           detalleVenta: this.detalleVenta
-      })  
+      })
       const detalles: any[] = this.ventaForm.get('detalleVenta')?.value
 
       if(detalles.length > 0) {
@@ -250,8 +250,8 @@ export class CarritoComponent implements OnInit {
       this.notificacionesService.notificarAlerta('Debe tener una dirección registrada.');
     }
 
-    
-    
+
+
 
 
   }

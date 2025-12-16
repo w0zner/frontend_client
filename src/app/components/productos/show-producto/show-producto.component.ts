@@ -22,7 +22,7 @@ export class ShowProductoComponent implements OnInit {
   public url: any;
   public productosRecomendados: any[]= [];
   public carritoForm: FormGroup
-  public socket = io('http://localhost:5000')
+  public socket = io('https://api.mystore.mom')
   public descuentoActivo: any = undefined
   public reviews: any[] = []
   stars = [1, 2, 3, 4, 5];

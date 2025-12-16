@@ -30,7 +30,7 @@ export class IndexProductosComponent implements OnInit {
   pageSize=3
   sortBy: string = 'defecto'
   public carritoForm: FormGroup
-  public socket = io('http://localhost:5000')
+  public socket = io('https://api.mystore.mom')
   public descuentoActivo: any = undefined
 
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private route: ActivatedRoute, private notificacionesService: NotificacionService, private carritoService: CarritoService, private guestService: GuestService) {
