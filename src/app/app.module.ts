@@ -25,6 +25,8 @@ import { ContactoComponent } from './components/contacto/contacto.component';
 import { IndexOrdenesComponent } from './components/usuario/ordenes/index-ordenes/index-ordenes.component';
 import { DetalleOrdenComponent } from './components/usuario/ordenes/detalle-orden/detalle-orden.component';
 import { IndexReviewComponent } from './components/usuario/reviews/index-review/index-review.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 registerLocaleData(localePy, 'es-PY');
 
@@ -57,7 +59,11 @@ registerLocaleData(localePy, 'es-PY');
     NgbModule
 ],
   providers: [
-     { provide: LOCALE_ID, useValue: 'es-PY' }
+     { provide: LOCALE_ID, useValue: 'es-PY' },
+     {
+        provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor,
+        multi: true
+      }
   ],
   bootstrap: [AppComponent]
 })
