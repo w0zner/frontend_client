@@ -252,7 +252,7 @@
                         </a>
                         <a href="#" class="d-inline-block mb-2" style="max-width: 300px;">
                           <img src="../../assets/img/ecommerce/checkout/paypal-credit.png" alt="PayPal Credit">
-                        </a> 
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -295,7 +295,7 @@
       </div>
     </div>
   </div>
-  
+
 </div>
 <div style="display: flex; align-items: center; justify-content: center; ">
     <button type="button" class="btn btn-primary" [disabled]="step==0" (click)="atras()"><i class="cxi-angle-left"></i></button>
@@ -304,13 +304,13 @@
 <div class="row">
   <div class="col-12">
     <div class="alert alert-info mt-3" role="alert" *ngIf="step == 4 && direccion">
-      Ha llegado al final, ya puede finalizar la compra 
+      Ha llegado al final, ya puede finalizar la compra
     </div>
     <div class="alert alert-warning mt-3" role="alert" *ngIf="step == 4 && !direccion">
-      Complete la Información requerida en los pasos previos para finalizar la compra. 
+      Complete la Información requerida en los pasos previos para finalizar la compra.
     </div>
     <!-- <div class="alert alert-warning mt-3" role="alert" *ngIf="this.ventaForm.get('detalleVenta')?.value.length == 0">
-      Debe tener un producto en el carrito para realizar la compra. 
+      Debe tener un producto en el carrito para realizar la compra.
     </div> -->
   </div>
 </div>
@@ -320,23 +320,23 @@
 
             <!-- Adresses -->
 <!--             <h2 class="h4 mb-4">2. Dirección de envío</h2>
-            
+
 
             <hr class="mb-4 pb-2">
 
             <h2 class="h4 mb-4">3. Método de envío</h2>
-            
+
 
 
             <hr class="border-top-0 border-bottom pt-4 mb-4">
 
             <h2 class="h4 pt-2 mb-4">4. Método de pago</h2>
-            
+
 
             <hr class="mb-4 pb-2">
 
             <h2 class="h4 mb-4">5. Información adicional(opcional)</h2> -->
-            
+
           </div>
 
           <!-- Order totals (sticky sidebar) -->
@@ -376,7 +376,7 @@
                     <span class="h5 mb-0">{{calcularTotalCarrito() + (ventaForm.get('envio_precio')?.value || 0) | currency:'PYG ':'symbol':'1.0-0'}}</span>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="registrarCompra()">Finalizar la compra</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="step!=4 || this.carrito.length == 0" (click)="registrarCompra()" data-toggle="tooltip" data-placement="bottom" title="Debe llegar la paso 5 ">Finalizar la compra</button>
                 <div class="alert alert-warning" role="alert" *ngIf="!direccion">
                   Debe agregar una dirección para Finalizar la compra.
                 </div>
